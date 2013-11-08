@@ -1,4 +1,3 @@
 #not commit .class files
 *.class
 *.pdf
-*.jar

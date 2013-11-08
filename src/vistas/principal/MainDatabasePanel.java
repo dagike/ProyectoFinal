@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
+@SuppressWarnings("serial")
 public class MainDatabasePanel extends JPanel {
 	public void showPanel() {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -20,5 +20,7 @@ public class MainDatabasePanel extends JPanel {
 		Cart cart = new Cart();
 		add(cart,BorderLayout.EAST);
 	}
-
+	public MainDatabasePanel(){
+			showPanel();
+	}
 }

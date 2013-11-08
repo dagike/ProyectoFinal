@@ -3,12 +3,35 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
+import java.sql.*;
 
+@SuppressWarnings("serial")
 public class Ingreso extends JPanel{
 	private JTextField usuario;
 	private JPasswordField password;
 	private JLabel lusuario,lpassword,lerror;
-	private JButton login,limpiar;
+	private JButton login,regresar;
+	
+	public JButton getLogin(){return login;}
+	public JButton getRegresar(){return regresar;}
+	
+	public Connection intentoConectar(){
+		Connection coneccion;
+		try {
+			Class.forName("org.postgresql.Driver"); 
+			coneccion = DriverManager.getConnection("jdbc:postgresql://127.0.0.1/tienda",usuario.getText(),String.copyValueOf(password.getPassword()));
+			lerror.setText("Conexion Exitosa");
+			return Connection;
+		}
+		catch (SQLException excepcionSql) {
+			lerror.setText("El usuario o password son incorrectos");
+		}
+		catch( ClassNotFoundException e){
+			System.out.println("Where is your PostgreSQL JDBC Driver? "+ "Include in your library path!");
+		}
+		return null; 
+	}
+	
 	
 	public void showPanel(){
 		setBorder(new EmptyBorder(30, 0, 0, 0));
@@ -52,7 +75,7 @@ public class Ingreso extends JPanel{
 		posicion.gridwidth = 1;
 		posicion.weightx = 1.0;
 		posicion.weighty = 0.5;
-		add(limpiar, posicion);
+		add(regresar, posicion);
 		
 		
 		posicion.gridx = 0;
@@ -78,8 +101,9 @@ public class Ingreso extends JPanel{
 		lusuario = new JLabel("Usuario: ");
 		lpassword = new JLabel("Password:");
 		login = new JButton("Login");
-		limpiar = new JButton("Regresar");
+		regresar = new JButton("Regresar");
 		lerror = new JLabel("");
 		lerror.setForeground(new Color(255,0,0));
+		showPanel();
 	}
 }
