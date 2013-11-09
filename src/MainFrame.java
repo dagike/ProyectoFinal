@@ -35,6 +35,7 @@ public class MainFrame extends JFrame {
 		log=new Ingreso();
 		log.getLogin().addActionListener(new Acciones());
 		log.getRegresar().addActionListener(new Acciones());
+		log.getPasswordField().addActionListener(new Acciones());
 		
 		escoger=new MainDatabasePanel();
 		
@@ -51,6 +52,7 @@ public class MainFrame extends JFrame {
 		}
 		else if(estado==INGRESO){
 			setSize(400, 350);
+			log.limpiar();
 			setContentPane(log);
 		}
 		else if(estado==PRINCIPAL){
@@ -74,6 +76,9 @@ public class MainFrame extends JFrame {
 				log.intentoConectar();
 				//estado=INGRESO;
 				//estados();
+			}
+			else if(e.getSource()==log.getPasswordField()){
+				log.intentoConectar();
 			}
 			else if(e.getSource()==log.getRegresar()){
 				estado=INICIAL;

@@ -45,7 +45,5 @@ public class Inicial extends JPanel{
 		empleado = new JButton("Empleado");
 		cliente = new JButton("Cliente");
 		showPanel();
-		
-		//cliente.addActionListener(new Acciones());
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.sql.*;
+import logica.Usuario;
 
 @SuppressWarnings("serial")
 public class Ingreso extends JPanel{
@@ -14,14 +15,23 @@ public class Ingreso extends JPanel{
 	
 	public JButton getLogin(){return login;}
 	public JButton getRegresar(){return regresar;}
+	public JPasswordField getPasswordField(){return password;}
+	public void limpiar(){
+		usuario.setText("");
+		password.setText("");
+		lerror.setText("");
+	}
 	
-	public Connection intentoConectar(){
+	public Usuario intentoConectar(){
 		Connection coneccion;
+		Usuario u;
 		try {
 			Class.forName("org.postgresql.Driver"); 
 			coneccion = DriverManager.getConnection("jdbc:postgresql://127.0.0.1/tienda",usuario.getText(),String.copyValueOf(password.getPassword()));
+			u=new Usuario(usuario.getText());
+			u.setConnection(coneccion);
 			lerror.setText("Conexion Exitosa");
-			return Connection;
+			return u;
 		}
 		catch (SQLException excepcionSql) {
 			lerror.setText("El usuario o password son incorrectos");
