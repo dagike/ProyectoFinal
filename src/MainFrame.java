@@ -3,14 +3,18 @@ import java.awt.event.*;
 import javax.swing.*;
 import vistas.*;
 import vistas.principal.*;
+import logica.*;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
 	private MainDatabasePanel escoger;
 	private Ingreso log;
 	private Inicial ini;
+	private NuevoUsuario nuevoUsuario;
 	
-	public final static int INGRESO=0,PRINCIPAL=1,INICIAL=2;
+	//logica
+	private Usuario usuario;
+	public final static int INGRESO=0,PRINCIPAL=1,INICIAL=2,NUEVOUSUARIO=3;
 	private int estado=INICIAL;
 	
 	public static void main(String[] args) {
@@ -39,8 +43,6 @@ public class MainFrame extends JFrame {
 		
 		escoger=new MainDatabasePanel();
 		
-		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		estados();
@@ -59,6 +61,10 @@ public class MainFrame extends JFrame {
 			setSize(800, 600);
 			setContentPane(escoger);
 		}
+		else if(estado==NUEVOUSUARIO){
+			setSize(626, 415);
+			setContentPane(nuevoUsuario);
+		}
 	}
 	public class Acciones implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -72,15 +78,25 @@ public class MainFrame extends JFrame {
 				estados();
 			}
 			//Panel de ingresar al sistema
-			else if(e.getSource()==log.getLogin()){
-				log.intentoConectar();
-				//estado=INGRESO;
-				//estados();
-			}
-			else if(e.getSource()==log.getPasswordField()){
-				log.intentoConectar();
+			else if(e.getSource()==log.getLogin()||e.getSource()==log.getPasswordField()){
+				usuario=null;
+				usuario=log.intentoConectar();
+				if(usuario!=null){
+					if(usuario.getTipo()==usuario.ADMINISTRADOR){
+						nuevoUsuario = new NuevoUsuario(usuario);
+						nuevoUsuario.getCancelar().addActionListener(new Acciones());
+						estado=NUEVOUSUARIO;
+					}
+					estados();
+				}
 			}
 			else if(e.getSource()==log.getRegresar()){
+				estado=INICIAL;
+				estados();
+			}
+			
+			//Agregar Nuevo Usuario
+			else if(e.getSource()==nuevoUsuario.getCancelar()){
 				estado=INICIAL;
 				estados();
 			}

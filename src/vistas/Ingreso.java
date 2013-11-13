@@ -28,8 +28,7 @@ public class Ingreso extends JPanel{
 		try {
 			Class.forName("org.postgresql.Driver"); 
 			coneccion = DriverManager.getConnection("jdbc:postgresql://127.0.0.1/tienda",usuario.getText(),String.copyValueOf(password.getPassword()));
-			u=new Usuario(usuario.getText());
-			u.setConnection(coneccion);
+			u=new Usuario(usuario.getText(),coneccion);
 			lerror.setText("Conexion Exitosa");
 			return u;
 		}
