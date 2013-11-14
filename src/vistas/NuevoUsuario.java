@@ -1,8 +1,11 @@
 package vistas;
 import javax.swing.*;
+
 import java.awt.*;
+
 import logica.Usuario;
 
+@SuppressWarnings("serial")
 public class NuevoUsuario extends JPanel{
 	private JLabel bienvenida,lNombre,lApellidoPaterno,lApellidoMaterno,lEmail,lPassword,lNombreUsuario;
 	private JLabel lConfirmarPassword,lTipoDeUsuario;

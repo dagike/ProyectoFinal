@@ -1,3 +1,4 @@
 #not commit .class files
 *.class
 *.pdf
+/classes
