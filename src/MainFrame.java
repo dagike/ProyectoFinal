@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import vistas.*;
+import vistas.admin.*;
 import vistas.principal.*;
 import logica.*;
 
@@ -10,12 +11,12 @@ public class MainFrame extends JFrame {
 	private MainDatabasePanel escoger;
 	private Ingreso log;
 	private Inicial ini;
-	private NuevoUsuario nuevoUsuario;
+	private Dinamico din;
 	
 	//logica
 	private Usuario usuario;
-	public final static int INGRESO=0,PRINCIPAL=1,INICIAL=2,NUEVOUSUARIO=3;
-	private int estado=INICIAL;
+	public final static int INGRESO=0,PRINCIPAL=1,INICIAL=2,ADMINISTRADOR=3;
+	private int estado=ADMINISTRADOR;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -41,6 +42,9 @@ public class MainFrame extends JFrame {
 		log.getRegresar().addActionListener(new Acciones());
 		log.getPasswordField().addActionListener(new Acciones());
 		
+		din=new Dinamico();
+		din.getSalir().add(salir);
+		
 		escoger=new MainDatabasePanel();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,9 +65,10 @@ public class MainFrame extends JFrame {
 			setSize(800, 600);
 			setContentPane(escoger);
 		}
-		else if(estado==NUEVOUSUARIO){
-			setSize(626, 415);
-			setContentPane(nuevoUsuario);
+		else if(estado == ADMINISTRADOR){
+			setSize(660,460);
+			setContentPane(din);
+			setJMenuBar(din.getAdminMenu());
 		}
 	}
 	public class Acciones implements ActionListener{
@@ -78,7 +83,7 @@ public class MainFrame extends JFrame {
 				estados();
 			}
 			//Panel de ingresar al sistema
-			else if(e.getSource()==log.getLogin()||e.getSource()==log.getPasswordField()){
+			/*else if(e.getSource()==log.getLogin()||e.getSource()==log.getPasswordField()){
 				usuario=null;
 				usuario=log.intentoConectar();
 				if(usuario!=null){
@@ -100,7 +105,14 @@ public class MainFrame extends JFrame {
 				estado=INICIAL;
 				estados();
 			}
-			
+			*/
 		}
 	}
+	Action salir = new AbstractAction("Salir") {
+		public void actionPerformed(ActionEvent e) {
+			estado = INICIAL;
+			setJMenuBar(null);
+			estados();
+		}
+	};
 }
