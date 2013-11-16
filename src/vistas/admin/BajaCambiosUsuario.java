@@ -10,7 +10,7 @@ public class BajaCambiosUsuario extends JPanel{
 	private JLabel lTipoDeUsuario;
 	private JLabel errorNombre,errorApellidoPaterno,errorApellidoMaterno,errorEmail,errorNombreUsuario;
 	private JLabel lMensaje;
-	
+	private int estado;
 	private JRadioButton rbAdministrador,rbEmpleado;
 	private JButton bAceptar,bCancelar,bEliminar;
 	private JTextField tNombre,tApellidoPaterno,tApellidoMaterno,tEmail,tNombreUsuario;
@@ -219,18 +219,26 @@ public class BajaCambiosUsuario extends JPanel{
 		ButtonGroup grupo = new ButtonGroup();
       grupo.add(rbAdministrador);
       grupo.add(rbEmpleado);
+      setBajas();
 	}
 	public void setUser(Usuario u){
 		this.u=u;
 		bienvenido.setText("Bienvenido "+u.getNombreUsuario());
 	}
+	public JButton getAceptar(){return bAceptar;}
+	public JButton getAceptar(){return bCancelar;}
+	public JButton getSubmit(){return bEliminar;}
+	public int getEstado(){return estado;}
+	
 	public void setCambios(){
 		lMensaje.setText("Cambios Usuario");
 		bEliminar.setText("Cambiar");
+		estado=Dinamico.CAMBIOSUSUARIO;
 	}
 	public void setBajas(){
 		lMensaje.setText("Bajas Usuario");
 		bEliminar.setText("Eliminar");
+		estado=Dinamico.BAJASUSUARIO;
 	}
 	public void cancelar(){
 		tNombre.setText("");
