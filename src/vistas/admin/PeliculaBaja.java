@@ -4,14 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 
 @SuppressWarnings("serial")
-public class JugueteBaja extends JPanel {
+public class PeliculaBaja extends JPanel {
 	private JLabel bienvenido, lMensaje;
 	private JLabel lblNombre, lblErrorNombre;
 	private JTextField tFNombre;
-	private JLabel lblFabricante, lblErrorFabricante;
-	private JTextField tFFabricante;
-	private JLabel lblEdadApropiada, lblErrorEdadApropiada;
-	private JTextField tFEdadApropiada;
+	private JLabel lblFechaEstreno, lblErrorFechaEstreno;
+	private JTextField tFFechaEstreno;
+	private JLabel lblGenero, lblErrorGenero;
+	private JTextField tFGenero;
+	private JLabel lblIdioma, lblErrorIdioma;
+	private JTextField tFIdioma;
 	private JLabel lblPrecio, lblErrorPrecio;
 	private JTextField tFPrecio;
 	private JLabel lblExistencias, lblErrorExistencias;
@@ -23,7 +25,7 @@ public class JugueteBaja extends JPanel {
 	public JButton getCancelar(){return btnCancelar;}
 	public JButton getAceptar(){return btnAceptar;}
 
-	public JugueteBaja() {
+	public PeliculaBaja() {
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{115, 90, 100, 100, 0, 0};
@@ -41,7 +43,7 @@ public class JugueteBaja extends JPanel {
 		gbc_bienvenido.gridy = 1;
 		add(bienvenido, gbc_bienvenido);
 		
-		lMensaje = new JLabel("Bajas Juguetes");
+		lMensaje = new JLabel("Bajas Peliculas");
 		GridBagConstraints gbc_lMensaje = new GridBagConstraints();
 		gbc_lMensaje.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lMensaje.insets = new Insets(0, 0, 5, 0);
@@ -81,59 +83,83 @@ public class JugueteBaja extends JPanel {
 		gbc_btnAceptar.gridy = 3;
 		add(btnAceptar, gbc_btnAceptar);
 		
-		lblErrorFabricante = new JLabel("");
-		GridBagConstraints gbc_lblErrorFabricante = new GridBagConstraints();
-		gbc_lblErrorFabricante.insets = new Insets(0, 0, 5, 5);
-		gbc_lblErrorFabricante.gridx = 1;
-		gbc_lblErrorFabricante.gridy = 5;
-		add(lblErrorFabricante, gbc_lblErrorFabricante);
+		lblErrorFechaEstreno = new JLabel("");
+		GridBagConstraints gbc_lblErrorFechaLanzamiento = new GridBagConstraints();
+		gbc_lblErrorFechaLanzamiento.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorFechaLanzamiento.gridx = 1;
+		gbc_lblErrorFechaLanzamiento.gridy = 5;
+		add(lblErrorFechaEstreno, gbc_lblErrorFechaLanzamiento);
 		
-		lblFabricante = new JLabel("Fabricante");
-		GridBagConstraints gbc_lblFabricante = new GridBagConstraints();
-		gbc_lblFabricante.anchor = GridBagConstraints.EAST;
-		gbc_lblFabricante.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFabricante.gridx = 2;
-		gbc_lblFabricante.gridy = 5;
-		add(lblFabricante, gbc_lblFabricante);
+		lblFechaEstreno = new JLabel("Fecha de Estreno");
+		GridBagConstraints gbc_lblFechaLanzamiento = new GridBagConstraints();
+		gbc_lblFechaLanzamiento.anchor = GridBagConstraints.EAST;
+		gbc_lblFechaLanzamiento.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFechaLanzamiento.gridx = 2;
+		gbc_lblFechaLanzamiento.gridy = 5;
+		add(lblFechaEstreno, gbc_lblFechaLanzamiento);
 		
-		tFFabricante = new JTextField();
-		GridBagConstraints gbc_tFFabricante = new GridBagConstraints();
-		gbc_tFFabricante.insets = new Insets(0, 0, 5, 5);
-		gbc_tFFabricante.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tFFabricante.gridx = 3;
-		gbc_tFFabricante.gridy = 5;
-		add(tFFabricante, gbc_tFFabricante);
-		tFFabricante.setColumns(10);
+		tFFechaEstreno = new JTextField();
+		GridBagConstraints gbc_tFFechaLanzamiento = new GridBagConstraints();
+		gbc_tFFechaLanzamiento.insets = new Insets(0, 0, 5, 5);
+		gbc_tFFechaLanzamiento.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFFechaLanzamiento.gridx = 3;
+		gbc_tFFechaLanzamiento.gridy = 5;
+		add(tFFechaEstreno, gbc_tFFechaLanzamiento);
+		tFFechaEstreno.setColumns(10);
 		
-		lblErrorEdadApropiada = new JLabel("");
-		GridBagConstraints gbc_lblErrorEdadApropiada = new GridBagConstraints();
-		gbc_lblErrorEdadApropiada.insets = new Insets(0, 0, 5, 5);
-		gbc_lblErrorEdadApropiada.gridx = 1;
-		gbc_lblErrorEdadApropiada.gridy = 6;
-		add(lblErrorEdadApropiada, gbc_lblErrorEdadApropiada);
+		lblErrorGenero = new JLabel("");
+		GridBagConstraints gbc_lblErrorGenero = new GridBagConstraints();
+		gbc_lblErrorGenero.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorGenero.gridx = 1;
+		gbc_lblErrorGenero.gridy = 6;
+		add(lblErrorGenero, gbc_lblErrorGenero);
 		
-		lblEdadApropiada = new JLabel("Edad Aprodiada");
-		GridBagConstraints gbc_lblEdadAprodiada = new GridBagConstraints();
-		gbc_lblEdadAprodiada.anchor = GridBagConstraints.EAST;
-		gbc_lblEdadAprodiada.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEdadAprodiada.gridx = 2;
-		gbc_lblEdadAprodiada.gridy = 6;
-		add(lblEdadApropiada, gbc_lblEdadAprodiada);
+		lblGenero = new JLabel("Genero");
+		GridBagConstraints gbc_lblGenero = new GridBagConstraints();
+		gbc_lblGenero.anchor = GridBagConstraints.EAST;
+		gbc_lblGenero.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGenero.gridx = 2;
+		gbc_lblGenero.gridy = 6;
+		add(lblGenero, gbc_lblGenero);
 		
-		tFEdadApropiada = new JTextField();
-		GridBagConstraints gbc_tFEdadApropiada = new GridBagConstraints();
-		gbc_tFEdadApropiada.insets = new Insets(0, 0, 5, 5);
-		gbc_tFEdadApropiada.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tFEdadApropiada.gridx = 3;
-		gbc_tFEdadApropiada.gridy = 6;
-		add(tFEdadApropiada, gbc_tFEdadApropiada);
-		tFEdadApropiada.setColumns(10);
+		tFGenero = new JTextField();
+		GridBagConstraints gbc_tFGenero = new GridBagConstraints();
+		gbc_tFGenero.insets = new Insets(0, 0, 5, 5);
+		gbc_tFGenero.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFGenero.gridx = 3;
+		gbc_tFGenero.gridy = 6;
+		add(tFGenero, gbc_tFGenero);
+		tFGenero.setColumns(10);
+		
+		lblErrorIdioma = new JLabel("");
+		GridBagConstraints gbc_lblErrorIdioma = new GridBagConstraints();
+		gbc_lblErrorIdioma.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorIdioma.gridx = 1;
+		gbc_lblErrorIdioma.gridy = 7;
+		add(lblErrorIdioma, gbc_lblErrorIdioma);
+		
+		lblIdioma = new JLabel("Idioma");
+		GridBagConstraints gbc_lblIdioma = new GridBagConstraints();
+		gbc_lblIdioma.anchor = GridBagConstraints.EAST;
+		gbc_lblIdioma.insets = new Insets(0, 0, 5, 5);
+		gbc_lblIdioma.gridx = 2;
+		gbc_lblIdioma.gridy = 7;
+		add(lblIdioma, gbc_lblIdioma);
+		
+		tFIdioma = new JTextField();
+		GridBagConstraints gbc_tFIdioma = new GridBagConstraints();
+		gbc_tFIdioma.insets = new Insets(0, 0, 5, 5);
+		gbc_tFIdioma.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFIdioma.gridx = 3;
+		gbc_tFIdioma.gridy = 7;
+		add(tFIdioma, gbc_tFIdioma);
+		tFIdioma.setColumns(10);
 		
 		lblErrorPrecio = new JLabel("");
 		GridBagConstraints gbc_lblErrorPrecio = new GridBagConstraints();
 		gbc_lblErrorPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorPrecio.gridx = 1;
-		gbc_lblErrorPrecio.gridy = 7;
+		gbc_lblErrorPrecio.gridy = 8;
 		add(lblErrorPrecio, gbc_lblErrorPrecio);
 		
 		lblPrecio = new JLabel("Precio");
@@ -141,7 +167,7 @@ public class JugueteBaja extends JPanel {
 		gbc_lblPrecio.anchor = GridBagConstraints.EAST;
 		gbc_lblPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecio.gridx = 2;
-		gbc_lblPrecio.gridy = 7;
+		gbc_lblPrecio.gridy = 8;
 		add(lblPrecio, gbc_lblPrecio);
 		
 		tFPrecio = new JTextField();
@@ -149,7 +175,7 @@ public class JugueteBaja extends JPanel {
 		gbc_tFPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_tFPrecio.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFPrecio.gridx = 3;
-		gbc_tFPrecio.gridy = 7;
+		gbc_tFPrecio.gridy = 8;
 		add(tFPrecio, gbc_tFPrecio);
 		tFPrecio.setColumns(10);
 		
@@ -157,7 +183,7 @@ public class JugueteBaja extends JPanel {
 		GridBagConstraints gbc_lblErrorExistencias = new GridBagConstraints();
 		gbc_lblErrorExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorExistencias.gridx = 1;
-		gbc_lblErrorExistencias.gridy = 8;
+		gbc_lblErrorExistencias.gridy = 9;
 		add(lblErrorExistencias, gbc_lblErrorExistencias);
 		
 		lblExistencias = new JLabel("Existencias");
@@ -165,7 +191,7 @@ public class JugueteBaja extends JPanel {
 		gbc_lblExistencias.anchor = GridBagConstraints.EAST;
 		gbc_lblExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblExistencias.gridx = 2;
-		gbc_lblExistencias.gridy = 8;
+		gbc_lblExistencias.gridy = 9;
 		add(lblExistencias, gbc_lblExistencias);
 		
 		tFExistencias = new JTextField();
@@ -173,7 +199,7 @@ public class JugueteBaja extends JPanel {
 		gbc_tFExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_tFExistencias.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFExistencias.gridx = 3;
-		gbc_tFExistencias.gridy = 8;
+		gbc_tFExistencias.gridy = 9;
 		add(tFExistencias, gbc_tFExistencias);
 		tFExistencias.setColumns(10);
 		
@@ -181,29 +207,29 @@ public class JugueteBaja extends JPanel {
 		GridBagConstraints gbc_btnEliminar = new GridBagConstraints();
 		gbc_btnEliminar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnEliminar.gridx = 2;
-		gbc_btnEliminar.gridy = 10;
+		gbc_btnEliminar.gridy = 11;
 		add(btnEliminar, gbc_btnEliminar);
 		
 		btnCancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancelar.gridx = 3;
-		gbc_btnCancelar.gridy = 10;
+		gbc_btnCancelar.gridy = 11;
 		add(btnCancelar, gbc_btnCancelar);
 
 	}
 	public void setCambios(){
-		lMensaje.setText("Cambios Juguetes");
+		lMensaje.setText("Cambios Peliculas");
 		btnEliminar.setText("Cambiar");
 	}
 	public void setBajas(){
-		lMensaje.setText("Bajas Juguetes");
+		lMensaje.setText("Bajas Peliculas");
 		btnEliminar.setText("Eliminar");
 	}
 	public void cancelar(){
 		tFNombre.setText("");
-		tFFabricante.setText("");
-		tFEdadApropiada.setText("");
+		tFFechaEstreno.setText("");
+		tFGenero.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
 	}

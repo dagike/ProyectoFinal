@@ -101,7 +101,6 @@ public class MainFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			estado = INICIAL;
 			setJMenuBar(null);
-			din.salir();
 			estados();
 		}
 	};

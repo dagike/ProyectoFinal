@@ -280,11 +280,7 @@ public class NuevoUsuario extends JPanel{
 	public JButton getAceptar(){return bAceptar;}
 	public Persona getPersona(){ 
 		Nombre n = new Nombre(tNombre.getText(),tApellidoPaterno.getText(),tApellidoMaterno.getText());
-		Persona p;
-		if(rbAdministrador.isSelected())
-			p = new Persona(n,tEmail.getText(), tNombreUsuario.getText().toLowerCase() ,Usuario.ADMINISTRADOR);
-		else
-			p = new Persona(n,tEmail.getText(), tNombreUsuario.getText().toLowerCase() ,Usuario.EMPLEADO);
+		Persona p = new Persona(n,tEmail.getText(),tNombreUsuario.getText());
 		p.setPassword(String.copyValueOf(tPassword.getPassword()));
 		return p;
 	}
@@ -292,11 +288,7 @@ public class NuevoUsuario extends JPanel{
 		this.u=u;
 		bienvenida.setText("Bienvenido "+u.getNombreUsuario());
 	}
-	public void exito(){
-		lAgregarNuevoUsuario.setText("Usuario Agregado con Exito");
-	}
 	public void cancelar(){
-		lAgregarNuevoUsuario.setText("Agregar Nuevo Usuario");
 		tNombre.setText("");
 		tApellidoPaterno.setText("");
 		tApellidoMaterno.setText("");

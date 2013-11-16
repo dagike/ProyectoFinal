@@ -4,14 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 
 @SuppressWarnings("serial")
-public class JugueteBaja extends JPanel {
+public class DiscoBaja extends JPanel {
 	private JLabel bienvenido, lMensaje;
 	private JLabel lblNombre, lblErrorNombre;
 	private JTextField tFNombre;
-	private JLabel lblFabricante, lblErrorFabricante;
-	private JTextField tFFabricante;
-	private JLabel lblEdadApropiada, lblErrorEdadApropiada;
-	private JTextField tFEdadApropiada;
+	private JLabel lblFechaLanzamiento, lblErrorFechaLanzamiento;
+	private JTextField tFFechaLanzamiento;
+	private JLabel lblGenero, lblErrorGenero;
+	private JTextField tFGenero;
 	private JLabel lblPrecio, lblErrorPrecio;
 	private JTextField tFPrecio;
 	private JLabel lblExistencias, lblErrorExistencias;
@@ -23,7 +23,7 @@ public class JugueteBaja extends JPanel {
 	public JButton getCancelar(){return btnCancelar;}
 	public JButton getAceptar(){return btnAceptar;}
 
-	public JugueteBaja() {
+	public DiscoBaja() {
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{115, 90, 100, 100, 0, 0};
@@ -41,7 +41,7 @@ public class JugueteBaja extends JPanel {
 		gbc_bienvenido.gridy = 1;
 		add(bienvenido, gbc_bienvenido);
 		
-		lMensaje = new JLabel("Bajas Juguetes");
+		lMensaje = new JLabel("Bajas Discos");
 		GridBagConstraints gbc_lMensaje = new GridBagConstraints();
 		gbc_lMensaje.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lMensaje.insets = new Insets(0, 0, 5, 0);
@@ -81,53 +81,53 @@ public class JugueteBaja extends JPanel {
 		gbc_btnAceptar.gridy = 3;
 		add(btnAceptar, gbc_btnAceptar);
 		
-		lblErrorFabricante = new JLabel("");
-		GridBagConstraints gbc_lblErrorFabricante = new GridBagConstraints();
-		gbc_lblErrorFabricante.insets = new Insets(0, 0, 5, 5);
-		gbc_lblErrorFabricante.gridx = 1;
-		gbc_lblErrorFabricante.gridy = 5;
-		add(lblErrorFabricante, gbc_lblErrorFabricante);
+		lblErrorFechaLanzamiento = new JLabel("");
+		GridBagConstraints gbc_lblErrorFechaLanzamiento = new GridBagConstraints();
+		gbc_lblErrorFechaLanzamiento.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorFechaLanzamiento.gridx = 1;
+		gbc_lblErrorFechaLanzamiento.gridy = 5;
+		add(lblErrorFechaLanzamiento, gbc_lblErrorFechaLanzamiento);
 		
-		lblFabricante = new JLabel("Fabricante");
-		GridBagConstraints gbc_lblFabricante = new GridBagConstraints();
-		gbc_lblFabricante.anchor = GridBagConstraints.EAST;
-		gbc_lblFabricante.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFabricante.gridx = 2;
-		gbc_lblFabricante.gridy = 5;
-		add(lblFabricante, gbc_lblFabricante);
+		lblFechaLanzamiento = new JLabel("Fecha de Lanzamiento");
+		GridBagConstraints gbc_lblFechaLanzamiento = new GridBagConstraints();
+		gbc_lblFechaLanzamiento.anchor = GridBagConstraints.EAST;
+		gbc_lblFechaLanzamiento.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFechaLanzamiento.gridx = 2;
+		gbc_lblFechaLanzamiento.gridy = 5;
+		add(lblFechaLanzamiento, gbc_lblFechaLanzamiento);
 		
-		tFFabricante = new JTextField();
-		GridBagConstraints gbc_tFFabricante = new GridBagConstraints();
-		gbc_tFFabricante.insets = new Insets(0, 0, 5, 5);
-		gbc_tFFabricante.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tFFabricante.gridx = 3;
-		gbc_tFFabricante.gridy = 5;
-		add(tFFabricante, gbc_tFFabricante);
-		tFFabricante.setColumns(10);
+		tFFechaLanzamiento = new JTextField();
+		GridBagConstraints gbc_tFFechaLanzamiento = new GridBagConstraints();
+		gbc_tFFechaLanzamiento.insets = new Insets(0, 0, 5, 5);
+		gbc_tFFechaLanzamiento.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFFechaLanzamiento.gridx = 3;
+		gbc_tFFechaLanzamiento.gridy = 5;
+		add(tFFechaLanzamiento, gbc_tFFechaLanzamiento);
+		tFFechaLanzamiento.setColumns(10);
 		
-		lblErrorEdadApropiada = new JLabel("");
-		GridBagConstraints gbc_lblErrorEdadApropiada = new GridBagConstraints();
-		gbc_lblErrorEdadApropiada.insets = new Insets(0, 0, 5, 5);
-		gbc_lblErrorEdadApropiada.gridx = 1;
-		gbc_lblErrorEdadApropiada.gridy = 6;
-		add(lblErrorEdadApropiada, gbc_lblErrorEdadApropiada);
+		lblErrorGenero = new JLabel("");
+		GridBagConstraints gbc_lblErrorGenero = new GridBagConstraints();
+		gbc_lblErrorGenero.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorGenero.gridx = 1;
+		gbc_lblErrorGenero.gridy = 6;
+		add(lblErrorGenero, gbc_lblErrorGenero);
 		
-		lblEdadApropiada = new JLabel("Edad Aprodiada");
-		GridBagConstraints gbc_lblEdadAprodiada = new GridBagConstraints();
-		gbc_lblEdadAprodiada.anchor = GridBagConstraints.EAST;
-		gbc_lblEdadAprodiada.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEdadAprodiada.gridx = 2;
-		gbc_lblEdadAprodiada.gridy = 6;
-		add(lblEdadApropiada, gbc_lblEdadAprodiada);
+		lblGenero = new JLabel("Genero");
+		GridBagConstraints gbc_lblGenero = new GridBagConstraints();
+		gbc_lblGenero.anchor = GridBagConstraints.EAST;
+		gbc_lblGenero.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGenero.gridx = 2;
+		gbc_lblGenero.gridy = 6;
+		add(lblGenero, gbc_lblGenero);
 		
-		tFEdadApropiada = new JTextField();
-		GridBagConstraints gbc_tFEdadApropiada = new GridBagConstraints();
-		gbc_tFEdadApropiada.insets = new Insets(0, 0, 5, 5);
-		gbc_tFEdadApropiada.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tFEdadApropiada.gridx = 3;
-		gbc_tFEdadApropiada.gridy = 6;
-		add(tFEdadApropiada, gbc_tFEdadApropiada);
-		tFEdadApropiada.setColumns(10);
+		tFGenero = new JTextField();
+		GridBagConstraints gbc_tFGenero = new GridBagConstraints();
+		gbc_tFGenero.insets = new Insets(0, 0, 5, 5);
+		gbc_tFGenero.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFGenero.gridx = 3;
+		gbc_tFGenero.gridy = 6;
+		add(tFGenero, gbc_tFGenero);
+		tFGenero.setColumns(10);
 		
 		lblErrorPrecio = new JLabel("");
 		GridBagConstraints gbc_lblErrorPrecio = new GridBagConstraints();
@@ -193,17 +193,17 @@ public class JugueteBaja extends JPanel {
 
 	}
 	public void setCambios(){
-		lMensaje.setText("Cambios Juguetes");
+		lMensaje.setText("Cambios Discos");
 		btnEliminar.setText("Cambiar");
 	}
 	public void setBajas(){
-		lMensaje.setText("Bajas Juguetes");
+		lMensaje.setText("Bajas Discos");
 		btnEliminar.setText("Eliminar");
 	}
 	public void cancelar(){
 		tFNombre.setText("");
-		tFFabricante.setText("");
-		tFEdadApropiada.setText("");
+		tFFechaLanzamiento.setText("");
+		tFGenero.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
 	}
