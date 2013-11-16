@@ -10,7 +10,7 @@ public class Dinamico extends JPanel {
 	private JMenuBar adminMenu;
 	private JMenu empleado,producto,salir;
 	public static int ALTASUSUARIO=0,BAJASUSUARIO=1,CAMBIOSUSUARIO=2,ALTAARTICULO=3,BAJAARTICULO=4,CAMBIOSARTICULO=5;
-	private int estado=BAJASUSUARIO;
+	private int estado=ALTASUSUARIO;
 	private NuevoUsuario nuevoUsuario;
 	private BajaCambiosUsuario bajaCambios;
 	
@@ -18,6 +18,12 @@ public class Dinamico extends JPanel {
 	private JugueteAlta jugueteAlta;
 	private JugueteBaja jugueteBaja;
 	
+	public void salir(){
+		nuevoUsuario.cancelar();
+		bajaCambios.cancelar();
+		jugueteAlta.cancelar();
+		jugueteBaja.cancelar();
+	}
 	public void setUser(Usuario u){
 		this.u=u;
 		nuevoUsuario.setUser(u);
@@ -78,11 +84,22 @@ public class Dinamico extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == nuevoUsuario.getAceptar()){ 
 				if(!nuevoUsuario.checkTextFields()){
-					int error;
-					error=u.agregarUsuario( nuevoUsuario.getPersona() );
-					if(error==Usuario.EREPETIDO){
-						nuevoUsuario.repetido(true);
+					Object[] options = {"Si","No"};
+					int n = JOptionPane.showOptionDialog(null,"Esta seguro de dar de alta?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+					if(n==0){
+						int error;
+						error=u.agregarUsuario( nuevoUsuario.getPersona() );
+						if(error==Usuario.EREPETIDO){
+							nuevoUsuario.repetido(true);
+						}else if(error==Usuario.ECONEXION){
+							System.out.println("Error en la conexion");
+						}
+						else if(error==0){
+							nuevoUsuario.cancelar();
+							nuevoUsuario.exito();
+						}
 					}
+					
 				}
 			}else if(e.getSource() == nuevoUsuario.getCancelar()) {
 				nuevoUsuario.cancelar();
