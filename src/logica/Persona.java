@@ -4,11 +4,13 @@ public class Persona{
 	private String email;
 	private String nombreUsuario;
 	private String password;
+	private int tipo;
 	
 	public Nombre getNombre(){return nombre;}
 	public String getEmail(){return email;}
 	public String getNombreUsuario(){return nombreUsuario;}
 	public String getPassword(){return password;}
+	public int getTipo(){return tipo;}
 	
 	public void setNombre(String nombrePila,String apellidoPaterno,String apellidoMaterno){
 		if(nombre==null)
@@ -24,9 +26,10 @@ public class Persona{
 	public void setNombreUsuario(String u){nombreUsuario=u;}
 	public void setPassword(String p){password=p;}
 	
-	public Persona(Nombre nombre,String email,String nombreUsuario){
+	public Persona(Nombre nombre,String email,String nombreUsuario,int tipo){
 		this.nombre=nombre;
 		this.email=email;
 		this.nombreUsuario=nombreUsuario;
+		this.tipo=tipo;
 	}
 }

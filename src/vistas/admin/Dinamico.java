@@ -12,7 +12,7 @@ public class Dinamico extends JPanel {
 	private JMenu  disco, juguete, libro, pelicula;
 	public static int ALTASUSUARIO=0,BAJASUSUARIO=1,CAMBIOSUSUARIO=2,ALTASDISCO=3,BAJASDISCO=4,CAMBIOSDISCO=5,ALTASJUGUETE=6,BAJASJUGUETE=7,CAMBIOSJUGUETE=8;
 	public static int ALTASLIBRO=9,BAJASLIBRO=10,CAMBIOSLIBRO=11,ALTASPELICULA=12,BAJASPELICULA=13,CAMBIOSPELICULA=14;
-	private int estado=BAJASUSUARIO;
+	private int estado=ALTASUSUARIO;
 	private NuevoUsuario nuevoUsuario;
 	private BajaCambiosUsuario bajaCambios;
 	
