@@ -3,7 +3,7 @@ import javax.swing.*;
 
 import java.awt.*;
 
-import logica.Usuario;
+import logica.*;
 
 @SuppressWarnings("serial")
 public class NuevoUsuario extends JPanel{
@@ -270,8 +270,24 @@ public class NuevoUsuario extends JPanel{
 		
 	}
 
+	public void repetido(boolean b){
+		if(b)
+			errorNombreUsuario.setText("Nombre Repetido");
+		else
+			errorNombreUsuario.setText("");
+	}
 	public JButton getCancelar(){return bCancelar;}
 	public JButton getAceptar(){return bAceptar;}
+	public Persona getPersona(){ 
+		Nombre n = new Nombre(tNombre.getText(),tApellidoPaterno.getText(),tApellidoMaterno.getText());
+		Persona p = new Persona(n,tEmail.getText(),tNombreUsuario.getText());
+		p.setPassword(String.copyValueOf(tPassword.getPassword()));
+		return p;
+	}
+	public void setUser(Usuario u){
+		this.u=u;
+		bienvenida.setText("Bienvenido "+u.getNombreUsuario());
+	}
 	public void cancelar(){
 		tNombre.setText("");
 		tApellidoPaterno.setText("");
@@ -288,6 +304,7 @@ public class NuevoUsuario extends JPanel{
 		tPassword.setText("");
 		tConfirmarPassword.setText("");
 		rbAdministrador.setSelected(true);
+		repetido(false);
 	}
 	public boolean checkTextFields(){
 		boolean error=false;

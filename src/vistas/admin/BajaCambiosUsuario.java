@@ -1,6 +1,7 @@
 package vistas.admin;
 import javax.swing.*;
 import java.awt.*;
+import logica.*;
 
 public class BajaCambiosUsuario extends JPanel{
 	private JLabel bienvenida,lNombre,lApellidoPaterno,lApellidoMaterno,lEmail,lNombreUsuario;
@@ -11,7 +12,7 @@ public class BajaCambiosUsuario extends JPanel{
 	private JRadioButton rbAdministrador,rbEmpleado;
 	private JButton bAceptar,bCancelar,bEliminar;
 	private JTextField tNombre,tApellidoPaterno,tApellidoMaterno,tEmail,tNombreUsuario;
-	//private Usuario u;
+	private Usuario u;
 	public BajaCambiosUsuario(){
 		setForeground(Color.BLACK);
 		setBackground(Color.WHITE);
@@ -216,6 +217,10 @@ public class BajaCambiosUsuario extends JPanel{
 		ButtonGroup grupo = new ButtonGroup();
       grupo.add(rbAdministrador);
       grupo.add(rbEmpleado);
+	}
+	public void setUser(Usuario u){
+		this.u=u;
+		bienvenida.setText("Bienvenido "+u.getNombreUsuario());
 	}
 	public void setCambios(){
 		lMensaje.setText("Cambios Usuario");

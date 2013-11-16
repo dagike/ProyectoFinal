@@ -3,6 +3,7 @@ package vistas.admin;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
+import logica.*;
 
 @SuppressWarnings("serial")
 public class Dinamico extends JPanel {
@@ -12,7 +13,13 @@ public class Dinamico extends JPanel {
 	private int estado=BAJASSUSUARIO;
 	private NuevoUsuario nuevoUsuario;
 	private BajaCambiosUsuario bajaCambios;
+	private Usuario u;
 	
+	public void setUser(Usuario u){
+		this.u=u;
+		nuevoUsuario.setUser(u);
+		bajaCambios.setUser(u);
+	}
 	public JMenu getSalir(){return salir;}
 	public JMenuBar getAdminMenu(){return adminMenu;}
 	public Dinamico() {
@@ -52,7 +59,11 @@ public class Dinamico extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == nuevoUsuario.getAceptar()){ 
 				if(!nuevoUsuario.checkTextFields()){
-					System.out.println("Ahuevo");
+					int error;
+					error=u.agregarUsuario( nuevoUsuario.getPersona() );
+					if(error==Usuario.EREPETIDO){
+						nuevoUsuario.repetido(true);
+					}
 				}
 			}else if(e.getSource() == nuevoUsuario.getCancelar()) {
 				nuevoUsuario.cancelar();

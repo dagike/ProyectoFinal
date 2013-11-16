@@ -34,8 +34,7 @@ public class MainFrame extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		ini=new Inicial();
-		ini.getEmpleado().addActionListener(new Acciones());
-		ini.getCliente().addActionListener(new Acciones());
+		ini.getIngresar().addActionListener(new Acciones());
 		
 		log=new Ingreso();
 		log.getLogin().addActionListener(new Acciones());
@@ -74,23 +73,18 @@ public class MainFrame extends JFrame {
 	public class Acciones implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			//Panel inicial
-			if(e.getSource()==ini.getEmpleado()){
+			if(e.getSource()==ini.getIngresar()){
 				estado=INGRESO;
 				estados();
 			}
-			else if(e.getSource()==ini.getCliente()){
-				estado=PRINCIPAL;
-				estados();
-			}
 			//Panel de ingresar al sistema
-			/*else if(e.getSource()==log.getLogin()||e.getSource()==log.getPasswordField()){
+			else if(e.getSource()==log.getLogin()||e.getSource()==log.getPasswordField()){
 				usuario=null;
 				usuario=log.intentoConectar();
 				if(usuario!=null){
 					if(usuario.getTipo()==usuario.ADMINISTRADOR){
-						nuevoUsuario = new NuevoUsuario(usuario);
-						nuevoUsuario.getCancelar().addActionListener(new Acciones());
-						estado=NUEVOUSUARIO;
+						din.setUser(usuario);
+						estado=ADMINISTRADOR;
 					}
 					estados();
 				}
@@ -99,13 +93,8 @@ public class MainFrame extends JFrame {
 				estado=INICIAL;
 				estados();
 			}
-			
 			//Agregar Nuevo Usuario
-			else if(e.getSource()==nuevoUsuario.getCancelar()){
-				estado=INICIAL;
-				estados();
-			}
-			*/
+			
 		}
 	}
 	Action salir = new AbstractAction("Salir") {

@@ -6,9 +6,8 @@ import javax.swing.border.*;
 
 @SuppressWarnings("serial")
 public class Inicial extends JPanel{
-	private JButton empleado,cliente;
-	public JButton getEmpleado(){return empleado;}
-	public JButton getCliente(){return cliente;}
+	private JButton ingresar;
+	public JButton getIngresar(){return ingresar;}
 	public void showPanel(){
 		setBorder(new EmptyBorder(30, 0, 0, 0));
 		GridBagConstraints posicion = new GridBagConstraints();
@@ -27,23 +26,15 @@ public class Inicial extends JPanel{
 		add(imagen, posicion);
 		
 		posicion.gridx = 0;
-		posicion.gridy = 2;
-		posicion.gridwidth = 2;
-		posicion.weightx=1.0;
-		posicion.weighty = 0;
-		add(cliente, posicion);
-		
-		posicion.gridx = 0;
 		posicion.gridy = 1;
 		posicion.gridwidth = 2;
 		posicion.weightx=1.0;
 		posicion.weighty = 0;
 		posicion.insets = new Insets(30,0,0,0);
-		add(empleado, posicion);	
+		add(ingresar, posicion);	
 	}
 	public Inicial(){
-		empleado = new JButton("Empleado");
-		cliente = new JButton("Cliente");
+		ingresar = new JButton("Ingresar");
 		showPanel();
 	}
 }
