@@ -1,10 +1,12 @@
 package vistas.admin;
 import javax.swing.*;
+
 import java.awt.*;
 import logica.*;
 
+@SuppressWarnings("serial")
 public class BajaCambiosUsuario extends JPanel{
-	private JLabel bienvenida,lNombre,lApellidoPaterno,lApellidoMaterno,lEmail,lNombreUsuario;
+	private JLabel bienvenido,lNombre,lApellidoPaterno,lApellidoMaterno,lEmail,lNombreUsuario;
 	private JLabel lTipoDeUsuario;
 	private JLabel errorNombre,errorApellidoPaterno,errorApellidoMaterno,errorEmail,errorNombreUsuario;
 	private JLabel lMensaje;
@@ -23,14 +25,14 @@ public class BajaCambiosUsuario extends JPanel{
 		gridBagLayout.rowWeights = new double[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		setLayout(gridBagLayout);
 
-		bienvenida = new JLabel("Bienvenido ");
-		GridBagConstraints gbc_bienvenida = new GridBagConstraints();
-		gbc_bienvenida.gridwidth = 2;
-		gbc_bienvenida.insets = new Insets(0, 0, 5, 5);
-		gbc_bienvenida.anchor = GridBagConstraints.NORTH;
-		gbc_bienvenida.gridx = 1;
-		gbc_bienvenida.gridy = 1;
-		add(bienvenida, gbc_bienvenida);
+		bienvenido = new JLabel("Bienvenido ");
+		GridBagConstraints gbc_bienvenido = new GridBagConstraints();
+		gbc_bienvenido.gridwidth = 2;
+		gbc_bienvenido.insets = new Insets(0, 0, 5, 5);
+		gbc_bienvenido.anchor = GridBagConstraints.NORTH;
+		gbc_bienvenido.gridx = 1;
+		gbc_bienvenido.gridy = 1;
+		add(bienvenido, gbc_bienvenido);
 		
 		lMensaje = new JLabel("Bajas Usuario");
 		GridBagConstraints gbc_lMensaje = new GridBagConstraints();
@@ -220,7 +222,7 @@ public class BajaCambiosUsuario extends JPanel{
 	}
 	public void setUser(Usuario u){
 		this.u=u;
-		bienvenida.setText("Bienvenido "+u.getNombreUsuario());
+		bienvenido.setText("Bienvenido "+u.getNombreUsuario());
 	}
 	public void setCambios(){
 		lMensaje.setText("Cambios Usuario");

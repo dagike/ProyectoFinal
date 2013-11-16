@@ -9,11 +9,14 @@ import logica.*;
 public class Dinamico extends JPanel {
 	private JMenuBar adminMenu;
 	private JMenu empleado,producto,salir;
-	public static int ALTASUSUARIO=0,BAJASSUSUARIO=1,CAMBIOSUSUARIO=2;
-	private int estado=BAJASSUSUARIO;
+	public static int ALTASUSUARIO=0,BAJASUSUARIO=1,CAMBIOSUSUARIO=2,ALTAARTICULO=3,BAJAARTICULO=4,CAMBIOSARTICULO=5;
+	private int estado=BAJASUSUARIO;
 	private NuevoUsuario nuevoUsuario;
 	private BajaCambiosUsuario bajaCambios;
+	
 	private Usuario u;
+	private JugueteAlta jugueteAlta;
+	private JugueteBaja jugueteBaja;
 	
 	public void setUser(Usuario u){
 		this.u=u;
@@ -47,11 +50,27 @@ public class Dinamico extends JPanel {
 		nuevoUsuario.setMaximumSize(new Dimension(570,400));
 		nuevoUsuario.setPreferredSize(new Dimension(570,400));
 		add(nuevoUsuario);
-		nuevoUsuario.setVisible(false);
+		//nuevoUsuario.setVisible(false);
 		
 		bajaCambios=new BajaCambiosUsuario();
 		add(bajaCambios);
-		bajaCambios.setVisible(false);
+		//bajaCambios.setVisible(false);
+		
+		jugueteAlta = new JugueteAlta();
+		jugueteAlta.getAceptar().addActionListener(new Acciones());
+		jugueteAlta.getCancelar().addActionListener(new Acciones());
+		jugueteAlta.setMinimumSize(new Dimension(570,400));
+		jugueteAlta.setMaximumSize(new Dimension(570,400));
+		jugueteAlta.setPreferredSize(new Dimension(570,400));
+		add(jugueteAlta);
+		
+		jugueteBaja = new JugueteBaja();
+		jugueteBaja.getEliminar().addActionListener(new Acciones());
+		jugueteBaja.getCancelar().addActionListener(new Acciones());
+		jugueteBaja.setMinimumSize(new Dimension(570,400));
+		jugueteBaja.setMaximumSize(new Dimension(570,400));
+		jugueteBaja.setPreferredSize(new Dimension(570,400));
+		add(jugueteBaja);
 		
 		estados();
 	}
@@ -67,31 +86,57 @@ public class Dinamico extends JPanel {
 				}
 			}else if(e.getSource() == nuevoUsuario.getCancelar()) {
 				nuevoUsuario.cancelar();
+			}else if(e.getSource() == jugueteAlta.getAceptar()){
+				if(!jugueteAlta.checkTextFields()){
+					
+				}
+			}else if(e.getSource() == jugueteAlta.getCancelar()){
+				jugueteAlta.cancelar();
 			}
 		}
 	}
 	public void estados(){
 		if(estado == ALTASUSUARIO){
 			bajaCambios.setVisible(false);
+			jugueteAlta.setVisible(false);
+			jugueteBaja.setVisible(false);
 			nuevoUsuario.cancelar();
 			nuevoUsuario.setVisible(true);
 		}
-		else if(estado==BAJASSUSUARIO){
+		else if(estado==BAJASUSUARIO){
 			nuevoUsuario.setVisible(false);
+			jugueteAlta.setVisible(false);
+			jugueteBaja.setVisible(false);
 			bajaCambios.setBajas();
 			bajaCambios.cancelar();
 			bajaCambios.setVisible(true);
 		}else if(estado == CAMBIOSUSUARIO){
 			nuevoUsuario.setVisible(false);
+			jugueteAlta.setVisible(false);
+			jugueteBaja.setVisible(false);
 			bajaCambios.setCambios();
 			bajaCambios.cancelar();
 			bajaCambios.setVisible(true);
-		}else if(estado == 4){
-			
-		}else if(estado == 5){
-			
-		}else if(estado == 6){
-			
+		}else if(estado == ALTAARTICULO){
+			nuevoUsuario.setVisible(false);
+			jugueteBaja.setVisible(false);
+			bajaCambios.setVisible(false);
+			jugueteAlta.cancelar();
+			jugueteAlta.setVisible(true);
+		}else if(estado == BAJAARTICULO){
+			nuevoUsuario.setVisible(false);
+			jugueteAlta.setVisible(false);
+			bajaCambios.setVisible(false);
+			jugueteBaja.setBajas();
+			jugueteBaja.cancelar();
+			jugueteBaja.setVisible(true);
+		}else if(estado == CAMBIOSARTICULO){
+			nuevoUsuario.setVisible(false);
+			jugueteAlta.setVisible(false);
+			bajaCambios.setVisible(false);
+			jugueteBaja.setCambios();
+			jugueteBaja.cancelar();
+			jugueteBaja.setVisible(true);
 		}
 	}
 	Action empleadoAltas = new AbstractAction("Altas") {
@@ -102,7 +147,7 @@ public class Dinamico extends JPanel {
 	};
 	Action empleadoBajas = new AbstractAction("Bajas") {
 		public void actionPerformed(ActionEvent e) {
-			estado = BAJASSUSUARIO;
+			estado = BAJASUSUARIO;
 			estados();
 		}
 	};
@@ -116,21 +161,21 @@ public class Dinamico extends JPanel {
 	
 	Action productoAltas = new AbstractAction("Altas") {
 		public void actionPerformed(ActionEvent e) {
-			estado = 4;
+			estado = ALTAARTICULO;
 			estados();
 		}
 	};
 	
 	Action productoBajas = new AbstractAction("Bajas") {
 		public void actionPerformed(ActionEvent e) {
-			estado = 5;
+			estado = BAJAARTICULO;
 			estados();
 		}
 	};
 	
 	Action productoCambios = new AbstractAction("Cambios") {
 		public void actionPerformed(ActionEvent e) {
-			estado = 6;
+			estado = CAMBIOSARTICULO;
 			estados();
 		}
 	};
