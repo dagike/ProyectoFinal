@@ -1,5 +1,6 @@
 package logica;
 import java.sql.*;
+import logica.articulos.*;
 
 public class Usuario{
 	public static int ADMINISTRADOR=0,EMPLEADO=1,CLIENTE=2;
@@ -53,6 +54,7 @@ public class Usuario{
 					instruccion.execute("CREATE USER "+p.getNombreUsuario()+" WITH PASSWORD '"+p.getPassword()+"'");
 					instruccion.execute(" INSERT INTO nombre values('0','"+p.getNombre().getApellidoPaterno()+"','"+p.getNombre().getApellidoMaterno() +"','"+p.getNombre().getNombrePila()+"')" );
 					instruccion.execute("INSERT INTO empleado (cve_empleado,cve_tienda,cve_nombre,email,usuario) SELECT 0,1,max(cve_nombre),'"+p.getEmail()+"','"+p.getNombreUsuario()+"' from nombre");
+					instruccion.execute("  GRANT ALL PRIVILEGES ON tienda to "+p.getNombreUsuario());
 				}
 			}
 		}catch(SQLException e){
@@ -156,4 +158,25 @@ public class Usuario{
 		}
 		return true; 
 	}
+
+	public int agregarJuguete(Juguete j){return 0;}
+	public Juguete obtenerInfoJuguete(String nombre){return null;}
+	public boolean eliminarJuguete(Juguete j){return true;}
+	public boolean cambiarJuguete(Juguete j){return true;}
+	
+	public int agregarPelicula(Pelicula p){return 0;}
+	public Pelicula obtenerInfoPelicula(String nombre){return null;}
+	public boolean eliminarPelicula(Pelicula p){return true;}
+	public boolean cambiarPelicula(Pelicula p){return true;}
+	
+	public int agregarLibro(Libro l){return 0;}
+	public Libro obtenerInfoLibro(String nombre){return null;}
+	public boolean eliminarLibro(Libro l){return true;}
+	public boolean cambiarLibro(Libro l){return true;}
+	
+	public int agregarDisco(Disco d){return 0;}
+	public Disco obtenerInfoDisco(String nombre){return null;}
+	public boolean eliminarDisco(Disco d){return true;}
+	public boolean cambiarDisco(Disco d){return true;}
+	
 }

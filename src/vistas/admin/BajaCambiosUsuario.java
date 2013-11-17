@@ -229,13 +229,14 @@ public class BajaCambiosUsuario extends JPanel{
 	public JButton getCancelar(){return bCancelar;}
 	public JButton getSubmit(){return bEliminar;}
 	public int getEstado(){return estado;}
-	public String getNombreUsuario(){return tNombreUsuario.getText().toLowerCase();}
 	public int getTipo(){
 		if(rbAdministrador.isSelected())
 			return Usuario.ADMINISTRADOR;
 		else
 			return Usuario.EMPLEADO;
 	}
+	
+	public String getNombreUsuario(){return tNombreUsuario.getText().toLowerCase();}
 	public Persona getPersona(){ 
 		Nombre n = new Nombre(tNombre.getText(),tApellidoPaterno.getText(),tApellidoMaterno.getText());
 		Persona p;
@@ -268,7 +269,6 @@ public class BajaCambiosUsuario extends JPanel{
 		else
 			rbEmpleado.setSelected(true);
 	}
-	
 	public void setCambios(){
 		lMensaje.setText("Cambios Usuario");
 		bEliminar.setText("Cambiar");
@@ -278,6 +278,12 @@ public class BajaCambiosUsuario extends JPanel{
 		lMensaje.setText("Bajas Usuario");
 		bEliminar.setText("Eliminar");
 		estado=Dinamico.BAJASUSUARIO;
+	}
+	public void exito(){
+		if(estado==Dinamico.BAJASUSUARIO)
+			lMensaje.setText("Usuario Eliminado");
+		else
+			lMensaje.setText("Usuario Cambiado");
 	}
 	public void nuevo(){
 		tNombre.setText("");
@@ -294,6 +300,7 @@ public class BajaCambiosUsuario extends JPanel{
 		else
 			lMensaje.setText("Cambios Usuario");
 	}
+	
 	public void cancelar(){
 		tNombre.setText("");
 		tApellidoPaterno.setText("");
@@ -310,12 +317,6 @@ public class BajaCambiosUsuario extends JPanel{
 			lMensaje.setText("Bajas Usuario");
 		else
 			lMensaje.setText("Cambios Usuario");
-	}
-	public void exito(){
-		if(estado==Dinamico.BAJASUSUARIO)
-			lMensaje.setText("Usuario Eliminado");
-		else
-			lMensaje.setText("Usuario Cambiado");
 	}
 	public boolean checkTextFields(){
 		boolean error=false;
