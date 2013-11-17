@@ -37,13 +37,13 @@ public class Dinamico extends JPanel {
 		nuevoUsuario.cancelar();
 		bajaCambios.cancelar();
 		jugueteAlta.cancelar();
-		jugueteBaja.cancelar();
+		jugueteBaja.cancelar(estado);
 		discoAlta.cancelar();
-		discoBaja.cancelar();
+		discoBaja.cancelar(estado);
 		libroAlta.cancelar();
-		libroBaja.cancelar();
+		libroBaja.cancelar(estado);
 		peliculaAlta.cancelar();
-		peliculaBaja.cancelar();
+		peliculaBaja.cancelar(estado);
 		estados();
 	}
 	
@@ -298,13 +298,13 @@ public class Dinamico extends JPanel {
 						if(estado == BAJASDISCO){
 							if( discoBaja.getNombreDisco().equals(disco.getNombre()) ){
 								discoBaja.setError(4);
-								discoBaja.cancelar();
+								discoBaja.cancelar(BAJASDISCO);
 							}
 							else{
 								Object[] options = {"Si","No"};
 								int n = JOptionPane.showOptionDialog(null,"Esta seguro de eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 								if(n==0&&disco.eliminarArticulo(disco)){
-									discoBaja.cancelar();
+									discoBaja.cancelar(estado);
 									discoBaja.exito(BAJASDISCO);
 								}
 							}
@@ -312,14 +312,14 @@ public class Dinamico extends JPanel {
 						else if(estado == CAMBIOSDISCO){
 							if( discoBaja.getNombreDisco().equals(disco.getNombre()) ){
 								discoBaja.setError(4);
-								discoBaja.cancelar();
+								discoBaja.cancelar(CAMBIOSDISCO);
 							}
 							else{
 								Object[] options = {"Si","No"};
 								int n = JOptionPane.showOptionDialog(null,"Esta seguro de los cambios?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 								Disco nueva=discoBaja.getDisco();
 								if(n==0&&disco.cambiarArticulo(nueva)){
-									discoBaja.cancelar();
+									discoBaja.cancelar(CAMBIOSDISCO);
 									discoBaja.exito(CAMBIOSDISCO);
 								}
 							}
@@ -327,24 +327,24 @@ public class Dinamico extends JPanel {
 					}
 					else{
 						discoBaja.setError(3);
-						discoBaja.cancelar();
+						discoBaja.cancelar(estado);
 					}
 				}
 				else{
 					discoBaja.setError(4);
-					discoBaja.cancelar();
+					discoBaja.cancelar(estado);
 				}
 			}else if(e.getSource() == discoBaja.getAceptar()){
 				if(!discoBaja.getNombreDisco().equals("")){
-					discoBaja.cancelar();
+					discoBaja.cancelar(estado);
 					disco.obtenerInfo(discoBaja.getNombreDisco());
 					if(disco==null){
 						discoBaja.setError(2);
-						discoBaja.cancelar();
+						discoBaja.cancelar(estado);
 					}
 					else if(disco.getNombre()==null){
 						discoBaja.setError(3);
-						discoBaja.cancelar();
+						discoBaja.cancelar(estado);
 						disco=null;
 					}
 					else{
@@ -354,11 +354,11 @@ public class Dinamico extends JPanel {
 				}
 				else{
 					discoBaja.setError(1);
-					discoBaja.cancelar();
+					discoBaja.cancelar(estado);
 					disco=null;
 				}
 			}else if(e.getSource() == discoBaja.getCancelar()){
-				discoBaja.cancelar();
+				discoBaja.cancelar(estado);
 			}else if(e.getSource() == jugueteAlta.getAceptar()){
 				if(!jugueteAlta.checkTextFields()){
 					Object[] options = {"Si","No"};
@@ -385,13 +385,13 @@ public class Dinamico extends JPanel {
 						if(estado == BAJASJUGUETE){
 							if( jugueteBaja.getNombreJuguete().equals(juguete.getNombre()) ){
 								jugueteBaja.setError(4);
-								jugueteBaja.cancelar();
+								jugueteBaja.cancelar(estado);
 							}
 							else{
 								Object[] options = {"Si","No"};
 								int n = JOptionPane.showOptionDialog(null,"Esta seguro de eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 								if(n==0&&juguete.eliminarArticulo(juguete)){
-									jugueteBaja.cancelar();
+									jugueteBaja.cancelar(estado);
 									jugueteBaja.exito(BAJASJUGUETE);
 								}
 							}
@@ -399,14 +399,14 @@ public class Dinamico extends JPanel {
 						else if(estado == CAMBIOSJUGUETE){
 							if( jugueteBaja.getNombreJuguete().equals(juguete.getNombre()) ){
 								jugueteBaja.setError(4);
-								jugueteBaja.cancelar();
+								jugueteBaja.cancelar(estado);
 							}
 							else{
 								Object[] options = {"Si","No"};
 								int n = JOptionPane.showOptionDialog(null,"Esta seguro de los cambios?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 								Juguete nueva=jugueteBaja.getJuguete();
 								if(n==0&&juguete.cambiarArticulo(nueva)){
-									jugueteBaja.cancelar();
+									jugueteBaja.cancelar(estado);
 									jugueteBaja.exito(CAMBIOSJUGUETE);
 								}
 							}
@@ -414,24 +414,24 @@ public class Dinamico extends JPanel {
 					}
 					else{
 						jugueteBaja.setError(3);
-						jugueteBaja.cancelar();
+						jugueteBaja.cancelar(estado);
 					}
 				}
 				else{
 					jugueteBaja.setError(4);
-					jugueteBaja.cancelar();
+					jugueteBaja.cancelar(estado);
 				}
 			}else if(e.getSource() == jugueteBaja.getAceptar()){
 				if(!jugueteBaja.getNombreJuguete().equals("")){
-					jugueteBaja.cancelar();
+					jugueteBaja.cancelar(estado);
 					juguete.obtenerInfo(jugueteBaja.getNombreJuguete());
 					if(juguete==null){
 						jugueteBaja.setError(2);
-						jugueteBaja.cancelar();
+						jugueteBaja.cancelar(estado);
 					}
 					else if(juguete.getNombre()==null){
 						jugueteBaja.setError(3);
-						jugueteBaja.cancelar();
+						jugueteBaja.cancelar(estado);
 						disco=null;
 					}
 					else{
@@ -441,11 +441,11 @@ public class Dinamico extends JPanel {
 				}
 				else{
 					jugueteBaja.setError(1);
-					jugueteBaja.cancelar();
+					jugueteBaja.cancelar(estado);
 					juguete=null;
 				}
 			}else if(e.getSource() == jugueteBaja.getCancelar()){
-				jugueteBaja.cancelar();
+				jugueteBaja.cancelar(estado);
 			}else if(e.getSource() == libroAlta.getAceptar()){
 				if(!libroAlta.checkTextFields()){
 					Object[] options = {"Si","No"};
@@ -472,13 +472,13 @@ public class Dinamico extends JPanel {
 						if(estado == BAJASLIBRO){
 							if( libroBaja.getNombreLibro().equals(libro.getNombre()) ){
 								libroBaja.setError(4);
-								libroBaja.cancelar();
+								libroBaja.cancelar(estado);
 							}
 							else{
 								Object[] options = {"Si","No"};
 								int n = JOptionPane.showOptionDialog(null,"Esta seguro de eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 								if(n==0&&libro.eliminarArticulo(libro)){
-									libroBaja.cancelar();
+									libroBaja.cancelar(estado);
 									libroBaja.exito(BAJASLIBRO);
 								}
 							}
@@ -486,14 +486,14 @@ public class Dinamico extends JPanel {
 						else if(estado == CAMBIOSJUGUETE){
 							if( libroBaja.getNombreLibro().equals(libro.getNombre()) ){
 								libroBaja.setError(4);
-								libroBaja.cancelar();
+								libroBaja.cancelar(estado);
 							}
 							else{
 								Object[] options = {"Si","No"};
 								int n = JOptionPane.showOptionDialog(null,"Esta seguro de los cambios?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 								Libro nueva=libroBaja.getLibro();
 								if(n==0&&libro.cambiarArticulo(nueva)){
-									libroBaja.cancelar();
+									libroBaja.cancelar(estado);
 									libroBaja.exito(CAMBIOSLIBRO);
 								}
 							}
@@ -501,24 +501,24 @@ public class Dinamico extends JPanel {
 					}
 					else{
 						libroBaja.setError(3);
-						libroBaja.cancelar();
+						libroBaja.cancelar(estado);
 					}
 				}
 				else{
 					libroBaja.setError(4);
-					libroBaja.cancelar();
+					libroBaja.cancelar(estado);
 				}
 			}else if(e.getSource() == libroBaja.getAceptar()){
 				if(!libroBaja.getNombreLibro().equals("")){
-					libroBaja.cancelar();
+					libroBaja.cancelar(estado);
 					libro.obtenerInfo(libroBaja.getNombreLibro());
 					if(libro==null){
 						libroBaja.setError(2);
-						libroBaja.cancelar();
+						libroBaja.cancelar(estado);
 					}
 					else if(juguete.getNombre()==null){
 						libroBaja.setError(3);
-						libroBaja.cancelar();
+						libroBaja.cancelar(estado);
 						disco=null;
 					}
 					else{
@@ -528,11 +528,11 @@ public class Dinamico extends JPanel {
 				}
 				else{
 					libroBaja.setError(1);
-					libroBaja.cancelar();
+					libroBaja.cancelar(estado);
 					libro=null;
 				}
 			}else if(e.getSource() == libroBaja.getCancelar()){
-				libroBaja.cancelar();
+				libroBaja.cancelar(estado);
 			}else if(e.getSource() == peliculaAlta.getAceptar()){
 				if(!peliculaAlta.checkTextFields()){
 					Object[] options = {"Si","No"};
@@ -559,13 +559,13 @@ public class Dinamico extends JPanel {
 						if(estado == BAJASPELICULA){
 							if( peliculaBaja.getNombrePelicula().equals(pelicula.getNombre()) ){
 								peliculaBaja.setError(4);
-								peliculaBaja.cancelar();
+								peliculaBaja.cancelar(estado);
 							}
 							else{
 								Object[] options = {"Si","No"};
 								int n = JOptionPane.showOptionDialog(null,"Esta seguro de eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 								if(n==0&&pelicula.eliminarArticulo(pelicula)){
-									peliculaBaja.cancelar();
+									peliculaBaja.cancelar(estado);
 									peliculaBaja.exito(BAJASPELICULA);
 								}
 							}
@@ -573,14 +573,14 @@ public class Dinamico extends JPanel {
 						else if(estado == CAMBIOSPELICULA){
 							if( peliculaBaja.getNombrePelicula().equals(pelicula.getNombre()) ){
 								peliculaBaja.setError(4);
-								peliculaBaja.cancelar();
+								peliculaBaja.cancelar(estado);
 							}
 							else{
 								Object[] options = {"Si","No"};
 								int n = JOptionPane.showOptionDialog(null,"Esta seguro de los cambios?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 								Pelicula nueva=peliculaBaja.getPelicula();
 								if(n==0&&libro.cambiarArticulo(nueva)){
-									peliculaBaja.cancelar();
+									peliculaBaja.cancelar(estado);
 									peliculaBaja.exito(CAMBIOSPELICULA);
 								}
 							}
@@ -588,24 +588,24 @@ public class Dinamico extends JPanel {
 					}
 					else{
 						peliculaBaja.setError(3);
-						peliculaBaja.cancelar();
+						peliculaBaja.cancelar(estado);
 					}
 				}
 				else{
 					peliculaBaja.setError(4);
-					peliculaBaja.cancelar();
+					peliculaBaja.cancelar(estado);
 				}
 			}else if(e.getSource() == peliculaBaja.getAceptar()){
 				if(!peliculaBaja.getNombrePelicula().equals("")){
-					peliculaBaja.cancelar();
+					peliculaBaja.cancelar(estado);
 					pelicula.obtenerInfo(peliculaBaja.getNombrePelicula());
 					if(pelicula==null){
 						peliculaBaja.setError(2);
-						peliculaBaja.cancelar();
+						peliculaBaja.cancelar(estado);
 					}
 					else if(pelicula.getNombre()==null){
 						peliculaBaja.setError(3);
-						peliculaBaja.cancelar();
+						peliculaBaja.cancelar(estado);
 						pelicula=null;
 					}
 					else{
@@ -615,11 +615,11 @@ public class Dinamico extends JPanel {
 				}
 				else{
 					peliculaBaja.setError(1);
-					peliculaBaja.cancelar();
+					peliculaBaja.cancelar(estado);
 					pelicula=null;
 				}
 			}else if(e.getSource() == peliculaBaja.getCancelar()){
-				peliculaBaja.cancelar();
+				peliculaBaja.cancelar(estado);
 			}
 		}
 	}
@@ -687,7 +687,7 @@ public class Dinamico extends JPanel {
 			peliculaAlta.setVisible(false);
 			peliculaBaja.setVisible(false);
 			discoBaja.setBajas();
-			discoBaja.cancelar();
+			discoBaja.cancelar(estado);
 			discoBaja.setVisible(true);
 		}else if(estado == CAMBIOSDISCO){
 			nuevoUsuario.setVisible(false);
@@ -700,7 +700,7 @@ public class Dinamico extends JPanel {
 			peliculaAlta.setVisible(false);
 			peliculaBaja.setVisible(false);
 			discoBaja.setCambios();
-			discoBaja.cancelar();
+			discoBaja.cancelar(estado);
 			discoBaja.setVisible(true);
 		}else if(estado == ALTASJUGUETE){
 			nuevoUsuario.setVisible(false);
@@ -725,7 +725,7 @@ public class Dinamico extends JPanel {
 			peliculaAlta.setVisible(false);
 			peliculaBaja.setVisible(false);
 			jugueteBaja.setBajas();
-			jugueteBaja.cancelar();
+			jugueteBaja.cancelar(estado);
 			jugueteBaja.setVisible(true);
 		}else if(estado == CAMBIOSJUGUETE){
 			nuevoUsuario.setVisible(false);
@@ -738,7 +738,7 @@ public class Dinamico extends JPanel {
 			peliculaAlta.setVisible(false);
 			peliculaBaja.setVisible(false);
 			jugueteBaja.setCambios();
-			jugueteBaja.cancelar();
+			jugueteBaja.cancelar(estado);
 			jugueteBaja.setVisible(true);
 		}else if(estado == ALTASLIBRO){
 			nuevoUsuario.setVisible(false);
@@ -763,7 +763,7 @@ public class Dinamico extends JPanel {
 			peliculaAlta.setVisible(false);
 			peliculaBaja.setVisible(false);
 			libroBaja.setBajas();
-			libroBaja.cancelar();
+			libroBaja.cancelar(estado);
 			libroBaja.setVisible(true);
 		}else if(estado == CAMBIOSLIBRO){
 			nuevoUsuario.setVisible(false);
@@ -776,7 +776,7 @@ public class Dinamico extends JPanel {
 			peliculaAlta.setVisible(false);
 			peliculaBaja.setVisible(false);
 			libroBaja.setCambios();
-			libroBaja.cancelar();
+			libroBaja.cancelar(estado);
 			libroBaja.setVisible(true);
 		}else if(estado == ALTASPELICULA){
 			nuevoUsuario.setVisible(false);
@@ -801,7 +801,7 @@ public class Dinamico extends JPanel {
 			libroBaja.setVisible(false);
 			peliculaAlta.setVisible(false);
 			peliculaBaja.setBajas();
-			peliculaBaja.cancelar();
+			peliculaBaja.cancelar(estado);
 			peliculaBaja.setVisible(true);
 		}else if(estado == CAMBIOSPELICULA){
 			nuevoUsuario.setVisible(false);
@@ -814,7 +814,7 @@ public class Dinamico extends JPanel {
 			libroBaja.setVisible(false);
 			peliculaAlta.setVisible(false);
 			peliculaBaja.setCambios();
-			peliculaBaja.cancelar();
+			peliculaBaja.cancelar(estado);
 			peliculaBaja.setVisible(true);
 		}
 	}
