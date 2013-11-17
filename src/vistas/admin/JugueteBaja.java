@@ -54,6 +54,7 @@ public class JugueteBaja extends JPanel {
 		add(lMensaje, gbc_lMensaje);
 		
 		lblErrorNombre = new JLabel("");
+		lblErrorNombre.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorNombre = new GridBagConstraints();
 		gbc_lblErrorNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorNombre.gridx = 1;
@@ -85,6 +86,7 @@ public class JugueteBaja extends JPanel {
 		add(btnAceptar, gbc_btnAceptar);
 		
 		lblErrorFabricante = new JLabel("");
+		lblErrorFabricante.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorFabricante = new GridBagConstraints();
 		gbc_lblErrorFabricante.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorFabricante.gridx = 1;
@@ -109,6 +111,7 @@ public class JugueteBaja extends JPanel {
 		tFFabricante.setColumns(10);
 		
 		lblErrorEdadApropiada = new JLabel("");
+		lblErrorEdadApropiada.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorEdadApropiada = new GridBagConstraints();
 		gbc_lblErrorEdadApropiada.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorEdadApropiada.gridx = 1;
@@ -133,6 +136,7 @@ public class JugueteBaja extends JPanel {
 		tFEdadApropiada.setColumns(10);
 		
 		lblErrorPrecio = new JLabel("");
+		lblErrorPrecio.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorPrecio = new GridBagConstraints();
 		gbc_lblErrorPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorPrecio.gridx = 1;
@@ -157,6 +161,7 @@ public class JugueteBaja extends JPanel {
 		tFPrecio.setColumns(10);
 		
 		lblErrorExistencias = new JLabel("");
+		lblErrorExistencias.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorExistencias = new GridBagConstraints();
 		gbc_lblErrorExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorExistencias.gridx = 1;
@@ -277,5 +282,12 @@ public class JugueteBaja extends JPanel {
 		tFEdadApropiada.setText(String.valueOf(juguete.getEdad()));
 		tFPrecio.setText(String.valueOf(juguete.getPrecio()));
 		tFExistencias.setText(String.valueOf(juguete.getExistencias()));
+	}
+	
+	public void exito(int estado){
+		if(estado==Dinamico.BAJASJUGUETE)
+			lMensaje.setText("Juguete Eliminado");
+		else
+			lMensaje.setText("Juguete Cambiado");
 	}
 }

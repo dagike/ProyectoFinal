@@ -4,12 +4,13 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
 import logica.*;
+import logica.articulos.*;
 
 @SuppressWarnings("serial")
 public class Dinamico extends JPanel {
 	private JMenuBar adminMenu;
 	private JMenu empleado,producto,salir;
-	private JMenu  disco, juguete, libro, pelicula;
+	private JMenu  menuDisco, menuJuguete, menuLibro, menuPelicula;
 	public static int ALTASUSUARIO=0,BAJASUSUARIO=1,CAMBIOSUSUARIO=2,ALTASDISCO=3,BAJASDISCO=4,CAMBIOSDISCO=5,ALTASJUGUETE=6,BAJASJUGUETE=7,CAMBIOSJUGUETE=8;
 	public static int ALTASLIBRO=9,BAJASLIBRO=10,CAMBIOSLIBRO=11,ALTASPELICULA=12,BAJASPELICULA=13,CAMBIOSPELICULA=14;
 	private int estado=ALTASUSUARIO;
@@ -18,12 +19,16 @@ public class Dinamico extends JPanel {
 	
 	private Persona p;
 	private Usuario u;
+	private Juguete juguete;
 	private JugueteAlta jugueteAlta;
 	private JugueteBaja jugueteBaja;
+	private Disco disco;
 	private DiscoAlta discoAlta;
 	private DiscoBaja discoBaja;
+	private Libro libro;
 	private LibroAlta libroAlta;
 	private LibroBaja libroBaja;
+	private Pelicula pelicula;
 	private PeliculaAlta peliculaAlta;
 	private PeliculaBaja peliculaBaja;
 	
@@ -33,6 +38,12 @@ public class Dinamico extends JPanel {
 		bajaCambios.cancelar();
 		jugueteAlta.cancelar();
 		jugueteBaja.cancelar();
+		discoAlta.cancelar();
+		discoBaja.cancelar();
+		libroAlta.cancelar();
+		libroBaja.cancelar();
+		peliculaAlta.cancelar();
+		peliculaBaja.cancelar();
 		estados();
 	}
 	
@@ -57,26 +68,26 @@ public class Dinamico extends JPanel {
 		adminMenu.add(empleado);
 
 		producto = new JMenu("Producto");
-		disco = new JMenu("Disco");
-		disco.add(altasDisco);
-		disco.add(bajasDisco);
-		disco.add(cambiosDisco);
-		juguete = new JMenu("Jueguete");
-		juguete.add(altasJuguete);
-		juguete.add(bajasJuguete);
-		juguete.add(cambiosJuguete);
-		libro = new JMenu("Libro");
-		libro.add(altasLibro);
-		libro.add(bajasLibro);
-		libro.add(cambiosLibro);
-		pelicula = new JMenu("Pelicula");
-		pelicula.add(altasPelicula);
-		pelicula.add(bajasPelicula);
-		pelicula.add(cambiosPelicula);
-		producto.add(disco);
-		producto.add(juguete);
-		producto.add(libro);
-		producto.add(pelicula);
+		menuDisco = new JMenu("Disco");
+		menuDisco.add(altasDisco);
+		menuDisco.add(bajasDisco);
+		menuDisco.add(cambiosDisco);
+		menuJuguete = new JMenu("Jueguete");
+		menuJuguete.add(altasJuguete);
+		menuJuguete.add(bajasJuguete);
+		menuJuguete.add(cambiosJuguete);
+		menuLibro = new JMenu("Libro");
+		menuLibro.add(altasLibro);
+		menuLibro.add(bajasLibro);
+		menuLibro.add(cambiosLibro);
+		menuPelicula = new JMenu("Pelicula");
+		menuPelicula.add(altasPelicula);
+		menuPelicula.add(bajasPelicula);
+		menuPelicula.add(cambiosPelicula);
+		producto.add(menuDisco);
+		producto.add(menuJuguete);
+		producto.add(menuLibro);
+		producto.add(menuPelicula);
 		adminMenu.add(producto);
 		
 		salir = new JMenu("Salir");
@@ -166,6 +177,7 @@ public class Dinamico extends JPanel {
 		
 		estados();
 	}
+	
 	public class Acciones implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == nuevoUsuario.getAceptar()){ 
@@ -260,34 +272,358 @@ public class Dinamico extends JPanel {
 			}
 			else if(e.getSource() == bajaCambios.getCancelar()){
 				bajaCambios.cancelar();
-			}
-			else if(e.getSource() == discoAlta.getAceptar()){
+			}else if(e.getSource() == discoAlta.getAceptar()){
 				if(!discoAlta.checkTextFields()){
-					
+					Object[] options = {"Si","No"};
+					int n = JOptionPane.showOptionDialog(null,"Esta seguro de dar de alta?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+					if(n==0){
+						int error;
+						error=disco.agregarArticulo( discoAlta.getDisco() );
+						if(error==Usuario.EREPETIDO){
+							discoAlta.repetido(true);
+						}else if(error==Usuario.ECONEXION){
+							System.out.println("Error en la conexion");
+						}
+						else if(error==0){
+							discoAlta.cancelar();
+							discoAlta.exito();
+						}
+					}	
 				}
 			}else if(e.getSource() == discoAlta.getCancelar()){
 				discoAlta.cancelar();
+			}else if(e.getSource() == discoBaja.getEliminar()){
+				if(!discoBaja.checkTextFields()&&disco!=null){
+					if(discoBaja.getNombreDisco().equals(disco.getNombre())){
+						if(estado == BAJASDISCO){
+							if( discoBaja.getNombreDisco().equals(disco.getNombre()) ){
+								discoBaja.setError(4);
+								discoBaja.cancelar();
+							}
+							else{
+								Object[] options = {"Si","No"};
+								int n = JOptionPane.showOptionDialog(null,"Esta seguro de eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+								if(n==0&&disco.eliminarArticulo(disco)){
+									discoBaja.cancelar();
+									discoBaja.exito(BAJASDISCO);
+								}
+							}
+						}
+						else if(estado == CAMBIOSDISCO){
+							if( discoBaja.getNombreDisco().equals(disco.getNombre()) ){
+								discoBaja.setError(4);
+								discoBaja.cancelar();
+							}
+							else{
+								Object[] options = {"Si","No"};
+								int n = JOptionPane.showOptionDialog(null,"Esta seguro de los cambios?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+								Disco nueva=discoBaja.getDisco();
+								if(n==0&&disco.cambiarArticulo(nueva)){
+									discoBaja.cancelar();
+									discoBaja.exito(CAMBIOSDISCO);
+								}
+							}
+						}
+					}
+					else{
+						discoBaja.setError(3);
+						discoBaja.cancelar();
+					}
+				}
+				else{
+					discoBaja.setError(4);
+					discoBaja.cancelar();
+				}
+			}else if(e.getSource() == discoBaja.getAceptar()){
+				if(!discoBaja.getNombreDisco().equals("")){
+					discoBaja.cancelar();
+					disco.obtenerInfo(discoBaja.getNombreDisco());
+					if(disco==null){
+						discoBaja.setError(2);
+						discoBaja.cancelar();
+					}
+					else if(disco.getNombre()==null){
+						discoBaja.setError(3);
+						discoBaja.cancelar();
+						disco=null;
+					}
+					else{
+						discoBaja.cargarDatos(disco);
+						discoBaja.setError(0);
+					}	
+				}
+				else{
+					discoBaja.setError(1);
+					discoBaja.cancelar();
+					disco=null;
+				}
+			}else if(e.getSource() == discoBaja.getCancelar()){
+				discoBaja.cancelar();
 			}else if(e.getSource() == jugueteAlta.getAceptar()){
 				if(!jugueteAlta.checkTextFields()){
-					
+					Object[] options = {"Si","No"};
+					int n = JOptionPane.showOptionDialog(null,"Esta seguro de dar de alta?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+					if(n==0){
+						int error;
+						error=juguete.agregarArticulo( jugueteAlta.getJuguete() );
+						if(error==Usuario.EREPETIDO){
+							jugueteAlta.repetido(true);
+						}else if(error==Usuario.ECONEXION){
+							System.out.println("Error en la conexion");
+						}
+						else if(error==0){
+							jugueteAlta.cancelar();
+							jugueteAlta.exito();
+						}
+					}
 				}
 			}else if(e.getSource() == jugueteAlta.getCancelar()){
 				jugueteAlta.cancelar();
+			}else if(e.getSource() == jugueteBaja.getEliminar()){
+				if(!jugueteBaja.checkTextFields()&&juguete!=null){
+					if(jugueteBaja.getNombreJuguete().equals(juguete.getNombre())){
+						if(estado == BAJASJUGUETE){
+							if( jugueteBaja.getNombreJuguete().equals(juguete.getNombre()) ){
+								jugueteBaja.setError(4);
+								jugueteBaja.cancelar();
+							}
+							else{
+								Object[] options = {"Si","No"};
+								int n = JOptionPane.showOptionDialog(null,"Esta seguro de eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+								if(n==0&&juguete.eliminarArticulo(juguete)){
+									jugueteBaja.cancelar();
+									jugueteBaja.exito(BAJASJUGUETE);
+								}
+							}
+						}
+						else if(estado == CAMBIOSJUGUETE){
+							if( jugueteBaja.getNombreJuguete().equals(juguete.getNombre()) ){
+								jugueteBaja.setError(4);
+								jugueteBaja.cancelar();
+							}
+							else{
+								Object[] options = {"Si","No"};
+								int n = JOptionPane.showOptionDialog(null,"Esta seguro de los cambios?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+								Juguete nueva=jugueteBaja.getJuguete();
+								if(n==0&&juguete.cambiarArticulo(nueva)){
+									jugueteBaja.cancelar();
+									jugueteBaja.exito(CAMBIOSJUGUETE);
+								}
+							}
+						}
+					}
+					else{
+						jugueteBaja.setError(3);
+						jugueteBaja.cancelar();
+					}
+				}
+				else{
+					jugueteBaja.setError(4);
+					jugueteBaja.cancelar();
+				}
+			}else if(e.getSource() == jugueteBaja.getAceptar()){
+				if(!jugueteBaja.getNombreJuguete().equals("")){
+					jugueteBaja.cancelar();
+					juguete.obtenerInfo(jugueteBaja.getNombreJuguete());
+					if(juguete==null){
+						jugueteBaja.setError(2);
+						jugueteBaja.cancelar();
+					}
+					else if(juguete.getNombre()==null){
+						jugueteBaja.setError(3);
+						jugueteBaja.cancelar();
+						disco=null;
+					}
+					else{
+						jugueteBaja.cargarDatos(juguete);
+						jugueteBaja.setError(0);
+					}	
+				}
+				else{
+					jugueteBaja.setError(1);
+					jugueteBaja.cancelar();
+					juguete=null;
+				}
+			}else if(e.getSource() == jugueteBaja.getCancelar()){
+				jugueteBaja.cancelar();
 			}else if(e.getSource() == libroAlta.getAceptar()){
 				if(!libroAlta.checkTextFields()){
-					
+					Object[] options = {"Si","No"};
+					int n = JOptionPane.showOptionDialog(null,"Esta seguro de dar de alta?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+					if(n==0){
+						int error;
+						error=libro.agregarArticulo( libroAlta.getLibro() );
+						if(error==Usuario.EREPETIDO){
+							libroAlta.repetido(true);
+						}else if(error==Usuario.ECONEXION){
+							System.out.println("Error en la conexion");
+						}
+						else if(error==0){
+							libroAlta.cancelar();
+							libroAlta.exito();
+						}
+					}
 				}
 			}else if(e.getSource() == libroAlta.getCancelar()){
 				libroAlta.cancelar();
+			}else if(e.getSource() == libroBaja.getEliminar()){
+				if(!libroBaja.checkTextFields()&&libro!=null){
+					if(libroBaja.getNombreLibro().equals(libro.getNombre())){
+						if(estado == BAJASLIBRO){
+							if( libroBaja.getNombreLibro().equals(libro.getNombre()) ){
+								libroBaja.setError(4);
+								libroBaja.cancelar();
+							}
+							else{
+								Object[] options = {"Si","No"};
+								int n = JOptionPane.showOptionDialog(null,"Esta seguro de eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+								if(n==0&&libro.eliminarArticulo(libro)){
+									libroBaja.cancelar();
+									libroBaja.exito(BAJASLIBRO);
+								}
+							}
+						}
+						else if(estado == CAMBIOSJUGUETE){
+							if( libroBaja.getNombreLibro().equals(libro.getNombre()) ){
+								libroBaja.setError(4);
+								libroBaja.cancelar();
+							}
+							else{
+								Object[] options = {"Si","No"};
+								int n = JOptionPane.showOptionDialog(null,"Esta seguro de los cambios?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+								Libro nueva=libroBaja.getLibro();
+								if(n==0&&libro.cambiarArticulo(nueva)){
+									libroBaja.cancelar();
+									libroBaja.exito(CAMBIOSLIBRO);
+								}
+							}
+						}
+					}
+					else{
+						libroBaja.setError(3);
+						libroBaja.cancelar();
+					}
+				}
+				else{
+					libroBaja.setError(4);
+					libroBaja.cancelar();
+				}
+			}else if(e.getSource() == libroBaja.getAceptar()){
+				if(!libroBaja.getNombreLibro().equals("")){
+					libroBaja.cancelar();
+					libro.obtenerInfo(libroBaja.getNombreLibro());
+					if(libro==null){
+						libroBaja.setError(2);
+						libroBaja.cancelar();
+					}
+					else if(juguete.getNombre()==null){
+						libroBaja.setError(3);
+						libroBaja.cancelar();
+						disco=null;
+					}
+					else{
+						libroBaja.cargarDatos(libro);
+						libroBaja.setError(0);
+					}	
+				}
+				else{
+					libroBaja.setError(1);
+					libroBaja.cancelar();
+					libro=null;
+				}
+			}else if(e.getSource() == libroBaja.getCancelar()){
+				libroBaja.cancelar();
 			}else if(e.getSource() == peliculaAlta.getAceptar()){
 				if(!peliculaAlta.checkTextFields()){
-					
+					Object[] options = {"Si","No"};
+					int n = JOptionPane.showOptionDialog(null,"Esta seguro de dar de alta?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+					if(n==0){
+						int error;
+						error=pelicula.agregarArticulo( peliculaAlta.getPelicula());
+						if(error==Usuario.EREPETIDO){
+							peliculaAlta.repetido(true);
+						}else if(error==Usuario.ECONEXION){
+							System.out.println("Error en la conexion");
+						}
+						else if(error==0){
+							peliculaAlta.cancelar();
+							peliculaAlta.exito();
+						}
+					}
 				}
 			}else if(e.getSource() == peliculaAlta.getCancelar()){
 				peliculaAlta.cancelar();
+			}else if(e.getSource() == peliculaBaja.getEliminar()){
+				if(!peliculaBaja.checkTextFields()&&pelicula!=null){
+					if(peliculaBaja.getNombrePelicula().equals(pelicula.getNombre())){
+						if(estado == BAJASPELICULA){
+							if( peliculaBaja.getNombrePelicula().equals(pelicula.getNombre()) ){
+								peliculaBaja.setError(4);
+								peliculaBaja.cancelar();
+							}
+							else{
+								Object[] options = {"Si","No"};
+								int n = JOptionPane.showOptionDialog(null,"Esta seguro de eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+								if(n==0&&pelicula.eliminarArticulo(pelicula)){
+									peliculaBaja.cancelar();
+									peliculaBaja.exito(BAJASPELICULA);
+								}
+							}
+						}
+						else if(estado == CAMBIOSPELICULA){
+							if( peliculaBaja.getNombrePelicula().equals(pelicula.getNombre()) ){
+								peliculaBaja.setError(4);
+								peliculaBaja.cancelar();
+							}
+							else{
+								Object[] options = {"Si","No"};
+								int n = JOptionPane.showOptionDialog(null,"Esta seguro de los cambios?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+								Pelicula nueva=peliculaBaja.getPelicula();
+								if(n==0&&libro.cambiarArticulo(nueva)){
+									peliculaBaja.cancelar();
+									peliculaBaja.exito(CAMBIOSPELICULA);
+								}
+							}
+						}
+					}
+					else{
+						peliculaBaja.setError(3);
+						peliculaBaja.cancelar();
+					}
+				}
+				else{
+					peliculaBaja.setError(4);
+					peliculaBaja.cancelar();
+				}
+			}else if(e.getSource() == peliculaBaja.getAceptar()){
+				if(!peliculaBaja.getNombrePelicula().equals("")){
+					peliculaBaja.cancelar();
+					pelicula.obtenerInfo(peliculaBaja.getNombrePelicula());
+					if(pelicula==null){
+						peliculaBaja.setError(2);
+						peliculaBaja.cancelar();
+					}
+					else if(pelicula.getNombre()==null){
+						peliculaBaja.setError(3);
+						peliculaBaja.cancelar();
+						pelicula=null;
+					}
+					else{
+						peliculaBaja.cargarDatos(pelicula);
+						peliculaBaja.setError(0);
+					}	
+				}
+				else{
+					peliculaBaja.setError(1);
+					peliculaBaja.cancelar();
+					pelicula=null;
+				}
+			}else if(e.getSource() == peliculaBaja.getCancelar()){
+				peliculaBaja.cancelar();
 			}
 		}
 	}
+	
 	public void estados(){
 		if(estado == ALTASUSUARIO){
 			bajaCambios.setVisible(false);
@@ -482,19 +818,19 @@ public class Dinamico extends JPanel {
 			peliculaBaja.setVisible(true);
 		}
 	}
+	
 	Action empleadoAltas = new AbstractAction("Altas") {
 		public void actionPerformed(ActionEvent e) {
 			estado = ALTASUSUARIO;
 			estados();
 		}
-	};
+	};	
 	Action empleadoBajas = new AbstractAction("Bajas") {
 		public void actionPerformed(ActionEvent e) {
 			estado = BAJASUSUARIO;
 			estados();
 		}
 	};
-	
 	Action empleadoCambios = new AbstractAction("Cambios") {
 		public void actionPerformed(ActionEvent e) {
 			estado = CAMBIOSUSUARIO;
@@ -515,7 +851,6 @@ public class Dinamico extends JPanel {
 			estados();
 		}
 	};
-	
 	Action cambiosDisco = new AbstractAction("Cambios") {
 		public void actionPerformed(ActionEvent e) {
 			estado = CAMBIOSDISCO;
@@ -529,20 +864,19 @@ public class Dinamico extends JPanel {
 			estados();
 		}
 	};
-	
 	Action bajasJuguete = new AbstractAction("Bajas") {
 		public void actionPerformed(ActionEvent e) {
 			estado = BAJASJUGUETE;
 			estados();
 		}
 	};
-	
 	Action cambiosJuguete = new AbstractAction("Cambios") {
 		public void actionPerformed(ActionEvent e) {
 			estado = CAMBIOSJUGUETE;
 			estados();
 		}
 	};
+	
 	
 	Action altasLibro = new AbstractAction("Altas") {
 		public void actionPerformed(ActionEvent e) {
@@ -557,7 +891,6 @@ public class Dinamico extends JPanel {
 			estados();
 		}
 	};
-	
 	Action cambiosLibro = new AbstractAction("Cambios") {
 		public void actionPerformed(ActionEvent e) {
 			estado = CAMBIOSLIBRO;

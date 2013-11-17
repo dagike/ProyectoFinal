@@ -52,6 +52,7 @@ public class DiscoAlta extends JPanel {
 		add(lMensaje, gbc_lMensaje);
 		
 		lblErrorNombre = new JLabel("");
+		lblErrorNombre.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorNombre = new GridBagConstraints();
 		gbc_lblErrorNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorNombre.gridx = 1;
@@ -76,6 +77,7 @@ public class DiscoAlta extends JPanel {
 		tFNombre.setColumns(10);
 		
 		lblErrorArtista = new JLabel("");
+		lblErrorArtista.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorArtista = new GridBagConstraints();
 		gbc_lblErrorArtista.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorArtista.gridx = 1;
@@ -100,6 +102,7 @@ public class DiscoAlta extends JPanel {
 		tFArtista.setColumns(10);
 		
 		lblErrorFechaLanzamiento = new JLabel("");
+		lblErrorFechaLanzamiento.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorFechaLanzamiento = new GridBagConstraints();
 		gbc_lblErrorFechaLanzamiento.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorFechaLanzamiento.gridx = 1;
@@ -124,6 +127,7 @@ public class DiscoAlta extends JPanel {
 		tFFechaLanzamiento.setColumns(10);
 		
 		lblErrorGenero = new JLabel("");
+		lblErrorGenero.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorGenero = new GridBagConstraints();
 		gbc_lblErrorGenero.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorGenero.gridx = 1;
@@ -148,6 +152,7 @@ public class DiscoAlta extends JPanel {
 		tFGenero.setColumns(10);
 		
 		lblErrorPrecio = new JLabel("");
+		lblErrorPrecio.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorPrecio = new GridBagConstraints();
 		gbc_lblErrorPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorPrecio.gridx = 1;
@@ -172,6 +177,7 @@ public class DiscoAlta extends JPanel {
 		tFPrecio.setColumns(10);
 		
 		lblErrorExistencias = new JLabel("");
+		lblErrorExistencias.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorExistencias = new GridBagConstraints();
 		gbc_lblErrorExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorExistencias.gridx = 1;
@@ -287,4 +293,14 @@ public class DiscoAlta extends JPanel {
 			lblErrorNombre.setText("");
 	}
 	
+	public void repetido(boolean b){
+		if(b)
+			lblErrorNombre.setText("Nombre Repetido");
+		else
+			lblErrorNombre.setText("");
+	}
+	
+	public void exito(){
+		lMensaje.setText("Disco Agregado");
+	}
 }

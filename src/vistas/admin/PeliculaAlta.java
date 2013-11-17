@@ -54,6 +54,7 @@ public class PeliculaAlta extends JPanel {
 		add(lMensaje, gbc_lMensaje);
 		
 		lblErrorNombre = new JLabel("");
+		lblErrorNombre.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorNombre = new GridBagConstraints();
 		gbc_lblErrorNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorNombre.gridx = 1;
@@ -78,6 +79,7 @@ public class PeliculaAlta extends JPanel {
 		tFNombre.setColumns(10);
 		
 		lblErrorDirector = new JLabel("");
+		lblErrorDirector.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorDirector = new GridBagConstraints();
 		gbc_lblErrorDirector.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorDirector.gridx = 1;
@@ -102,6 +104,7 @@ public class PeliculaAlta extends JPanel {
 		tFDirector.setColumns(10);
 		
 		lblErrorFechaEstreno = new JLabel("");
+		lblErrorFechaEstreno.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorFechaEstreno = new GridBagConstraints();
 		gbc_lblErrorFechaEstreno.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorFechaEstreno.gridx = 1;
@@ -126,6 +129,7 @@ public class PeliculaAlta extends JPanel {
 		tFFechaEstreno.setColumns(10);
 		
 		lblErrorGenero = new JLabel("");
+		lblErrorGenero.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorGenero = new GridBagConstraints();
 		gbc_lblErrorGenero.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorGenero.gridx = 1;
@@ -150,6 +154,7 @@ public class PeliculaAlta extends JPanel {
 		tFGenero.setColumns(10);
 		
 		lblErrorIdioma = new JLabel("");
+		lblErrorIdioma.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorIdioma = new GridBagConstraints();
 		gbc_lblErrorIdioma.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorIdioma.gridx = 1;
@@ -174,6 +179,7 @@ public class PeliculaAlta extends JPanel {
 		tFGenero.setColumns(10);
 		
 		lblErrorPrecio = new JLabel("");
+		lblErrorPrecio.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorPrecio = new GridBagConstraints();
 		gbc_lblErrorPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorPrecio.gridx = 1;
@@ -198,6 +204,7 @@ public class PeliculaAlta extends JPanel {
 		tFPrecio.setColumns(10);
 		
 		lblErrorExistencias = new JLabel("");
+		lblErrorExistencias.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorExistencias = new GridBagConstraints();
 		gbc_lblErrorExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorExistencias.gridx = 1;
@@ -319,5 +326,16 @@ public class PeliculaAlta extends JPanel {
 			lblErrorNombre.setText("Error");
 		else
 			lblErrorNombre.setText("");
+	}
+	
+	public void repetido(boolean b){
+		if(b)
+			lblErrorNombre.setText("Nombre Repetido");
+		else
+			lblErrorNombre.setText("");
+	}
+	
+	public void exito(){
+		lMensaje.setText("Pelicula Agregada");
 	}
 }

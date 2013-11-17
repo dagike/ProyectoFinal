@@ -50,6 +50,7 @@ public class JugueteAlta extends JPanel {
 		add(lMensaje, gbc_lMensaje);
 		
 		lblErrorNombre = new JLabel("");
+		lblErrorNombre.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorNombre = new GridBagConstraints();
 		gbc_lblErrorNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorNombre.gridx = 1;
@@ -74,6 +75,7 @@ public class JugueteAlta extends JPanel {
 		tFNombre.setColumns(10);
 		
 		lblErrorFabricante = new JLabel("");
+		lblErrorFabricante.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorFabricante = new GridBagConstraints();
 		gbc_lblErrorFabricante.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorFabricante.gridx = 1;
@@ -98,6 +100,7 @@ public class JugueteAlta extends JPanel {
 		tFFabricante.setColumns(10);
 		
 		lblErrorEdadApropiada = new JLabel("");
+		lblErrorEdadApropiada.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorEdadApropiada = new GridBagConstraints();
 		gbc_lblErrorEdadApropiada.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorEdadApropiada.gridx = 1;
@@ -122,6 +125,7 @@ public class JugueteAlta extends JPanel {
 		tFEdadApropiada.setColumns(10);
 		
 		lblErrorPrecio = new JLabel("");
+		lblErrorPrecio.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorPrecio = new GridBagConstraints();
 		gbc_lblErrorPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorPrecio.gridx = 1;
@@ -146,6 +150,7 @@ public class JugueteAlta extends JPanel {
 		tFPrecio.setColumns(10);
 		
 		lblErrorExistencias = new JLabel("");
+		lblErrorExistencias.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorExistencias = new GridBagConstraints();
 		gbc_lblErrorExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorExistencias.gridx = 1;
@@ -247,5 +252,16 @@ public class JugueteAlta extends JPanel {
 			lblErrorNombre.setText("Error");
 		else
 			lblErrorNombre.setText("");
+	}
+	
+	public void repetido(boolean b){
+		if(b)
+			lblErrorNombre.setText("Nombre Repetido");
+		else
+			lblErrorNombre.setText("");
+	}
+	
+	public void exito(){
+		lMensaje.setText("Juguete Agregado");
 	}
 }

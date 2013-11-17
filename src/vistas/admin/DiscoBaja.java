@@ -54,6 +54,7 @@ public class DiscoBaja extends JPanel {
 		add(lMensaje, gbc_lMensaje);
 		
 		lblErrorNombre = new JLabel("");
+		lblErrorNombre.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorNombre = new GridBagConstraints();
 		gbc_lblErrorNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorNombre.gridx = 1;
@@ -85,6 +86,7 @@ public class DiscoBaja extends JPanel {
 		add(btnAceptar, gbc_btnAceptar);
 		
 		lblErrorArtista = new JLabel("");
+		lblErrorArtista.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorArtista = new GridBagConstraints();
 		gbc_lblErrorArtista.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorArtista.gridx = 1;
@@ -109,6 +111,7 @@ public class DiscoBaja extends JPanel {
 		tFArtista.setColumns(10);
 		
 		lblErrorFechaLanzamiento = new JLabel("");
+		lblErrorFechaLanzamiento.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorFechaLanzamiento = new GridBagConstraints();
 		gbc_lblErrorFechaLanzamiento.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorFechaLanzamiento.gridx = 1;
@@ -133,6 +136,7 @@ public class DiscoBaja extends JPanel {
 		tFFechaLanzamiento.setColumns(10);
 		
 		lblErrorGenero = new JLabel("");
+		lblErrorGenero.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorGenero = new GridBagConstraints();
 		gbc_lblErrorGenero.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorGenero.gridx = 1;
@@ -157,6 +161,7 @@ public class DiscoBaja extends JPanel {
 		tFGenero.setColumns(10);
 		
 		lblErrorPrecio = new JLabel("");
+		lblErrorPrecio.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorPrecio = new GridBagConstraints();
 		gbc_lblErrorPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorPrecio.gridx = 1;
@@ -181,6 +186,7 @@ public class DiscoBaja extends JPanel {
 		tFPrecio.setColumns(10);
 		
 		lblErrorExistencias = new JLabel("");
+		lblErrorExistencias.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorExistencias = new GridBagConstraints();
 		gbc_lblErrorExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorExistencias.gridx = 1;
@@ -313,5 +319,12 @@ public class DiscoBaja extends JPanel {
 		tFGenero.setText(disco.getGenero());
 		tFPrecio.setText(String.valueOf(disco.getPrecio()));
 		tFExistencias.setText(String.valueOf(disco.getExistencias()));
+	}
+	
+	public void exito(int estado){
+		if(estado==Dinamico.BAJASDISCO)
+			lMensaje.setText("Disco Eliminado");
+		else
+			lMensaje.setText("Disco Cambiado");
 	}
 }
