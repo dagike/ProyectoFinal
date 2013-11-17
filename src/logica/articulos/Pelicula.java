@@ -3,13 +3,13 @@ import logica.*;
 public class Pelicula extends Articulo{
 	private String nombre,director,genero,idioma;
 	private Fecha fecha;
-	public Pelicula(String nombre,String director,String genero,String idioma,int precio,int existencias){
+	public Pelicula(String nombre,String director,String genero,String idioma,String precio,String existencias){
 		this.nombre=nombre;
 		this.director=director;
 		this.genero=genero;
 		this.idioma=idioma;
-		this.precio=precio;
-		this.existencias=existencias;
+		this.precio=Integer.parseInt(precio);
+		this.existencias=Integer.parseInt(existencias);
 		fecha= new Fecha();
 	}
 	public String getFecha(){return fecha.toString();}

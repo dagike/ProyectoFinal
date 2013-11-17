@@ -4,16 +4,16 @@ public class Libro extends Articulo{
 	private String nombre,autor,editorial,idioma,isbn,genero;
 	private int edicion;
 	private Fecha fecha;
-	public Libro(String nombre,String autor,String editorial,String idioma,String isbn,String genero,int edicion,int precio,int existencias){
+	public Libro(String nombre,String autor,String editorial,String idioma,String isbn,String genero,String edicion,String precio,String existencias){
 		this.nombre=nombre;
 		this.autor=autor;
 		this.editorial=editorial;
 		this.idioma=idioma;
 		this.isbn=isbn;
 		this.genero=genero;
-		this.edicion=edicion;
-		this.precio=precio;
-		this.existencias=existencias;
+		this.edicion=Integer.parseInt(edicion);
+		this.precio=Integer.parseInt(precio);
+		this.existencias=Integer.parseInt(existencias);
 		fecha= new Fecha();
 	}
 	public String getFecha(){return fecha.toString();}

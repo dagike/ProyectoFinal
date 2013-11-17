@@ -1,6 +1,5 @@
 package vistas.admin;
 import javax.swing.*;
-
 import java.awt.*;
 import logica.*;
 
@@ -15,6 +14,7 @@ public class BajaCambiosUsuario extends JPanel{
 	private JButton bAceptar,bCancelar,bEliminar;
 	private JTextField tNombre,tApellidoPaterno,tApellidoMaterno,tEmail,tNombreUsuario;
 	private Usuario u;
+	
 	public BajaCambiosUsuario(){
 		setForeground(Color.BLACK);
 		setBackground(Color.WHITE);
@@ -221,14 +221,20 @@ public class BajaCambiosUsuario extends JPanel{
       grupo.add(rbEmpleado);
       setBajas();
 	}
+	
 	public void setUser(Usuario u){
 		this.u=u;
 		bienvenido.setText("Bienvenido "+u.getNombreUsuario());
 	}
+	
 	public JButton getAceptar(){return bAceptar;}
+	
 	public JButton getCancelar(){return bCancelar;}
+	
 	public JButton getSubmit(){return bEliminar;}
+	
 	public int getEstado(){return estado;}
+	
 	public int getTipo(){
 		if(rbAdministrador.isSelected())
 			return Usuario.ADMINISTRADOR;
@@ -237,6 +243,7 @@ public class BajaCambiosUsuario extends JPanel{
 	}
 	
 	public String getNombreUsuario(){return tNombreUsuario.getText().toLowerCase();}
+	
 	public Persona getPersona(){ 
 		Nombre n = new Nombre(tNombre.getText(),tApellidoPaterno.getText(),tApellidoMaterno.getText());
 		Persona p;
@@ -246,6 +253,7 @@ public class BajaCambiosUsuario extends JPanel{
 			p = new Persona(n,tEmail.getText(), tNombreUsuario.getText().toLowerCase() ,Usuario.EMPLEADO);
 		return p;
 	}
+	
 	public void setError(int e){
 		if(e==1)
 			errorNombreUsuario.setText("Campo necesario");
@@ -258,6 +266,7 @@ public class BajaCambiosUsuario extends JPanel{
 		else
 			errorNombreUsuario.setText("");
 	}
+	
 	public void cargarDatos(Persona p){
 		tNombre.setText(p.getNombre().getNombrePila());
 		tApellidoPaterno.setText(p.getNombre().getApellidoPaterno());
@@ -269,22 +278,26 @@ public class BajaCambiosUsuario extends JPanel{
 		else
 			rbEmpleado.setSelected(true);
 	}
+	
 	public void setCambios(){
 		lMensaje.setText("Cambios Usuario");
 		bEliminar.setText("Cambiar");
 		estado=Dinamico.CAMBIOSUSUARIO;
 	}
+	
 	public void setBajas(){
 		lMensaje.setText("Bajas Usuario");
 		bEliminar.setText("Eliminar");
 		estado=Dinamico.BAJASUSUARIO;
 	}
+	
 	public void exito(){
 		if(estado==Dinamico.BAJASUSUARIO)
 			lMensaje.setText("Usuario Eliminado");
 		else
 			lMensaje.setText("Usuario Cambiado");
 	}
+	
 	public void nuevo(){
 		tNombre.setText("");
 		tApellidoPaterno.setText("");
@@ -318,6 +331,7 @@ public class BajaCambiosUsuario extends JPanel{
 		else
 			lMensaje.setText("Cambios Usuario");
 	}
+	
 	public boolean checkTextFields(){
 		boolean error=false;
 		if(tNombre.getText().equalsIgnoreCase("")){

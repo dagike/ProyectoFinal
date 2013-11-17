@@ -2,6 +2,7 @@ package vistas.admin;
 
 import javax.swing.*;
 import java.awt.*;
+import logica.articulos.Pelicula;
 
 @SuppressWarnings("serial")
 public class PeliculaAlta extends JPanel {
@@ -299,4 +300,24 @@ public class PeliculaAlta extends JPanel {
 		tFExistencias.setText("");
 	}
 
+	public String getNombrePelicula(){return tFNombre.getText().toLowerCase();}
+
+	public Pelicula getPelicula(){
+		Pelicula pelicula = new Pelicula(tFNombre.getText(),tFDirector.getText(),tFGenero.getText(),tFIdioma.getText(),tFPrecio.getText(),tFExistencias.getText());
+		pelicula.setFecha(tFFechaEstreno.getText());
+		return pelicula;
+	}
+	
+	public void setError(int e){
+		if(e==1)
+			lblErrorNombre.setText("Campo necesario");
+		else if(e==2)
+			lblErrorNombre.setText("No existe");
+		else if(e==3)
+			lblErrorNombre.setText("Usuario agegado mal");
+		else if(e==4)
+			lblErrorNombre.setText("Error");
+		else
+			lblErrorNombre.setText("");
+	}
 }

@@ -2,6 +2,7 @@ package vistas.admin;
 
 import javax.swing.*;
 import java.awt.*;
+import logica.articulos.Juguete;
 
 @SuppressWarnings("serial")
 public class JugueteAlta extends JPanel {
@@ -228,4 +229,23 @@ public class JugueteAlta extends JPanel {
 		tFExistencias.setText("");
 	}
 
+	public String getNombreJuguete(){return tFNombre.getText().toLowerCase();}
+
+	public Juguete getJuguete(){
+		Juguete juguete = new Juguete(tFNombre.getText(),tFFabricante.getText(),tFEdadApropiada.getText(),tFPrecio.getText(),tFExistencias.getText());
+		return juguete;
+	}
+	
+	public void setError(int e){
+		if(e==1)
+			lblErrorNombre.setText("Campo necesario");
+		else if(e==2)
+			lblErrorNombre.setText("No existe");
+		else if(e==3)
+			lblErrorNombre.setText("Usuario agegado mal");
+		else if(e==4)
+			lblErrorNombre.setText("Error");
+		else
+			lblErrorNombre.setText("");
+	}
 }

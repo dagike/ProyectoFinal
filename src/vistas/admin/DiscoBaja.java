@@ -2,6 +2,7 @@ package vistas.admin;
 
 import javax.swing.*;
 import java.awt.*;
+import logica.articulos.Disco;
 
 @SuppressWarnings("serial")
 public class DiscoBaja extends JPanel {
@@ -218,14 +219,17 @@ public class DiscoBaja extends JPanel {
 		add(btnCancelar, gbc_btnCancelar);
 
 	}
+	
 	public void setCambios(){
 		lMensaje.setText("Cambios Discos");
 		btnEliminar.setText("Cambiar");
 	}
+	
 	public void setBajas(){
 		lMensaje.setText("Bajas Discos");
 		btnEliminar.setText("Eliminar");
 	}
+	
 	public boolean checkTextFields(){
 		boolean error=false;
 		
@@ -271,6 +275,7 @@ public class DiscoBaja extends JPanel {
 		}
 		return error;
 	}
+	
 	public void cancelar(){
 		tFNombre.setText("");
 		tFArtista.setText("");
@@ -278,5 +283,35 @@ public class DiscoBaja extends JPanel {
 		tFGenero.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
+	}
+	
+	public String getNombreDisco(){return tFNombre.getText().toLowerCase();}
+
+	public Disco getDisco(){
+		Disco disco = new Disco(tFNombre.getText(),tFArtista.getText(),tFGenero.getText(),tFPrecio.getText(),tFExistencias.getText());
+		disco.setFecha(tFFechaLanzamiento.getText());
+		return disco;
+	}
+	
+	public void setError(int e){
+		if(e==1)
+			lblErrorNombre.setText("Campo necesario");
+		else if(e==2)
+			lblErrorNombre.setText("No existe");
+		else if(e==3)
+			lblErrorNombre.setText("Usuario agegado mal");
+		else if(e==4)
+			lblErrorNombre.setText("Error");
+		else
+			lblErrorNombre.setText("");
+	}
+	
+	public void cargarDatos(Disco disco){
+		tFNombre.setText(disco.getNombre());
+		tFArtista.setText(disco.getArtista());
+		tFFechaLanzamiento.setText(disco.getFecha());
+		tFGenero.setText(disco.getGenero());
+		tFPrecio.setText(String.valueOf(disco.getPrecio()));
+		tFExistencias.setText(String.valueOf(disco.getExistencias()));
 	}
 }

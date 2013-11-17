@@ -3,12 +3,12 @@ import logica.*;
 public class Disco extends Articulo{	
 	private String nombre,artista,genero;
 	private Fecha fecha;
-	public Disco(String nombre,String artista,String genero,int precio,int existencias){
+	public Disco(String nombre,String artista,String genero,String precio,String existencias){
 		this.nombre=nombre;
 		this.artista=artista;
 		this.genero=genero;
-		this.precio=precio;
-		this.existencias=existencias;
+		this.precio=Integer.parseInt(precio);
+		this.existencias=Integer.parseInt(existencias);
 		fecha= new Fecha();
 	}
 	public String getFecha(){return fecha.toString();}

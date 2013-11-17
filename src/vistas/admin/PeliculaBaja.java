@@ -2,6 +2,7 @@ package vistas.admin;
 
 import javax.swing.*;
 import java.awt.*;
+import logica.articulos.Pelicula;
 
 @SuppressWarnings("serial")
 public class PeliculaBaja extends JPanel {
@@ -318,4 +319,36 @@ public class PeliculaBaja extends JPanel {
 		tFPrecio.setText("");
 		tFExistencias.setText("");
 	}
+	
+	public String getNombrePelicula(){return tFNombre.getText().toLowerCase();}
+
+	public Pelicula getPelicula(){
+		Pelicula pelicula = new Pelicula(tFNombre.getText(),tFDirector.getText(),tFGenero.getText(),tFIdioma.getText(),tFPrecio.getText(),tFExistencias.getText());
+		pelicula.setFecha(tFFechaEstreno.getText());
+		return pelicula;
+	}
+	
+	public void setError(int e){
+		if(e==1)
+			lblErrorNombre.setText("Campo necesario");
+		else if(e==2)
+			lblErrorNombre.setText("No existe");
+		else if(e==3)
+			lblErrorNombre.setText("Usuario agegado mal");
+		else if(e==4)
+			lblErrorNombre.setText("Error");
+		else
+			lblErrorNombre.setText("");
+	}
+	
+	public void cargarDatos(Pelicula pelicula){
+		tFNombre.setText(pelicula.getNombre());
+		tFDirector.setText(pelicula.getDirector());
+		tFFechaEstreno.setText(pelicula.getFecha());
+		tFGenero.setText(pelicula.getGenero());
+		tFIdioma.setText(pelicula.getIdioma());
+		tFPrecio.setText(String.valueOf(pelicula.getPrecio()));
+		tFExistencias.setText(String.valueOf(pelicula.getExistencias()));
+	}
+	
 }

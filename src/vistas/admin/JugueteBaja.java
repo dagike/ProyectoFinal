@@ -1,7 +1,10 @@
 package vistas.admin;
 
 import javax.swing.*;
+
 import java.awt.*;
+
+import logica.articulos.Juguete;
 
 @SuppressWarnings("serial")
 public class JugueteBaja extends JPanel {
@@ -246,5 +249,33 @@ public class JugueteBaja extends JPanel {
 		tFEdadApropiada.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
+	}
+	
+	public String getNombreJuguete(){return tFNombre.getText().toLowerCase();}
+
+	public Juguete getJuguete(){
+		Juguete juguete = new Juguete(tFNombre.getText(),tFFabricante.getText(),tFEdadApropiada.getText(),tFPrecio.getText(),tFExistencias.getText());
+		return juguete;
+	}
+	
+	public void setError(int e){
+		if(e==1)
+			lblErrorNombre.setText("Campo necesario");
+		else if(e==2)
+			lblErrorNombre.setText("No existe");
+		else if(e==3)
+			lblErrorNombre.setText("Usuario agegado mal");
+		else if(e==4)
+			lblErrorNombre.setText("Error");
+		else
+			lblErrorNombre.setText("");
+	}
+	
+	public void cargarDatos(Juguete juguete){
+		tFNombre.setText(juguete.getNombre());
+		tFFabricante.setText(juguete.getFabricante());
+		tFEdadApropiada.setText(String.valueOf(juguete.getEdad()));
+		tFPrecio.setText(String.valueOf(juguete.getPrecio()));
+		tFExistencias.setText(String.valueOf(juguete.getExistencias()));
 	}
 }
