@@ -11,7 +11,7 @@ public class Persona{
 	public String getNombreUsuario(){return nombreUsuario;}
 	public String getPassword(){return password;}
 	public int getTipo(){return tipo;}
-	
+	public void setTipo(int tipo){this.tipo=tipo;}
 	public void setNombre(String nombrePila,String apellidoPaterno,String apellidoMaterno){
 		if(nombre==null)
 			nombre=new Nombre(nombrePila,apellidoPaterno,apellidoMaterno);
@@ -32,4 +32,5 @@ public class Persona{
 		this.nombreUsuario=nombreUsuario;
 		this.tipo=tipo;
 	}
+	public Persona(){}
 }

@@ -16,6 +16,7 @@ public class Dinamico extends JPanel {
 	private NuevoUsuario nuevoUsuario;
 	private BajaCambiosUsuario bajaCambios;
 	
+	private Persona p;
 	private Usuario u;
 	private JugueteAlta jugueteAlta;
 	private JugueteBaja jugueteBaja;
@@ -27,16 +28,19 @@ public class Dinamico extends JPanel {
 	private PeliculaBaja peliculaBaja;
 	
 	public void salir(){
+		estado=ALTASUSUARIO;
 		nuevoUsuario.cancelar();
 		bajaCambios.cancelar();
 		jugueteAlta.cancelar();
 		jugueteBaja.cancelar();
+		estados();
 	}
 	
 	public void setUser(Usuario u){
 		this.u=u;
 		nuevoUsuario.setUser(u);
 		bajaCambios.setUser(u);
+		
 	}
 	
 	public JMenu getSalir(){return salir;}
@@ -85,11 +89,12 @@ public class Dinamico extends JPanel {
 		nuevoUsuario.setMaximumSize(new Dimension(570,400));
 		nuevoUsuario.setPreferredSize(new Dimension(570,400));
 		add(nuevoUsuario);
-		//nuevoUsuario.setVisible(false);
 		
 		bajaCambios=new BajaCambiosUsuario();
+		bajaCambios.getAceptar().addActionListener(new Acciones());
+		bajaCambios.getCancelar().addActionListener(new Acciones());
+		bajaCambios.getSubmit().addActionListener(new Acciones());
 		add(bajaCambios);
-		//bajaCambios.setVisible(false);
 		
 		jugueteAlta = new JugueteAlta();
 		jugueteAlta.getAceptar().addActionListener(new Acciones());
@@ -179,12 +184,84 @@ public class Dinamico extends JPanel {
 							nuevoUsuario.cancelar();
 							nuevoUsuario.exito();
 						}
-					}
-					
+					}			
 				}
-			}else if(e.getSource() == nuevoUsuario.getCancelar()) {
+			}
+			else if(e.getSource() == nuevoUsuario.getCancelar()) {
 				nuevoUsuario.cancelar();
-			}else if(e.getSource() == discoAlta.getAceptar()){
+			}
+			//baja y cambios de usuario
+			else if(e.getSource() == bajaCambios.getAceptar()){
+				if(!bajaCambios.getNombreUsuario().equals("")){
+					bajaCambios.nuevo();
+					p=u.obtenerInfo(bajaCambios.getNombreUsuario());
+					if(p==null){
+						bajaCambios.setError(2);
+						bajaCambios.nuevo();
+					}
+					else if(p.getNombre()==null){
+						bajaCambios.setError(3);
+						bajaCambios.nuevo();
+						p=null;
+					}
+					else{
+						bajaCambios.cargarDatos(p);
+						bajaCambios.setError(0);
+					}	
+				}
+				else{
+					bajaCambios.setError(1);
+					bajaCambios.nuevo();
+					p=null;
+				}
+			}
+			else if(e.getSource() == bajaCambios.getSubmit()){
+				if(!bajaCambios.checkTextFields()&&p!=null){
+					if(bajaCambios.getNombreUsuario().equals(p.getNombreUsuario())){
+						if(bajaCambios.getEstado()==BAJASUSUARIO){
+							if( bajaCambios.getNombreUsuario().equals(u.getNombreUsuario()) ){
+								bajaCambios.setError(4);
+								bajaCambios.nuevo();
+							}
+							else{
+								Object[] options = {"Si","No"};
+								int n = JOptionPane.showOptionDialog(null,"Esta seguro de eliminar?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+								if(n==0&&u.eliminarUsuario(p)){
+									bajaCambios.cancelar();
+									bajaCambios.exito();
+								}
+							}
+						}
+						else if(bajaCambios.getEstado()==CAMBIOSUSUARIO){
+							if( bajaCambios.getTipo()!=p.getTipo() && bajaCambios.getNombreUsuario().equals(u.getNombreUsuario()) ){
+								bajaCambios.setError(4);
+								bajaCambios.nuevo();
+							}
+							else{
+								Object[] options = {"Si","No"};
+								int n = JOptionPane.showOptionDialog(null,"Esta seguro de los cambios?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
+								Persona nueva=bajaCambios.getPersona();
+								if(n==0&&u.cambiarUsuario(nueva)){
+									bajaCambios.cancelar();
+									bajaCambios.exito();
+								}
+							}
+						}
+					}
+					else{
+						bajaCambios.setError(3);
+						bajaCambios.nuevo();
+					}
+				}
+				else{
+					bajaCambios.setError(4);
+					bajaCambios.nuevo();
+				}
+			}
+			else if(e.getSource() == bajaCambios.getCancelar()){
+				bajaCambios.cancelar();
+			}
+			else if(e.getSource() == discoAlta.getAceptar()){
 				if(!discoAlta.checkTextFields()){
 					
 				}

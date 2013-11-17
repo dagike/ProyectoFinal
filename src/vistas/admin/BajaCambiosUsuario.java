@@ -226,9 +226,48 @@ public class BajaCambiosUsuario extends JPanel{
 		bienvenido.setText("Bienvenido "+u.getNombreUsuario());
 	}
 	public JButton getAceptar(){return bAceptar;}
-	public JButton getAceptar(){return bCancelar;}
+	public JButton getCancelar(){return bCancelar;}
 	public JButton getSubmit(){return bEliminar;}
 	public int getEstado(){return estado;}
+	public String getNombreUsuario(){return tNombreUsuario.getText().toLowerCase();}
+	public int getTipo(){
+		if(rbAdministrador.isSelected())
+			return Usuario.ADMINISTRADOR;
+		else
+			return Usuario.EMPLEADO;
+	}
+	public Persona getPersona(){ 
+		Nombre n = new Nombre(tNombre.getText(),tApellidoPaterno.getText(),tApellidoMaterno.getText());
+		Persona p;
+		if(rbAdministrador.isSelected())
+			p = new Persona(n,tEmail.getText(), tNombreUsuario.getText().toLowerCase() ,Usuario.ADMINISTRADOR);
+		else
+			p = new Persona(n,tEmail.getText(), tNombreUsuario.getText().toLowerCase() ,Usuario.EMPLEADO);
+		return p;
+	}
+	public void setError(int e){
+		if(e==1)
+			errorNombreUsuario.setText("Campo necesario");
+		else if(e==2)
+			errorNombreUsuario.setText("No existe");
+		else if(e==3)
+			errorNombreUsuario.setText("Usuario agegado mal");
+		else if(e==4)
+			errorNombreUsuario.setText("Error");
+		else
+			errorNombreUsuario.setText("");
+	}
+	public void cargarDatos(Persona p){
+		tNombre.setText(p.getNombre().getNombrePila());
+		tApellidoPaterno.setText(p.getNombre().getApellidoPaterno());
+		tApellidoMaterno.setText(p.getNombre().getApellidoMaterno());
+		tEmail.setText(p.getEmail());
+		tNombreUsuario.setText( p.getNombreUsuario() );
+		if(p.getTipo()==Usuario.ADMINISTRADOR)
+			rbAdministrador.setSelected(true);
+		else
+			rbEmpleado.setSelected(true);
+	}
 	
 	public void setCambios(){
 		lMensaje.setText("Cambios Usuario");
@@ -239,6 +278,21 @@ public class BajaCambiosUsuario extends JPanel{
 		lMensaje.setText("Bajas Usuario");
 		bEliminar.setText("Eliminar");
 		estado=Dinamico.BAJASUSUARIO;
+	}
+	public void nuevo(){
+		tNombre.setText("");
+		tApellidoPaterno.setText("");
+		tApellidoMaterno.setText("");
+		tEmail.setText("");
+		errorNombre.setText("");
+		errorApellidoPaterno.setText("");
+		errorApellidoMaterno.setText("");
+		errorEmail.setText("");
+		rbAdministrador.setSelected(true);
+		if(estado==Dinamico.BAJASUSUARIO)
+			lMensaje.setText("Bajas Usuario");
+		else
+			lMensaje.setText("Cambios Usuario");
 	}
 	public void cancelar(){
 		tNombre.setText("");
@@ -252,6 +306,51 @@ public class BajaCambiosUsuario extends JPanel{
 		errorEmail.setText("");
 		errorNombreUsuario.setText("");
 		rbAdministrador.setSelected(true);
+		if(estado==Dinamico.BAJASUSUARIO)
+			lMensaje.setText("Bajas Usuario");
+		else
+			lMensaje.setText("Cambios Usuario");
 	}
+	public void exito(){
+		if(estado==Dinamico.BAJASUSUARIO)
+			lMensaje.setText("Usuario Eliminado");
+		else
+			lMensaje.setText("Usuario Cambiado");
+	}
+	public boolean checkTextFields(){
+		boolean error=false;
+		if(tNombre.getText().equalsIgnoreCase("")){
+			errorNombre.setText("Campo necesario");
+			error = true;
+		}else
+			errorNombre.setText("");
+			
+		if(tApellidoPaterno.getText().equals("")){
+			errorApellidoPaterno.setText("Campo necesario");
+			error = true;
+		}else
+			errorApellidoPaterno.setText("");
+		
+		if(tApellidoMaterno.getText().equals("")){
+			errorApellidoMaterno.setText("Campo necesario");
+			error = true;
+		}else{
+			errorApellidoMaterno.setText("");
+		}
+		if(tEmail.getText().equals("")){
+			errorEmail.setText("Campo necesario");
+			error = true;
+		}else{
+			errorEmail.setText("");
+		}
+		
+		if(tNombreUsuario.getText().equals("")){
+			errorNombreUsuario.setText("Campo necesario");
+			error = true;
+		}else{
+			errorNombreUsuario.setText("");
+		}
 	
+		return error;
+	}
 }
