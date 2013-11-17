@@ -192,14 +192,54 @@ public class JugueteBaja extends JPanel {
 		add(btnCancelar, gbc_btnCancelar);
 
 	}
+	
 	public void setCambios(){
 		lMensaje.setText("Cambios Juguetes");
 		btnEliminar.setText("Cambiar");
 	}
+	
 	public void setBajas(){
 		lMensaje.setText("Bajas Juguetes");
 		btnEliminar.setText("Eliminar");
 	}
+	
+	public boolean checkTextFields(){
+		boolean error=false;
+		if(tFNombre.getText().equalsIgnoreCase("")){
+			lblErrorNombre.setText("Campo necesario");
+			error = true;
+		}else{
+			lblErrorNombre.setText("");
+		}
+			
+		if(tFFabricante.getText().equals("")){
+			lblErrorFabricante.setText("Campo necesario");
+			error = true;
+		}else
+			lblErrorFabricante.setText("");
+		
+		if(tFEdadApropiada.getText().equals("")){
+			lblErrorEdadApropiada.setText("Campo necesario");
+			error = true;
+		}else{
+			lblErrorEdadApropiada.setText("");
+		}
+		if(tFPrecio.getText().equals("")){
+			lblErrorPrecio.setText("Campo necesario");
+			error = true;
+		}else{
+			lblErrorPrecio.setText("");
+		}
+		
+		if(tFExistencias.getText().equals("")){
+			lblErrorExistencias.setText("Campo necesario");
+			error = true;
+		}else{
+			lblErrorExistencias.setText("");
+		}
+		return error;
+	}
+	
 	public void cancelar(){
 		tFNombre.setText("");
 		tFFabricante.setText("");

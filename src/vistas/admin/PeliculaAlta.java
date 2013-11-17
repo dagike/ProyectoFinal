@@ -8,6 +8,8 @@ public class PeliculaAlta extends JPanel {
 	private JLabel bienvenido, lMensaje;
 	private JLabel lblNombre, lblErrorNombre;
 	private JTextField tFNombre;
+	private JLabel lblDirector, lblErrorDirector;
+	private JTextField tFDirector;
 	private JLabel lblFechaEstreno, lblErrorFechaEstreno;
 	private JTextField tFFechaEstreno;
 	private JLabel lblGenero, lblErrorGenero;
@@ -27,9 +29,9 @@ public class PeliculaAlta extends JPanel {
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{115, 90, 100, 100, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		bienvenido = new JLabel("Bienvenido ");
@@ -74,11 +76,35 @@ public class PeliculaAlta extends JPanel {
 		add(tFNombre, gbc_tFNombre);
 		tFNombre.setColumns(10);
 		
+		lblErrorDirector = new JLabel("");
+		GridBagConstraints gbc_lblErrorDirector = new GridBagConstraints();
+		gbc_lblErrorDirector.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorDirector.gridx = 1;
+		gbc_lblErrorDirector.gridy = 4;
+		add(lblErrorDirector, gbc_lblErrorDirector);
+		
+		lblDirector = new JLabel("Director");
+		GridBagConstraints gbc_lblDirector = new GridBagConstraints();
+		gbc_lblDirector.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDirector.anchor = GridBagConstraints.EAST;
+		gbc_lblDirector.gridx = 2;
+		gbc_lblDirector.gridy = 4;
+		add(lblDirector, gbc_lblDirector);
+		
+		tFDirector = new JTextField();
+		GridBagConstraints gbc_tFDirector = new GridBagConstraints();
+		gbc_tFDirector.insets = new Insets(0, 0, 5, 5);
+		gbc_tFDirector.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFDirector.gridx = 3;
+		gbc_tFDirector.gridy = 4;
+		add(tFDirector, gbc_tFDirector);
+		tFDirector.setColumns(10);
+		
 		lblErrorFechaEstreno = new JLabel("");
 		GridBagConstraints gbc_lblErrorFechaEstreno = new GridBagConstraints();
 		gbc_lblErrorFechaEstreno.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorFechaEstreno.gridx = 1;
-		gbc_lblErrorFechaEstreno.gridy = 4;
+		gbc_lblErrorFechaEstreno.gridy = 5;
 		add(lblErrorFechaEstreno, gbc_lblErrorFechaEstreno);
 		
 		lblFechaEstreno = new JLabel("Fecha de Lanzamiento");
@@ -86,7 +112,7 @@ public class PeliculaAlta extends JPanel {
 		gbc_lblFechaEstreno.anchor = GridBagConstraints.EAST;
 		gbc_lblFechaEstreno.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFechaEstreno.gridx = 2;
-		gbc_lblFechaEstreno.gridy = 4;
+		gbc_lblFechaEstreno.gridy = 5;
 		add(lblFechaEstreno, gbc_lblFechaEstreno);
 		
 		tFFechaEstreno = new JTextField();
@@ -94,7 +120,7 @@ public class PeliculaAlta extends JPanel {
 		gbc_tFFechaEstreno.insets = new Insets(0, 0, 5, 5);
 		gbc_tFFechaEstreno.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFFechaEstreno.gridx = 3;
-		gbc_tFFechaEstreno.gridy = 4;
+		gbc_tFFechaEstreno.gridy = 5;
 		add(tFFechaEstreno, gbc_tFFechaEstreno);
 		tFFechaEstreno.setColumns(10);
 		
@@ -102,7 +128,7 @@ public class PeliculaAlta extends JPanel {
 		GridBagConstraints gbc_lblErrorGenero = new GridBagConstraints();
 		gbc_lblErrorGenero.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorGenero.gridx = 1;
-		gbc_lblErrorGenero.gridy = 5;
+		gbc_lblErrorGenero.gridy = 6;
 		add(lblErrorGenero, gbc_lblErrorGenero);
 		
 		lblGenero = new JLabel("Genero");
@@ -110,7 +136,7 @@ public class PeliculaAlta extends JPanel {
 		gbc_lblGenero.anchor = GridBagConstraints.EAST;
 		gbc_lblGenero.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGenero.gridx = 2;
-		gbc_lblGenero.gridy = 5;
+		gbc_lblGenero.gridy = 6;
 		add(lblGenero, gbc_lblGenero);
 		
 		tFGenero = new JTextField();
@@ -118,7 +144,7 @@ public class PeliculaAlta extends JPanel {
 		gbc_tFGenero.insets = new Insets(0, 0, 5, 5);
 		gbc_tFGenero.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFGenero.gridx = 3;
-		gbc_tFGenero.gridy = 5;
+		gbc_tFGenero.gridy = 6;
 		add(tFGenero, gbc_tFGenero);
 		tFGenero.setColumns(10);
 		
@@ -126,7 +152,7 @@ public class PeliculaAlta extends JPanel {
 		GridBagConstraints gbc_lblErrorIdioma = new GridBagConstraints();
 		gbc_lblErrorIdioma.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorIdioma.gridx = 1;
-		gbc_lblErrorIdioma.gridy = 6;
+		gbc_lblErrorIdioma.gridy = 7;
 		add(lblErrorIdioma, gbc_lblErrorIdioma);
 		
 		lblIdioma = new JLabel("Idioma");
@@ -134,7 +160,7 @@ public class PeliculaAlta extends JPanel {
 		gbc_lblIdioma.anchor = GridBagConstraints.EAST;
 		gbc_lblIdioma.insets = new Insets(0, 0, 5, 5);
 		gbc_lblIdioma.gridx = 2;
-		gbc_lblIdioma.gridy = 6;
+		gbc_lblIdioma.gridy = 7;
 		add(lblIdioma, gbc_lblIdioma);
 		
 		tFIdioma = new JTextField();
@@ -142,7 +168,7 @@ public class PeliculaAlta extends JPanel {
 		gbc_tFIdioma.insets = new Insets(0, 0, 5, 5);
 		gbc_tFIdioma.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFIdioma.gridx = 3;
-		gbc_tFIdioma.gridy = 6;
+		gbc_tFIdioma.gridy = 7;
 		add(tFIdioma, gbc_tFIdioma);
 		tFGenero.setColumns(10);
 		
@@ -150,7 +176,7 @@ public class PeliculaAlta extends JPanel {
 		GridBagConstraints gbc_lblErrorPrecio = new GridBagConstraints();
 		gbc_lblErrorPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorPrecio.gridx = 1;
-		gbc_lblErrorPrecio.gridy = 7;
+		gbc_lblErrorPrecio.gridy = 8;
 		add(lblErrorPrecio, gbc_lblErrorPrecio);
 		
 		lblPrecio = new JLabel("Precio");
@@ -158,7 +184,7 @@ public class PeliculaAlta extends JPanel {
 		gbc_lblPrecio.anchor = GridBagConstraints.EAST;
 		gbc_lblPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecio.gridx = 2;
-		gbc_lblPrecio.gridy = 7;
+		gbc_lblPrecio.gridy = 8;
 		add(lblPrecio, gbc_lblPrecio);
 		
 		tFPrecio = new JTextField();
@@ -166,7 +192,7 @@ public class PeliculaAlta extends JPanel {
 		gbc_tFPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_tFPrecio.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFPrecio.gridx = 3;
-		gbc_tFPrecio.gridy = 7;
+		gbc_tFPrecio.gridy = 8;
 		add(tFPrecio, gbc_tFPrecio);
 		tFPrecio.setColumns(10);
 		
@@ -174,7 +200,7 @@ public class PeliculaAlta extends JPanel {
 		GridBagConstraints gbc_lblErrorExistencias = new GridBagConstraints();
 		gbc_lblErrorExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorExistencias.gridx = 1;
-		gbc_lblErrorExistencias.gridy = 8;
+		gbc_lblErrorExistencias.gridy = 9;
 		add(lblErrorExistencias, gbc_lblErrorExistencias);
 		
 		lblExistencias = new JLabel("Existencias");
@@ -182,7 +208,7 @@ public class PeliculaAlta extends JPanel {
 		gbc_lblExistencias.anchor = GridBagConstraints.EAST;
 		gbc_lblExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblExistencias.gridx = 2;
-		gbc_lblExistencias.gridy = 8;
+		gbc_lblExistencias.gridy = 9;
 		add(lblExistencias, gbc_lblExistencias);
 		
 		tFExistencias = new JTextField();
@@ -190,7 +216,7 @@ public class PeliculaAlta extends JPanel {
 		gbc_tFExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_tFExistencias.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFExistencias.gridx = 3;
-		gbc_tFExistencias.gridy = 8;
+		gbc_tFExistencias.gridy = 9;
 		add(tFExistencias, gbc_tFExistencias);
 		tFExistencias.setColumns(10);
 		
@@ -198,31 +224,41 @@ public class PeliculaAlta extends JPanel {
 		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
 		gbc_btnAceptar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnAceptar.gridx = 2;
-		gbc_btnAceptar.gridy = 10;
+		gbc_btnAceptar.gridy = 11;
 		add(btnAceptar, gbc_btnAceptar);
 		
 		btnCancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancelar.gridx = 3;
-		gbc_btnCancelar.gridy = 10;
+		gbc_btnCancelar.gridy = 11;
 		add(btnCancelar, gbc_btnCancelar);
 
 	}
 	
 	public boolean checkTextFields(){
 		boolean error=false;
+		
 		if(tFNombre.getText().equalsIgnoreCase("")){
 			lblErrorNombre.setText("Campo necesario");
 			error = true;
-		}else
+		}else{
 			lblErrorNombre.setText("");
+		}
+		
+		if(tFDirector.getText().equalsIgnoreCase("")){
+			lblErrorDirector.setText("Campo necesario");
+			error = true;
+		}else{
+			lblErrorDirector.setText("");
+		}
 			
 		if(tFFechaEstreno.getText().equals("")){
 			lblErrorFechaEstreno.setText("Campo necesario");
 			error = true;
-		}else
+		}else{
 			lblErrorFechaEstreno.setText("");
+		}
 		
 		if(tFGenero.getText().equals("")){
 			lblErrorGenero.setText("Campo necesario");
@@ -255,6 +291,7 @@ public class PeliculaAlta extends JPanel {
 	}
 	public void cancelar(){
 		tFNombre.setText("");
+		tFDirector.setText("");
 		tFFechaEstreno.setText("");
 		tFGenero.setText("");
 		tFIdioma.setText("");

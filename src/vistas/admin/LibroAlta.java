@@ -1,6 +1,7 @@
 package vistas.admin;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 @SuppressWarnings("serial")
@@ -8,6 +9,10 @@ public class LibroAlta extends JPanel {
 	private JLabel bienvenido, lMensaje;
 	private JLabel lblNombre, lblErrorNombre;
 	private JTextField tFNombre;
+	private JLabel lblAutor, lblErrorAutor;
+	private JTextField tFAutor;
+	private JLabel lblEditorial, lblErrorEditorial;
+	private JTextField tFEditorial;
 	private JLabel lblFechaImpresion, lblErrorFechaImpresion;
 	private JTextField tFFechaImpresion;
 	private JLabel lblEdicion, lblErrorEdicion;
@@ -18,6 +23,8 @@ public class LibroAlta extends JPanel {
 	private JTextField tFGenero;
 	private JLabel lblIdioma, lblErrorIdioma;
 	private JTextField tFIdioma;
+	private JLabel lblISBN, lblErrorISBN;
+	private JTextField tFISBN;
 	private JLabel lblPrecio, lblErrorPrecio;
 	private JTextField tFPrecio;
 	private JLabel lblExistencias, lblErrorExistencias;
@@ -31,9 +38,9 @@ public class LibroAlta extends JPanel {
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{115, 90, 100, 100, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		bienvenido = new JLabel("Bienvenido ");
@@ -78,11 +85,59 @@ public class LibroAlta extends JPanel {
 		add(tFNombre, gbc_tFNombre);
 		tFNombre.setColumns(10);
 		
+		lblErrorAutor = new JLabel("");
+		GridBagConstraints gbc_lblErrorAutor = new GridBagConstraints();
+		gbc_lblErrorAutor.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorAutor.gridx = 1;
+		gbc_lblErrorAutor.gridy = 4;
+		add(lblErrorAutor, gbc_lblErrorAutor);
+		
+		lblAutor = new JLabel("Autor");
+		GridBagConstraints gbc_lblAutor = new GridBagConstraints();
+		gbc_lblAutor.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAutor.anchor = GridBagConstraints.EAST;
+		gbc_lblAutor.gridx = 2;
+		gbc_lblAutor.gridy = 4;
+		add(lblAutor, gbc_lblAutor);
+		
+		tFAutor = new JTextField();
+		GridBagConstraints gbc_tFAutor = new GridBagConstraints();
+		gbc_tFAutor.insets = new Insets(0, 0, 5, 5);
+		gbc_tFAutor.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFAutor.gridx = 3;
+		gbc_tFAutor.gridy = 4;
+		add(tFAutor, gbc_tFAutor);
+		tFAutor.setColumns(10);
+		
+		lblErrorEditorial = new JLabel("");
+		GridBagConstraints gbc_lblErrorEditorial = new GridBagConstraints();
+		gbc_lblErrorEditorial.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorEditorial.gridx = 1;
+		gbc_lblErrorEditorial.gridy = 5;
+		add(lblErrorEditorial, gbc_lblErrorEditorial);
+		
+		lblEditorial = new JLabel("Editorial");
+		GridBagConstraints gbc_lblEditorial = new GridBagConstraints();
+		gbc_lblEditorial.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEditorial.anchor = GridBagConstraints.EAST;
+		gbc_lblEditorial.gridx = 2;
+		gbc_lblEditorial.gridy = 5;
+		add(lblEditorial, gbc_lblEditorial);
+		
+		tFEditorial = new JTextField();
+		GridBagConstraints gbc_tFEditorial = new GridBagConstraints();
+		gbc_tFEditorial.insets = new Insets(0, 0, 5, 5);
+		gbc_tFEditorial.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFEditorial.gridx = 3;
+		gbc_tFEditorial.gridy = 5;
+		add(tFEditorial, gbc_tFEditorial);
+		tFEditorial.setColumns(10);
+		
 		lblErrorFechaImpresion = new JLabel("");
 		GridBagConstraints gbc_lblErrorFechaImpresion = new GridBagConstraints();
 		gbc_lblErrorFechaImpresion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorFechaImpresion.gridx = 1;
-		gbc_lblErrorFechaImpresion.gridy = 4;
+		gbc_lblErrorFechaImpresion.gridy = 6;
 		add(lblErrorFechaImpresion, gbc_lblErrorFechaImpresion);
 		
 		lblFechaImpresion = new JLabel("Fecha de Impresion");
@@ -90,7 +145,7 @@ public class LibroAlta extends JPanel {
 		gbc_lblFechaImpresion.anchor = GridBagConstraints.EAST;
 		gbc_lblFechaImpresion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFechaImpresion.gridx = 2;
-		gbc_lblFechaImpresion.gridy = 4;
+		gbc_lblFechaImpresion.gridy = 6;
 		add(lblFechaImpresion, gbc_lblFechaImpresion);
 		
 		tFFechaImpresion = new JTextField();
@@ -98,7 +153,7 @@ public class LibroAlta extends JPanel {
 		gbc_tFFechaImpresion.insets = new Insets(0, 0, 5, 5);
 		gbc_tFFechaImpresion.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFFechaImpresion.gridx = 3;
-		gbc_tFFechaImpresion.gridy = 4;
+		gbc_tFFechaImpresion.gridy = 6;
 		add(tFFechaImpresion, gbc_tFFechaImpresion);
 		tFFechaImpresion.setColumns(10);
 		
@@ -106,7 +161,7 @@ public class LibroAlta extends JPanel {
 		GridBagConstraints gbc_lblErrorEdicion = new GridBagConstraints();
 		gbc_lblErrorEdicion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorEdicion.gridx = 1;
-		gbc_lblErrorEdicion.gridy = 5;
+		gbc_lblErrorEdicion.gridy = 7;
 		add(lblErrorEdicion, gbc_lblErrorEdicion);
 		
 		lblEdicion = new JLabel("Edicion");
@@ -114,7 +169,7 @@ public class LibroAlta extends JPanel {
 		gbc_lblEdicion.anchor = GridBagConstraints.EAST;
 		gbc_lblEdicion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEdicion.gridx = 2;
-		gbc_lblEdicion.gridy = 5;
+		gbc_lblEdicion.gridy = 7;
 		add(lblEdicion, gbc_lblEdicion);
 		
 		tFEdicion = new JTextField();
@@ -122,7 +177,7 @@ public class LibroAlta extends JPanel {
 		gbc_tFEdicion.insets = new Insets(0, 0, 5, 5);
 		gbc_tFEdicion.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFEdicion.gridx = 3;
-		gbc_tFEdicion.gridy = 5;
+		gbc_tFEdicion.gridy = 7;
 		add(tFEdicion, gbc_tFEdicion);
 		tFEdicion.setColumns(10);
 		
@@ -130,7 +185,7 @@ public class LibroAlta extends JPanel {
 		GridBagConstraints gbc_lblErrorFechaEdicion = new GridBagConstraints();
 		gbc_lblErrorFechaEdicion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorFechaEdicion.gridx = 1;
-		gbc_lblErrorFechaEdicion.gridy = 6;
+		gbc_lblErrorFechaEdicion.gridy = 8;
 		add(lblErrorFechaEdicion, gbc_lblErrorFechaEdicion);
 		
 		lblFechaEdicion = new JLabel("Fecha de Edicion");
@@ -138,7 +193,7 @@ public class LibroAlta extends JPanel {
 		gbc_lblFechaEdicion.anchor = GridBagConstraints.EAST;
 		gbc_lblFechaEdicion.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFechaEdicion.gridx = 2;
-		gbc_lblFechaEdicion.gridy = 6;
+		gbc_lblFechaEdicion.gridy = 8;
 		add(lblFechaEdicion, gbc_lblFechaEdicion);
 		
 		tFFechaEdicion = new JTextField();
@@ -146,7 +201,7 @@ public class LibroAlta extends JPanel {
 		gbc_tFFechaEdicion.insets = new Insets(0, 0, 5, 5);
 		gbc_tFFechaEdicion.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFFechaEdicion.gridx = 3;
-		gbc_tFFechaEdicion.gridy = 6;
+		gbc_tFFechaEdicion.gridy = 8;
 		add(tFFechaEdicion, gbc_tFFechaEdicion);
 		tFFechaEdicion.setColumns(10);
 		
@@ -154,7 +209,7 @@ public class LibroAlta extends JPanel {
 		GridBagConstraints gbc_lblErrorGenero = new GridBagConstraints();
 		gbc_lblErrorGenero.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorGenero.gridx = 1;
-		gbc_lblErrorGenero.gridy = 7;
+		gbc_lblErrorGenero.gridy = 9;
 		add(lblErrorGenero, gbc_lblErrorGenero);
 		
 		lblGenero = new JLabel("Genero");
@@ -162,7 +217,7 @@ public class LibroAlta extends JPanel {
 		gbc_lblGenero.anchor = GridBagConstraints.EAST;
 		gbc_lblGenero.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGenero.gridx = 2;
-		gbc_lblGenero.gridy = 7;
+		gbc_lblGenero.gridy = 9;
 		add(lblGenero, gbc_lblGenero);
 		
 		tFGenero = new JTextField();
@@ -170,7 +225,7 @@ public class LibroAlta extends JPanel {
 		gbc_tFGenero.insets = new Insets(0, 0, 5, 5);
 		gbc_tFGenero.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFGenero.gridx = 3;
-		gbc_tFGenero.gridy = 7;
+		gbc_tFGenero.gridy = 9;
 		add(tFGenero, gbc_tFGenero);
 		tFGenero.setColumns(10);
 		
@@ -178,7 +233,7 @@ public class LibroAlta extends JPanel {
 		GridBagConstraints gbc_lblErrorIdioma = new GridBagConstraints();
 		gbc_lblErrorIdioma.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorIdioma.gridx = 1;
-		gbc_lblErrorIdioma.gridy = 8;
+		gbc_lblErrorIdioma.gridy = 10;
 		add(lblErrorIdioma, gbc_lblErrorIdioma);
 		
 		lblIdioma = new JLabel("Idioma");
@@ -186,7 +241,7 @@ public class LibroAlta extends JPanel {
 		gbc_lblIdioma.anchor = GridBagConstraints.EAST;
 		gbc_lblIdioma.insets = new Insets(0, 0, 5, 5);
 		gbc_lblIdioma.gridx = 2;
-		gbc_lblIdioma.gridy = 8;
+		gbc_lblIdioma.gridy = 10;
 		add(lblIdioma, gbc_lblIdioma);
 		
 		tFIdioma = new JTextField();
@@ -194,15 +249,39 @@ public class LibroAlta extends JPanel {
 		gbc_tFIdioma.insets = new Insets(0, 0, 5, 5);
 		gbc_tFIdioma.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFIdioma.gridx = 3;
-		gbc_tFIdioma.gridy = 8;
+		gbc_tFIdioma.gridy = 10;
 		add(tFIdioma, gbc_tFIdioma);
 		tFGenero.setColumns(10);
+		
+		lblErrorISBN = new JLabel("");
+		GridBagConstraints gbc_lblErrorISBN = new GridBagConstraints();
+		gbc_lblErrorISBN.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorISBN.gridx = 1;
+		gbc_lblErrorISBN.gridy = 11;
+		add(lblErrorISBN, gbc_lblErrorISBN);
+		
+		lblISBN = new JLabel("ISBN");
+		GridBagConstraints gbc_lblISBN = new GridBagConstraints();
+		gbc_lblISBN.anchor = GridBagConstraints.EAST;
+		gbc_lblISBN.insets = new Insets(0, 0, 5, 5);
+		gbc_lblISBN.gridx = 2;
+		gbc_lblISBN.gridy = 11;
+		add(lblISBN, gbc_lblISBN);
+		
+		tFISBN = new JTextField();
+		GridBagConstraints gbc_tFISBN = new GridBagConstraints();
+		gbc_tFISBN.insets = new Insets(0, 0, 5, 5);
+		gbc_tFISBN.fill = GridBagConstraints.HORIZONTAL;
+		gbc_tFISBN.gridx = 3;
+		gbc_tFISBN.gridy = 11;
+		add(tFISBN, gbc_tFISBN);
+		tFISBN.setColumns(10);
 		
 		lblErrorPrecio = new JLabel("");
 		GridBagConstraints gbc_lblErrorPrecio = new GridBagConstraints();
 		gbc_lblErrorPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorPrecio.gridx = 1;
-		gbc_lblErrorPrecio.gridy = 9;
+		gbc_lblErrorPrecio.gridy = 12;
 		add(lblErrorPrecio, gbc_lblErrorPrecio);
 		
 		lblPrecio = new JLabel("Precio");
@@ -210,7 +289,7 @@ public class LibroAlta extends JPanel {
 		gbc_lblPrecio.anchor = GridBagConstraints.EAST;
 		gbc_lblPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecio.gridx = 2;
-		gbc_lblPrecio.gridy = 9;
+		gbc_lblPrecio.gridy = 12;
 		add(lblPrecio, gbc_lblPrecio);
 		
 		tFPrecio = new JTextField();
@@ -218,7 +297,7 @@ public class LibroAlta extends JPanel {
 		gbc_tFPrecio.insets = new Insets(0, 0, 5, 5);
 		gbc_tFPrecio.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFPrecio.gridx = 3;
-		gbc_tFPrecio.gridy = 9;
+		gbc_tFPrecio.gridy = 12;
 		add(tFPrecio, gbc_tFPrecio);
 		tFPrecio.setColumns(10);
 		
@@ -226,7 +305,7 @@ public class LibroAlta extends JPanel {
 		GridBagConstraints gbc_lblErrorExistencias = new GridBagConstraints();
 		gbc_lblErrorExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorExistencias.gridx = 1;
-		gbc_lblErrorExistencias.gridy = 10;
+		gbc_lblErrorExistencias.gridy = 13;
 		add(lblErrorExistencias, gbc_lblErrorExistencias);
 		
 		lblExistencias = new JLabel("Existencias");
@@ -234,7 +313,7 @@ public class LibroAlta extends JPanel {
 		gbc_lblExistencias.anchor = GridBagConstraints.EAST;
 		gbc_lblExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_lblExistencias.gridx = 2;
-		gbc_lblExistencias.gridy = 10;
+		gbc_lblExistencias.gridy = 13;
 		add(lblExistencias, gbc_lblExistencias);
 		
 		tFExistencias = new JTextField();
@@ -242,7 +321,7 @@ public class LibroAlta extends JPanel {
 		gbc_tFExistencias.insets = new Insets(0, 0, 5, 5);
 		gbc_tFExistencias.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFExistencias.gridx = 3;
-		gbc_tFExistencias.gridy = 10;
+		gbc_tFExistencias.gridy = 13;
 		add(tFExistencias, gbc_tFExistencias);
 		tFExistencias.setColumns(10);
 		
@@ -250,14 +329,14 @@ public class LibroAlta extends JPanel {
 		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
 		gbc_btnAceptar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnAceptar.gridx = 2;
-		gbc_btnAceptar.gridy = 12;
+		gbc_btnAceptar.gridy = 15;
 		add(btnAceptar, gbc_btnAceptar);
 		
 		btnCancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancelar.gridx = 3;
-		gbc_btnCancelar.gridy = 12;
+		gbc_btnCancelar.gridy = 15;
 		add(btnCancelar, gbc_btnCancelar);
 
 	}
@@ -269,6 +348,27 @@ public class LibroAlta extends JPanel {
 			error = true;
 		}else
 			lblErrorNombre.setText("");
+	
+		if(tFAutor.getText().equals("")){
+			lblErrorAutor.setText("Campo necesario");
+			error = true;
+		}else{
+			lblErrorAutor.setText("");
+		}
+		
+		if(tFEditorial.getText().equals("")){
+			lblErrorEditorial.setText("Campo necesario");
+			error = true;
+		}else{
+			lblErrorEditorial.setText("");
+		}
+		
+		if(tFPrecio.getText().equals("")){
+			lblErrorPrecio.setText("Campo necesario");
+			error = true;
+		}else{
+			lblErrorPrecio.setText("");
+		}
 			
 		if(tFFechaImpresion.getText().equals("")){
 			lblErrorFechaImpresion.setText("Campo necesario");
@@ -305,6 +405,13 @@ public class LibroAlta extends JPanel {
 			lblErrorIdioma.setText("");
 		}
 		
+		if(tFISBN.getText().equals("")){
+			lblErrorISBN.setText("Campo necesario");
+			error = true;
+		}else{
+			lblErrorISBN.setText("");
+		}
+		
 		if(tFPrecio.getText().equals("")){
 			lblErrorPrecio.setText("Campo necesario");
 			error = true;
@@ -322,11 +429,14 @@ public class LibroAlta extends JPanel {
 	}
 	public void cancelar(){
 		tFNombre.setText("");
+		tFAutor.setText("");
+		tFEditorial.setText("");
 		tFFechaImpresion.setText("");
 		tFEdicion.setText("");
 		tFFechaEdicion.setText("");
 		tFGenero.setText("");
 		tFIdioma.setText("");
+		tFISBN.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
 	}
