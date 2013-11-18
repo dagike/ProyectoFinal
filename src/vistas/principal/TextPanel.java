@@ -11,9 +11,6 @@ import javax.swing.event.*;
 @SuppressWarnings("serial")
 public class TextPanel extends JPanel {
 	private JTextField textField;
-	private JList<String> producto;
-	private JList<String> autor;
-	private JList<String> titulo;
 	private JScrollPane scrollPane;
 	private String[] string = {"Libros", "Discos", "Peliculas","Juguetes"}; 
 	private Usuario u;
@@ -23,6 +20,12 @@ public class TextPanel extends JPanel {
 	private Pelicula pelicula;
 
 	JLabel lblAutor,lblTitulo,lblFicha,ficha;
+	private JScrollPane scrollPane_1;
+	private JList<String> producto;
+	private JScrollPane scrollPane_2;
+	private JList<String> autor;
+	private JScrollPane scrollPane_3;
+	private JList<String> titulo;
 	
 	public void setUsuario(Usuario u){this.u=u;}
 	public void inicio(){producto.setSelectedIndex(0);}
@@ -30,10 +33,10 @@ public class TextPanel extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 100, 0, 100, 0, 200, 0, 200, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 200, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
-		setSize(750, 450);
+		setSize(800, 450);
 		
 		JLabel lblProducto = new JLabel("Producto");
 		GridBagConstraints gbc_lblProducto = new GridBagConstraints();
@@ -63,29 +66,38 @@ public class TextPanel extends JPanel {
 		gbc_lblFicha.gridy = 1;
 		add(lblFicha, gbc_lblFicha);
 		
+		scrollPane_1 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
+		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_1.gridx = 1;
+		gbc_scrollPane_1.gridy = 2;
+		add(scrollPane_1, gbc_scrollPane_1);
+		
 		producto = new JList<String>(string);
-		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.insets = new Insets(0, 0, 5, 5);
-		gbc_list.fill = GridBagConstraints.BOTH;
-		gbc_list.gridx = 1;
-		gbc_list.gridy = 2;
-		add(producto, gbc_list);
+		scrollPane_1.setViewportView(producto);
+		
+		scrollPane_2 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_2 = new GridBagConstraints();
+		gbc_scrollPane_2.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_2.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_2.gridx = 3;
+		gbc_scrollPane_2.gridy = 2;
+		add(scrollPane_2, gbc_scrollPane_2);
 		
 		autor = new JList<String>();
-		GridBagConstraints gbc_list_1 = new GridBagConstraints();
-		gbc_list_1.insets = new Insets(0, 0, 5, 5);
-		gbc_list_1.fill = GridBagConstraints.BOTH;
-		gbc_list_1.gridx = 3;
-		gbc_list_1.gridy = 2;
-		add(autor, gbc_list_1);
+		scrollPane_2.setViewportView(autor);
+		
+		scrollPane_3 = new JScrollPane();
+		GridBagConstraints gbc_scrollPane_3 = new GridBagConstraints();
+		gbc_scrollPane_3.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane_3.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane_3.gridx = 5;
+		gbc_scrollPane_3.gridy = 2;
+		add(scrollPane_3, gbc_scrollPane_3);
 		
 		titulo = new JList<String>();
-		GridBagConstraints gbc_list_2 = new GridBagConstraints();
-		gbc_list_2.insets = new Insets(0, 0, 5, 5);
-		gbc_list_2.fill = GridBagConstraints.BOTH;
-		gbc_list_2.gridx = 5;
-		gbc_list_2.gridy = 2;
-		add(titulo, gbc_list_2);
+		scrollPane_3.setViewportView(titulo);
 		
 		JLabel lblCantidad = new JLabel("Cantidad");
 		GridBagConstraints gbc_lblCantidad = new GridBagConstraints();
@@ -126,40 +138,42 @@ public class TextPanel extends JPanel {
 		producto.addListSelectionListener(accion);
 		autor.addListSelectionListener(accion);
 		titulo.addListSelectionListener(accion);
-	}	
-	private class Select implements ListSelectionListener{
-		public void valueChanged(ListSelectionEvent e){
-			if(e.getSource()==producto){
-				if(producto.getSelectedValue()=="Libros"){
-					lblAutor.setText("Autor");
-					lblTitulo.setText("Titulo");
-					lblFicha.setText("Ficha");
-					autor.setListData(u.getAutores());
-					autor.setSelectedIndex(0);
-				}
-				else if(producto.getSelectedValue()=="Discos"){
-					lblAutor.setText("Artista");
-					lblTitulo.setText("Titulo");
-					lblFicha.setText("Ficha");
-					autor.setListData(u.getArtistasDisco());
-					autor.setSelectedIndex(0);
-				}
-			}
-			else if(e.getSource()==autor){
-				if(producto.getSelectedValue()=="Libros"){
-					titulo.setListData(u.getLibroNombres( autor.getSelectedValue() ));
-					titulo.setSelectedIndex(0);
-				}
-				else if(producto.getSelectedValue()=="Discos"){
-					titulo.setListData(u.getDiscoNombres( autor.getSelectedValue() ));
-					titulo.setSelectedIndex(0);
-				}	
-			}
-			else if(e.getSource()==titulo){
-				if(producto.getSelectedValue()=="Libros"){
-					
-				}
-			}
-		}
-	}
+	}  
+   private class Select implements ListSelectionListener{
+     public void valueChanged(ListSelectionEvent e){
+       if(e.getSource()==producto){
+         if(producto.getSelectedValue()=="Libros"){
+           lblAutor.setText("Autor");
+           lblTitulo.setText("Titulo");
+           lblFicha.setText("Ficha");
+           autor.setListData(u.getAutores());
+           autor.setSelectedIndex(0);
+         }
+         else if(producto.getSelectedValue()=="Discos"){
+           lblAutor.setText("Artista");
+           lblTitulo.setText("Titulo");
+           lblFicha.setText("Ficha");
+           autor.setListData(u.getArtistasDisco());
+           autor.setSelectedIndex(0);
+         }
+       }
+       else if(e.getSource()==autor){
+         if(producto.getSelectedValue()=="Libros"){
+           titulo.setListData(u.getLibroNombres( autor.getSelectedValue() ));
+           titulo.setSelectedIndex(0);
+         }
+         else if(producto.getSelectedValue()=="Discos"){
+           titulo.setListData(u.getDiscoNombres( autor.getSelectedValue() ));
+           titulo.setSelectedIndex(0);
+         }  
+       }
+       else if(e.getSource()==titulo){
+         if(producto.getSelectedValue()=="Libros"){
+           
+         }
+       }
+     }
+    }
+
+
 }
