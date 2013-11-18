@@ -29,6 +29,7 @@ public class MainDatabasePanel extends JPanel {
 		
 		setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLayout(new BorderLayout(0, 0));
+		setSize(800,600);
 		textPanel = new TextPanel();
 		GridBagLayout gridBagLayout = (GridBagLayout) textPanel.getLayout();
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0};
