@@ -1,6 +1,6 @@
 package vistas.principal;
-import javax.swing.JPanel;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 
 
 @SuppressWarnings("serial")
@@ -10,7 +10,8 @@ public class ShoppingAnimation extends JPanel {
 	 * Create the panel.
 	 */
 	public ShoppingAnimation() {
-		setBackground(Color.WHITE);
+		setSize(100,100);
+		setBackground(Color.BLACK);
 
 	}
 

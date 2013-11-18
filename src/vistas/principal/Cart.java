@@ -10,9 +10,6 @@ import java.awt.Insets;
 @SuppressWarnings("serial")
 public class Cart extends JPanel {
 	private JList<String> listaDeCompra;
-	/**
-	 * Create the panel.
-	 */
 	public Cart() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{8, 281, 0};

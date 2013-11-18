@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
 	//logica
 	private Usuario usuario;
 	public final static int INGRESO=0,PRINCIPAL=1,INICIAL=2,ADMINISTRADOR=3;
-	private int estado=ADMINISTRADOR;
+	private int estado=INICIAL;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
 		});
 	}
 	public MainFrame() {
-		setResizable(false);
+		//setResizable(false);
 		setLocationRelativeTo(null);
 		ini=new Inicial();
 		ini.getIngresar().addActionListener(new Acciones());
@@ -45,6 +45,9 @@ public class MainFrame extends JFrame {
 		din.getSalir().add(salir);
 		
 		escoger=new MainDatabasePanel();
+		escoger.getSalir().addActionListener(new Acciones());
+		escoger.getCancelar().addActionListener(new Acciones());
+		escoger.getPedido().addActionListener(new Acciones());
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
@@ -86,10 +89,15 @@ public class MainFrame extends JFrame {
 						din.setUser(usuario);
 						estado=ADMINISTRADOR;
 					}
+					else if(usuario.getTipo()==usuario.EMPLEADO){
+						escoger.setUsuario(usuario);
+						escoger.inicio();
+						estado=PRINCIPAL;
+					}
 					estados();
 				}
 			}
-			else if(e.getSource()==log.getRegresar()){
+			else if(e.getSource()==log.getRegresar()||e.getSource()==escoger.getSalir()){
 				estado=INICIAL;
 				estados();
 			}

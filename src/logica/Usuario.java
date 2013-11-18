@@ -1,6 +1,7 @@
 package logica;
 import java.sql.*;
 import logica.articulos.*;
+import java.util.*;
 
 public class Usuario{
 	public static int ADMINISTRADOR=0,EMPLEADO=1,CLIENTE=2;
@@ -33,7 +34,77 @@ public class Usuario{
 			System.out.println("Error al determinar el tipo de usuario");
 		} 
 	}
-	//faltan checar los permisos de los empleados de acceso a tablas
+
+	public Vector<String> getAutores(){
+		Vector <String>autores= new Vector<String>();
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT autor FROM libro group by autor order by autor");
+			if(conjuntoResultados.next()){
+				do{
+					autores.add(conjuntoResultados.getString(1));
+				}while(conjuntoResultados.next());
+			}
+		}catch(SQLException e){
+			System.out.println("Error en obtener autores");
+		} 
+		return autores;
+	}
+	public Vector<String> getLibroNombres(String autor){
+		Vector <String>titulos= new Vector<String>();
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre FROM libro where autor='"+autor+"' order by nombre");
+			if(conjuntoResultados.next()){
+				do{
+					titulos.add(conjuntoResultados.getString(1));
+				}while(conjuntoResultados.next());
+			}
+		}catch(SQLException e){
+			System.out.println("Error en obtener titulos");
+		} 
+		return titulos;
+	}
+	
+	public Vector<String> getArtistasDisco(){
+		Vector <String>artistas= new Vector<String>();
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT artista FROM disco group by artista order by artista");
+			if(conjuntoResultados.next()){
+				do{
+					artistas.add(conjuntoResultados.getString(1));
+				}while(conjuntoResultados.next());
+			}
+		}catch(SQLException e){
+			System.out.println("Error en obtener autores");
+		} 
+		return artistas;
+	}
+	public Vector<String> getDiscoNombres(String artista){
+		Vector <String>titulos= new Vector<String>();
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre FROM disco where artista='"+artista+"' order by nombre");
+			if(conjuntoResultados.next()){
+				do{
+					titulos.add(conjuntoResultados.getString(1));
+				}while(conjuntoResultados.next());
+			}
+		}catch(SQLException e){
+			System.out.println("Error en obtener titulos");
+		} 
+		return titulos;
+	}
+	
 	public int agregarUsuario(Persona p){
 		Statement instruccion = null; 
 		ResultSet conjuntoResultados = null;
