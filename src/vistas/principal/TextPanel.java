@@ -26,8 +26,8 @@ public class TextPanel extends JPanel {
 	private JList<String> autor;
 	private JScrollPane scrollPane_3;
 	private JList<String> titulo;
-	JButton btnAñadir;
-	private JLabel lblErrorAñadir, lblErrorCantidad;
+	JButton btnAadir;
+	private JLabel lblErrorAadir, lblErrorCantidad;
 	private JLabel lblTotal;
 	private JTextField tFTotal;
 	
@@ -176,20 +176,20 @@ public class TextPanel extends JPanel {
 		ficha.setOpaque(true);
 		scrollPane.setViewportView(ficha);
 		
-		btnAñadir = new JButton("Añadir");
-		GridBagConstraints gbc_btnAñadir = new GridBagConstraints();
-		gbc_btnAñadir.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAñadir.gridx = 7;
-		gbc_btnAñadir.gridy = 4;
-		add(btnAñadir, gbc_btnAñadir);
+		btnAadir = new JButton("A\u00f1adir");
+		GridBagConstraints gbc_btnAadir = new GridBagConstraints();
+		gbc_btnAadir.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAadir.gridx = 7;
+		gbc_btnAadir.gridy = 4;
+		add(btnAadir, gbc_btnAadir);
 		
-		lblErrorAñadir = new JLabel("");
-		lblErrorAñadir.setForeground(Color.RED);
-		GridBagConstraints gbc_lblErrorAñadir = new GridBagConstraints();
-		gbc_lblErrorAñadir.insets = new Insets(0, 0, 5, 0);
-		gbc_lblErrorAñadir.gridx = 8;
-		gbc_lblErrorAñadir.gridy = 4;
-		add(lblErrorAñadir, gbc_lblErrorAñadir);
+		lblErrorAadir = new JLabel("");
+		lblErrorAadir.setForeground(Color.RED);
+		GridBagConstraints gbc_lblErrorAadir = new GridBagConstraints();
+		gbc_lblErrorAadir.insets = new Insets(0, 0, 5, 0);
+		gbc_lblErrorAadir.gridx = 8;
+		gbc_lblErrorAadir.gridy = 4;
+		add(lblErrorAadir, gbc_lblErrorAadir);
 		
 		lblTotal = new JLabel("Total");
 		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
