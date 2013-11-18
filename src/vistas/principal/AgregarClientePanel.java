@@ -17,9 +17,6 @@ public class AgregarClientePanel extends JPanel {
 	private ButtonGroup btnGroupTarjetas = new ButtonGroup();
 	private JTextField tFNumeroTarjeta;
 
-	/**
-	 * Create the panel.
-	 */
 	public AgregarClientePanel() {
 		setBackground(Color.WHITE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
