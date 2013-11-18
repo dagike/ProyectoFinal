@@ -12,11 +12,13 @@ public class MainFrame extends JFrame {
 	private Ingreso log;
 	private Inicial ini;
 	private Dinamico din;
+	private AgregarClientePanel nvoCliente;
+	private ClientePanel cliente;
 	
 	//logica
 	private Usuario usuario;
-	public final static int INGRESO=0,PRINCIPAL=1,INICIAL=2,ADMINISTRADOR=3;
-	private int estado=INICIAL;
+	public final static int INGRESO=0,PRINCIPAL=1,INICIAL=2,ADMINISTRADOR=3,CLIENTE=4,NVOCLIENTE=5;
+	private int estado=CLIENTE;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -49,6 +51,10 @@ public class MainFrame extends JFrame {
 		escoger.getCancelar().addActionListener(new Acciones());
 		escoger.getPedido().addActionListener(new Acciones());
 		
+		nvoCliente=new AgregarClientePanel();
+		
+		cliente=new ClientePanel();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		estados();
@@ -71,6 +77,14 @@ public class MainFrame extends JFrame {
 			setSize(660,460);
 			setContentPane(din);
 			setJMenuBar(din.getAdminMenu());
+		}
+		else if(estado == CLIENTE){
+			setSize(400,250);
+			setContentPane(cliente);
+		}
+		else if(estado == NVOCLIENTE){
+			setSize(660,460);
+			setContentPane(nvoCliente);
 		}
 	}
 	public class Acciones implements ActionListener{

@@ -11,6 +11,7 @@ import java.awt.Color;
 
 public class ClientePanel extends JPanel {
 	private JTextField tFEmail;
+	private JLabel lblErrorEmail;
 
 	public ClientePanel() {
 		setBackground(Color.WHITE);
@@ -39,7 +40,7 @@ public class ClientePanel extends JPanel {
 		add(tFEmail, gbc_tFEmail);
 		tFEmail.setColumns(10);
 		
-		JLabel lblErrorEmail = new JLabel("");
+		lblErrorEmail = new JLabel("");
 		lblErrorEmail.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorEmail = new GridBagConstraints();
 		gbc_lblErrorEmail.insets = new Insets(0, 0, 5, 0);
