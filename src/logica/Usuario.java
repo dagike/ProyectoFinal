@@ -105,6 +105,77 @@ public class Usuario{
 		return titulos;
 	}
 	
+	public Vector<String> getDirectorPelicula(){
+		Vector <String>directores= new Vector<String>();
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT director FROM pelicula group by director order by director");
+			if(conjuntoResultados.next()){
+				do{
+					directores.add(conjuntoResultados.getString(1));
+				}while(conjuntoResultados.next());
+			}
+		}catch(SQLException e){
+			System.out.println("Error en obtener directores");
+		} 
+		return directores;
+	}
+	public Vector<String> getPeliculaNombres(String director){
+		Vector <String>titulos= new Vector<String>();
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre FROM pelicula where director='"+director+"' order by nombre");
+			if(conjuntoResultados.next()){
+				do{
+					titulos.add(conjuntoResultados.getString(1));
+				}while(conjuntoResultados.next());
+			}
+		}catch(SQLException e){
+			System.out.println("Error en obtener titulos de pelicula");
+		} 
+		return titulos;
+	}
+	
+	public Vector<String> getFabricanteJuguete(){
+		Vector <String>fabricantes= new Vector<String>();
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT fabricante FROM juguete group by fabricante order by fabricante");
+			if(conjuntoResultados.next()){
+				do{
+					fabricantes.add(conjuntoResultados.getString(1));
+				}while(conjuntoResultados.next());
+			}
+		}catch(SQLException e){
+			System.out.println("Error en obtener fabricantes");
+		} 
+		return fabricantes;
+	}
+	public Vector<String> getJugueteNombres(String fabricante){
+		Vector <String>titulos= new Vector<String>();
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre FROM juguete where fabricante='"+fabricante+"' order by nombre");
+			if(conjuntoResultados.next()){
+				do{
+					titulos.add(conjuntoResultados.getString(1));
+				}while(conjuntoResultados.next());
+			}
+		}catch(SQLException e){
+			System.out.println("Error en obtener nombres de juguetes");
+		} 
+		return titulos;
+	}
+	
+	
 	public int agregarUsuario(Persona p){
 		Statement instruccion = null; 
 		ResultSet conjuntoResultados = null;
