@@ -459,6 +459,17 @@ public class LibroBaja extends JPanel {
 		tFISBN.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
+		lblErrorNombre.setText("");
+		lblErrorAutor.setText("");
+		lblErrorEditorial.setText("");
+		lblErrorPrecio.setText("");
+		lblErrorFechaImpresion.setText("");
+		lblErrorEdicion.setText("");
+		lblErrorGenero.setText("");
+		lblErrorIdioma.setText("");
+		lblErrorISBN.setText("");
+		lblErrorPrecio.setText("");
+		lblErrorExistencias.setText("");
 		if(estado == Dinamico.BAJASLIBRO)
 			lMensaje.setText("Bajas Libros");
 		else
