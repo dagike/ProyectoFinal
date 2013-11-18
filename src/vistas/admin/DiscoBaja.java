@@ -307,7 +307,6 @@ public class DiscoBaja extends JPanel {
 		tFGenero.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
-		lblErrorNombre.setText("");
 		lblErrorArtista.setText("");
 		lblErrorFechaLanzamiento.setText("");
 		lblErrorGenero.setText("");

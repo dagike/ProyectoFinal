@@ -165,12 +165,12 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			conjuntoResultados = instruccion.executeQuery("SELECT * FROM juguete WHERE nombre='"+j.getNombre()+"'");
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM juguete WHERE nombre='"+j.getNombre().toLowerCase()+"'");
 			if(conjuntoResultados.next()){
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO juguete values(0,'"+j.getNombre()+"','"+j.getFabricante() +"',"+j.getEdad()+","+j.getPrecio()+","+j.getExistencias()+")" );
+				instruccion.execute(" INSERT INTO juguete values(0,'"+j.getNombre().toLowerCase()+"','"+j.getFabricante() +"',"+j.getEdad()+","+j.getPrecio()+","+j.getExistencias()+")" );
 			}
 		}catch(SQLException e){
 			return ECONEXION;
@@ -201,7 +201,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.execute("DELETE FROM juguete WHERE nombre='"+j.getNombre()+"'");
+			instruccion.execute("DELETE FROM juguete WHERE nombre='"+j.getNombre().toLowerCase()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -213,7 +213,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.executeUpdate("UPDATE juguete set fabricante='"+j.getFabricante()+"',edad_apropiada="+j.getEdad()+",precio="+j.getPrecio()+",existencias="+j.getExistencias()+" where nombre='"+j.getNombre()+"'");
+			instruccion.executeUpdate("UPDATE juguete set fabricante='"+j.getFabricante()+"',edad_apropiada="+j.getEdad()+",precio="+j.getPrecio()+",existencias="+j.getExistencias()+" where nombre='"+j.getNombre().toLowerCase()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -227,12 +227,12 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			conjuntoResultados = instruccion.executeQuery("SELECT * FROM pelicula WHERE nombre='"+p.getNombre()+"'");
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM pelicula WHERE nombre='"+p.getNombre().toLowerCase()+"'");
 			if(conjuntoResultados.next()){
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO pelicula values(0,'"+p.getNombre()+"','"+p.getFecha() +"','"+p.getGenero()+"',"+p.getPrecio()+",'"+p.getIdioma()+"',1,1,'"+p.getDirector()+"',"+p.getExistencias()+")" );
+				instruccion.execute(" INSERT INTO pelicula values(0,'"+p.getNombre().toLowerCase()+"','"+p.getFecha() +"','"+p.getGenero()+"',"+p.getPrecio()+",'"+p.getIdioma()+"',1,1,'"+p.getDirector()+"',"+p.getExistencias()+")" );
 			}
 		}catch(SQLException e){
 			return ECONEXION;
@@ -264,7 +264,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.execute("DELETE FROM pelicula WHERE nombre='"+p.getNombre()+"'");
+			instruccion.execute("DELETE FROM pelicula WHERE nombre='"+p.getNombre().toLowerCase()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -276,7 +276,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.executeUpdate("UPDATE pelicula set fecha_estreno='"+p.getFecha()+"',genero='"+p.getGenero()+"',idioma='"+p.getIdioma()+"',director='"+p.getDirector()+"',precio="+p.getPrecio()+",existencias="+p.getExistencias()+" where nombre='"+p.getNombre()+"'");
+			instruccion.executeUpdate("UPDATE pelicula set fecha_estreno='"+p.getFecha()+"',genero='"+p.getGenero()+"',idioma='"+p.getIdioma()+"',director='"+p.getDirector()+"',precio="+p.getPrecio()+",existencias="+p.getExistencias()+" where nombre='"+p.getNombre().toLowerCase()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -289,12 +289,12 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			conjuntoResultados = instruccion.executeQuery("SELECT nombre FROM disco WHERE nombre='"+d.getNombre()+"'");
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre FROM disco WHERE nombre='"+d.getNombre().toLowerCase()+"'");
 			if(conjuntoResultados.next()){
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO disco values(0,1,1,'"+d.getNombre()+"','"+d.getFecha()+"','"+d.getGenero()+"',"+d.getPrecio()+",'"+d.getArtista()+"',"+d.getExistencias()+")" );
+				instruccion.execute(" INSERT INTO disco values(0,1,1,'"+d.getNombre().toLowerCase()+"','"+d.getFecha()+"','"+d.getGenero()+"',"+d.getPrecio()+",'"+d.getArtista()+"',"+d.getExistencias()+")" );
 			}
 		}catch(SQLException e){
 			return ECONEXION;
@@ -327,7 +327,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.execute("DELETE FROM disco WHERE nombre='"+d.getNombre()+"'");
+			instruccion.execute("DELETE FROM disco WHERE nombre='"+d.getNombre().toLowerCase()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -339,7 +339,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.executeUpdate("UPDATE disco set fecha_lanzamiento='"+d.getFecha()+"',genero='"+d.getGenero()+"',artista='"+d.getArtista()+"',precio="+d.getPrecio()+",existencias="+d.getExistencias()+" where nombre='"+d.getNombre()+"'");
+			instruccion.executeUpdate("UPDATE disco set fecha_lanzamiento='"+d.getFecha()+"',genero='"+d.getGenero()+"',artista='"+d.getArtista()+"',precio="+d.getPrecio()+",existencias="+d.getExistencias()+" where nombre='"+d.getNombre().toLowerCase()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -352,12 +352,12 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			conjuntoResultados = instruccion.executeQuery("SELECT * FROM libro WHERE nombre='"+l.getNombre()+"'");
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM libro WHERE nombre='"+l.getNombre().toLowerCase()+"'");
 			if(conjuntoResultados.next()){
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO libro values(0,1,'"+l.getFecha()+"','"+l.getFecha()+"','"+l.getGenero()+","+l.getPrecio()+",'"+l.getIdioma()+"','"+l.getNombre()+"','"+l.getIsbn()+"','"+l.getEditorial()+"','"+l.getAutor()+"','"+l.getEdicion()+"',"+l.getExistencias()+")");
+				instruccion.execute(" INSERT INTO libro values(0,1,'"+l.getFecha()+"','"+l.getFecha()+"','"+l.getGenero()+"',"+l.getPrecio()+",'"+l.getIdioma()+"','"+l.getNombre().toLowerCase()+"','"+l.getIsbn()+"','"+l.getEditorial()+"','"+l.getAutor()+"','"+l.getEdicion()+"',"+l.getExistencias()+")");
 			}
 		}catch(SQLException e){
 			return ECONEXION;
@@ -389,7 +389,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.execute("DELETE FROM libro WHERE nombre='"+l.getNombre()+"'");
+			instruccion.execute("DELETE FROM libro WHERE nombre='"+l.getNombre().toLowerCase()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -401,7 +401,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.executeUpdate("UPDATE libro set fecha_impresion='"+l.getFecha()+"',genero='"+l.getGenero()+"',idioma='"+l.getIdioma()+"',isbn='"+l.getIsbn()+"',editorial='"+l.getEditorial()+"',autor='"+l.getAutor()+"',edicion='"+l.getEdicion()+"',precio="+l.getPrecio()+",existencias="+l.getExistencias()+" where nombre='"+l.getNombre()+"'");
+			instruccion.executeUpdate("UPDATE libro set fecha_impresion='"+l.getFecha()+"',genero='"+l.getGenero()+"',idioma='"+l.getIdioma()+"',isbn='"+l.getIsbn()+"',editorial='"+l.getEditorial()+"',autor='"+l.getAutor()+"',edicion='"+l.getEdicion()+"',precio="+l.getPrecio()+",existencias="+l.getExistencias()+" where nombre='"+l.getNombre().toLowerCase()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;

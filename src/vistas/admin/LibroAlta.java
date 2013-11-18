@@ -440,7 +440,6 @@ public class LibroAlta extends JPanel {
 		tFPrecio.setText("");
 		tFExistencias.setText("");
 		lMensaje.setText("Altas Libros");
-		lblErrorNombre.setText("");
 		lblErrorAutor.setText("");
 		lblErrorEditorial.setText("");
 		lblErrorPrecio.setText("");

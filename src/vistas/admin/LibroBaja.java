@@ -459,7 +459,6 @@ public class LibroBaja extends JPanel {
 		tFISBN.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
-		lblErrorNombre.setText("");
 		lblErrorAutor.setText("");
 		lblErrorEditorial.setText("");
 		lblErrorPrecio.setText("");

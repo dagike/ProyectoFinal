@@ -290,7 +290,6 @@ public class DiscoAlta extends JPanel {
 		tFPrecio.setText("");
 		tFExistencias.setText("");
 		lMensaje.setText("Altas Discos");
-		lblErrorNombre.setText("");
 		lblErrorArtista.setText("");
 		lblErrorFechaLanzamiento.setText("");
 		lblErrorGenero.setText("");

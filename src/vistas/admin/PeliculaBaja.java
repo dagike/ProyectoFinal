@@ -343,7 +343,6 @@ public class PeliculaBaja extends JPanel {
 		tFIdioma.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
-		lblErrorNombre.setText("");
 		lblErrorDirector.setText("");
 		lblErrorFechaEstreno.setText("");
 		lblErrorGenero.setText("");

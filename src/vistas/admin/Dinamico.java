@@ -446,7 +446,7 @@ public class Dinamico extends JPanel {
 									libroBaja.exito(BAJASLIBRO);
 								}
 						}
-						else if(estado == CAMBIOSJUGUETE){
+						else if(estado == CAMBIOSLIBRO){
 								Object[] options = {"Si","No"};
 								int n = JOptionPane.showOptionDialog(null,"Esta seguro de los cambios?","Confirmacion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,options,options[0]);
 								Libro nueva=libroBaja.getLibro();
@@ -472,7 +472,7 @@ public class Dinamico extends JPanel {
 						libroBaja.setError(2);
 						libroBaja.cancelar(estado);
 					}
-					else if(juguete.getNombre()==null){
+					else if(libro.getNombre()==null){
 						libroBaja.setError(3);
 						libroBaja.cancelar(estado);
 						libro=null;

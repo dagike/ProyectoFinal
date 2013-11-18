@@ -325,7 +325,6 @@ public class PeliculaAlta extends JPanel {
 		tFPrecio.setText("");
 		tFExistencias.setText("");
 		lMensaje.setText("Altas Peliculas");
-		lblErrorNombre.setText("");
 		lblErrorDirector.setText("");
 		lblErrorFechaEstreno.setText("");
 		lblErrorGenero.setText("");
