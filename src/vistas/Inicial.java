@@ -14,9 +14,9 @@ public class Inicial extends JPanel{
 		setLayout(new GridBagLayout());
 		
 		JPanel imagen=new JPanel();
-		imagen.setMinimumSize(new Dimension(200,100));
-		imagen.setMaximumSize(new Dimension(200,100));
-		imagen.setPreferredSize(new Dimension(200,100));
+		imagen.setMinimumSize(new Dimension(250,150));
+		imagen.setMaximumSize(new Dimension(250,150));
+		imagen.setPreferredSize(new Dimension(250,150));
 		imagen.setBackground(new Color(120,213,220));
 		
 		posicion.gridx = 0;

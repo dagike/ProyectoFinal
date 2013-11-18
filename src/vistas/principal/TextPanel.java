@@ -50,6 +50,20 @@ public class TextPanel extends JPanel {
            autor.setListData(u.getArtistasDisco());
            autor.setSelectedIndex(0);
          }
+         else if(producto.getSelectedValue()=="Peliculas"){
+           lblAutor.setText("Director");
+           lblTitulo.setText("Titulo");
+           lblFicha.setText("Ficha");
+           autor.setListData(u.getDirectorPelicula());
+           autor.setSelectedIndex(0);
+         }
+         else if(producto.getSelectedValue()=="Juguetes"){
+           lblAutor.setText("Fabricante");
+           lblTitulo.setText("Nombre");
+           lblFicha.setText("Ficha");
+           autor.setListData(u.getFabricanteJuguete());
+           autor.setSelectedIndex(0);
+         }
        }
        else if(e.getSource()==autor){
          if(producto.getSelectedValue()=="Libros"){
@@ -60,6 +74,14 @@ public class TextPanel extends JPanel {
            titulo.setListData(u.getDiscoNombres( autor.getSelectedValue() ));
            titulo.setSelectedIndex(0);
          }  
+         else if(producto.getSelectedValue()=="Peliculas"){
+           titulo.setListData(u.getPeliculaNombres( autor.getSelectedValue() ));
+           titulo.setSelectedIndex(0);
+         }
+         else if(producto.getSelectedValue()=="Juguetes"){
+           titulo.setListData(u.getJugueteNombres( autor.getSelectedValue() ));
+           titulo.setSelectedIndex(0);
+         }
        }
        else if(e.getSource()==titulo){
          if(producto.getSelectedValue()=="Libros"){
