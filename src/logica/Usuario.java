@@ -449,7 +449,6 @@ public class Usuario{
 		int i;
 		Disco d=null;
 		try{
-			nombre.toLowerCase();
 			instruccion =coneccion.createStatement();
 			conjuntoResultados = instruccion.executeQuery("SELECT nombre,artista,genero,precio,existencias,fecha_lanzamiento FROM disco WHERE nombre='"+nombre+"'");
 			if(conjuntoResultados.next()){

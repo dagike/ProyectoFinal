@@ -1,5 +1,6 @@
 package vistas.principal;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import logica.*;
@@ -49,8 +50,20 @@ public class MainDatabasePanel extends JPanel {
 		add(cart,BorderLayout.EAST);
 		
 		add(sur, BorderLayout.SOUTH);
+		Acciones acciones=new Acciones();
+		textPanel.getAgregar().addActionListener(acciones);
+		
+		
 	}
 	public JButton getSalir(){return btnSalir;}
 	public JButton getPedido(){return btnPedido;}
 	public JButton getCancelar(){return btnCancelar;}
+	public class Acciones implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == textPanel.getAgregar()){ 
+				textPanel.checkCantidad();
+			}
+		}
+	}
+	
 }

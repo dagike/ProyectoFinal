@@ -11,9 +11,9 @@ public class Libro extends Articulo{
 		this.idioma=idioma;
 		this.isbn=isbn;
 		this.genero=genero;
-		this.edicion=Integer.parseInt(edicion);
-		this.precio=Integer.parseInt(precio);
-		this.existencias=Integer.parseInt(existencias);
+		this.edicion=(edicion==null)?this.edicion=0:Integer.parseInt(edicion);
+		this.precio=(precio==null)?this.precio=0:Integer.parseInt(precio);
+		this.existencias=(existencias==null)?this.existencias=0:Integer.parseInt(existencias);
 		fecha= new Fecha();
 	}
 	public String getFecha(){return fecha.toString();}
@@ -31,4 +31,7 @@ public class Libro extends Articulo{
 		return this.fecha.setFecha(fecha);
 	}
 	public Libro(){}
+	public String getFicha(){
+		return "<html>ISBN: "+isbn+"<br>Autor: "+autor+"<br>Nombre: "+nombre+"<br>Edicion: "+edicion+"<br>Editorial: "+editorial+"<br>Fecha: "+getFecha()+"<br>Genero: "+genero+"<br>Idioma: "+idioma+"<br>Precio: $"+precio+"<br>Existencias: "+existencias+"<br> </html>";
+	}
 }
