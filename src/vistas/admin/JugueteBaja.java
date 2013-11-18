@@ -230,30 +230,54 @@ public class JugueteBaja extends JPanel {
 			lblErrorEdadApropiada.setText("Campo necesario");
 			error = true;
 		}else{
-			lblErrorEdadApropiada.setText("");
+			for(int i=0;i<tFEdadApropiada.getText().length();i++)
+				if(tFEdadApropiada.getText().charAt(i)< '0' || tFEdadApropiada.getText().charAt(i) > '9'){
+					lblErrorEdadApropiada.setText("Solo Numeros");
+					error = true;
+					break;
+				}else
+					lblErrorEdadApropiada.setText("");
 		}
+		
 		if(tFPrecio.getText().equals("")){
 			lblErrorPrecio.setText("Campo necesario");
 			error = true;
 		}else{
-			lblErrorPrecio.setText("");
+			for(int i=0;i<tFPrecio.getText().length();i++)
+				if(tFPrecio.getText().charAt(i)< '0' || tFPrecio.getText().charAt(i) > '9'){
+					lblErrorPrecio.setText("Solo Numeros");
+					error = true;
+					break;
+				}else
+					lblErrorPrecio.setText("");
 		}
 		
 		if(tFExistencias.getText().equals("")){
 			lblErrorExistencias.setText("Campo necesario");
 			error = true;
 		}else{
-			lblErrorExistencias.setText("");
+			for(int i=0;i<tFExistencias.getText().length();i++)
+				if(tFExistencias.getText().charAt(i)< '0' || tFExistencias.getText().charAt(i) > '9'){
+					lblErrorExistencias.setText("Solo Numeros");
+					error = true;
+					break;
+				}else
+					lblErrorExistencias.setText("");
 		}
+		
 		return error;
 	}
 	
-	public void cancelar(){
+	public void cancelar(int estado){
 		tFNombre.setText("");
 		tFFabricante.setText("");
 		tFEdadApropiada.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
+		if(estado == Dinamico.BAJASJUGUETE)
+			lMensaje.setText("Bajas Juguetes");
+		else
+			lMensaje.setText("Cambios Juguetes");
 	}
 	
 	public String getNombreJuguete(){return tFNombre.getText().toLowerCase();}

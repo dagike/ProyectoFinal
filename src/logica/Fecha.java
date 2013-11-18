@@ -8,20 +8,20 @@ public class Fecha{
 		//Validadacion de que solo haya numeros y tenga 2 diagonales
 		for(i=0,numeroDeDiagonales=0;i<fecha.length();i++){
 			temp=fecha.charAt(i);
-			if(temp<47&&temp>57){
+			if(temp<=47&&temp>57){
 				if(temp==45){numeroDeDiagonales++;}
+				else
+					k=1;
 			}
-			else
-				k=1;
 		}
-		if(fecha.length()<8&&numeroDeDiagonales!=2&&k==1){
+		if(fecha.length()<8||numeroDeDiagonales!=2||k==1){
 			this.dia=1;this.mes=1;this.anio=2000;
 			return false;
 		}
 		else{
 			//Obtencion de numeros con ayuda de las diagonales
 			for(i=0,numeroDeDiagonales=0;numeroDeDiagonales<2;i++){
-				if(fecha.charAt(i)=='/'){
+				if(fecha.charAt(i)=='-'){
 					numeroDeDiagonales++;
 					if(numeroDeDiagonales==1){
 						dia=Integer.parseInt(fecha.substring(0,i));

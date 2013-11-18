@@ -231,7 +231,7 @@ public class Usuario{
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO pelicula values(0,'"+p.getNombre()+"',"+p.getFecha() +",'"+p.getGenero()+"',"+p.getPrecio()+",'"+p.getIdioma()+"',1,1,'"+p.getDirector()+"',"+p.getExistencias()+")" );
+				instruccion.execute(" INSERT INTO pelicula values(0,'"+p.getNombre()+"','"+p.getFecha() +"','"+p.getGenero()+"',"+p.getPrecio()+",'"+p.getIdioma()+"',1,1,'"+p.getDirector()+"',"+p.getExistencias()+")" );
 			}
 		}catch(SQLException e){
 			return ECONEXION;
@@ -289,11 +289,12 @@ public class Usuario{
 		try{
 			instruccion =coneccion.createStatement();
 			conjuntoResultados = instruccion.executeQuery("SELECT * FROM disco WHERE nombre='"+d.getNombre()+"'");
+			System.out.println("Nop");
 			if(conjuntoResultados.next()){
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO disco values(0,1,1,'"+d.getNombre()+"',"+d.getFecha()+",'"+d.getGenero()+"',"+d.getPrecio()+",'"+d.getArtista()+"',"+d.getExistencias()+")" );
+				instruccion.execute(" INSERT INTO disco values(0,1,1,'"+d.getNombre()+"','"+d.getFecha()+"','"+d.getGenero()+"',"+d.getPrecio()+",'"+d.getArtista()+"',"+d.getExistencias()+")" );
 			}
 		}catch(SQLException e){
 			return ECONEXION;
@@ -355,7 +356,7 @@ public class Usuario{
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO libro values(0,1,"+l.getFecha()+","+l.getFecha()+",'"+l.getGenero()+","+l.getPrecio()+",'"+l.getIdioma()+"','"+l.getNombre()+"','"+l.getIsbn()+"','"+l.getEditorial()+"','"+l.getAutor()+"','"+l.getEdicion()+"',"+l.getExistencias()+")");
+				instruccion.execute(" INSERT INTO libro values(0,1,'"+l.getFecha()+"','"+l.getFecha()+"','"+l.getGenero()+","+l.getPrecio()+",'"+l.getIdioma()+"','"+l.getNombre()+"','"+l.getIsbn()+"','"+l.getEditorial()+"','"+l.getAutor()+"','"+l.getEdicion()+"',"+l.getExistencias()+")");
 			}
 		}catch(SQLException e){
 			return ECONEXION;

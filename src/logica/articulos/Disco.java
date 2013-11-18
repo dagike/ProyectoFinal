@@ -17,7 +17,9 @@ public class Disco extends Articulo{
 	public String getGenero(){return genero;}
 	
 	public boolean setFecha(String fecha){
-			return this.fecha.setFecha(fecha);
+		if(this.fecha==null)
+			this.fecha=new Fecha();
+		return this.fecha.setFecha(fecha);
 	}
 	
 	public Disco(){}

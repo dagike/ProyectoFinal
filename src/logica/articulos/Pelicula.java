@@ -19,7 +19,9 @@ public class Pelicula extends Articulo{
 	public String getIdioma(){return idioma;}
 	
 	public boolean setFecha(String fecha){
-			return this.fecha.setFecha(fecha);
+		if(this.fecha==null)
+			this.fecha=new Fecha();
+		return this.fecha.setFecha(fecha);
 	}
 	public Pelicula(){}
 }

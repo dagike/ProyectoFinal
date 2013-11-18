@@ -292,15 +292,28 @@ public class PeliculaAlta extends JPanel {
 			lblErrorPrecio.setText("Campo necesario");
 			error = true;
 		}else{
-			lblErrorPrecio.setText("");
+			for(int i=0;i<tFPrecio.getText().length();i++)
+				if(tFPrecio.getText().charAt(i)< '0' || tFPrecio.getText().charAt(i) > '9'){
+					lblErrorPrecio.setText("Solo Numeros");
+					error = true;
+					break;
+				}else
+					lblErrorPrecio.setText("");
 		}
 		
 		if(tFExistencias.getText().equals("")){
 			lblErrorExistencias.setText("Campo necesario");
 			error = true;
 		}else{
-			lblErrorExistencias.setText("");
+			for(int i=0;i<tFExistencias.getText().length();i++)
+				if(tFExistencias.getText().charAt(i)< '0' || tFExistencias.getText().charAt(i) > '9'){
+					lblErrorExistencias.setText("Solo Numeros");
+					error = true;
+					break;
+				}else
+					lblErrorExistencias.setText("");
 		}
+		
 		return error;
 	}
 	public void cancelar(){
@@ -311,6 +324,7 @@ public class PeliculaAlta extends JPanel {
 		tFIdioma.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
+		lMensaje.setText("Altas Peliculas");
 	}
 
 	public String getNombrePelicula(){return tFNombre.getText().toLowerCase();}
