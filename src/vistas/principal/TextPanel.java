@@ -18,6 +18,7 @@ public class TextPanel extends JPanel {
 	private Disco disco;
 	private Libro libro;
 	private Pelicula pelicula;
+	private int intTotal,cantidad;
 
 	JLabel lblProducto,lblAutor,lblTitulo,lblFicha,ficha,lblCantidad;
 	private JScrollPane scrollPane_1;
@@ -28,11 +29,10 @@ public class TextPanel extends JPanel {
 	private JList<String> titulo;
 	JButton btnAadir;
 	private JLabel lblErrorAadir, lblErrorCantidad;
-	private JLabel lblTotal;
-	private JTextField tFTotal;
+	private JLabel lblTotal,total;
 	
 	public void setUsuario(Usuario u){this.u=u;}
-	public void inicio(){producto.setSelectedIndex(0);}
+	public void inicio(){producto.setSelectedIndex(0);intTotal=0;total.setText("$"+intTotal);}
 	private class Select implements ListSelectionListener{
      public void valueChanged(ListSelectionEvent e){
        if(e.getSource()==producto){
@@ -50,6 +50,20 @@ public class TextPanel extends JPanel {
            autor.setListData(u.getArtistasDisco());
            autor.setSelectedIndex(0);
          }
+         else if(producto.getSelectedValue()=="Peliculas"){
+           lblAutor.setText("Director");
+           lblTitulo.setText("Titulo");
+           lblFicha.setText("Ficha");
+           autor.setListData(u.getDirectorPelicula());
+           autor.setSelectedIndex(0);
+         }
+         else if(producto.getSelectedValue()=="Juguetes"){
+           lblAutor.setText("Fabricante");
+           lblTitulo.setText("Nombre");
+           lblFicha.setText("Ficha");
+           autor.setListData(u.getFabricanteJuguete());
+           autor.setSelectedIndex(0);
+         }
        }
        else if(e.getSource()==autor){
          if(producto.getSelectedValue()=="Libros"){
@@ -60,10 +74,31 @@ public class TextPanel extends JPanel {
            titulo.setListData(u.getDiscoNombres( autor.getSelectedValue() ));
            titulo.setSelectedIndex(0);
          }  
+         else if(producto.getSelectedValue()=="Peliculas"){
+           titulo.setListData(u.getPeliculaNombres( autor.getSelectedValue() ));
+           titulo.setSelectedIndex(0);
+         }
+         else if(producto.getSelectedValue()=="Juguetes"){
+           titulo.setListData(u.getJugueteNombres( autor.getSelectedValue() ));
+           titulo.setSelectedIndex(0);
+         }
        }
        else if(e.getSource()==titulo){
-         if(producto.getSelectedValue()=="Libros"){
-           
+         if(producto.getSelectedValue()=="Libros"&&titulo.getSelectedValue()!=null){
+				libro=u.obtenerInfoLibro( titulo.getSelectedValue() );
+				ficha.setText(libro.getFicha());
+         }
+         else if(producto.getSelectedValue()=="Discos"&&titulo.getSelectedValue()!=null){
+				disco=u.obtenerInfoDisco( titulo.getSelectedValue() );
+				ficha.setText(disco.getFicha());
+         }  
+         else if(producto.getSelectedValue()=="Peliculas"&&titulo.getSelectedValue()!=null){
+				pelicula=u.obtenerInfoPelicula( titulo.getSelectedValue() );
+				ficha.setText(pelicula.getFicha());
+         }
+         else if(producto.getSelectedValue()=="Juguetes"&&titulo.getSelectedValue()!=null){
+				juguete=u.obtenerInfoJuguete( titulo.getSelectedValue() );
+				ficha.setText(juguete.getFicha());
          }
        }
      }
@@ -159,8 +194,9 @@ public class TextPanel extends JPanel {
 		lblErrorCantidad.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorCantidad = new GridBagConstraints();
 		gbc_lblErrorCantidad.insets = new Insets(0, 0, 5, 5);
-		gbc_lblErrorCantidad.gridx = 6;
+		gbc_lblErrorCantidad.gridx = 5;
 		gbc_lblErrorCantidad.gridy = 4;
+		gbc_lblErrorCantidad.gridwidth = 2;
 		add(lblErrorCantidad, gbc_lblErrorCantidad);
 		
 		scrollPane = new JScrollPane();
@@ -199,31 +235,70 @@ public class TextPanel extends JPanel {
 		gbc_lblTotal.gridy = 5;
 		add(lblTotal, gbc_lblTotal);
 		
-		tFTotal = new JTextField();
+		total = new JLabel();
+		total.setBackground(Color.white);
+		total.setOpaque(true);
 		GridBagConstraints gbc_tFTotal = new GridBagConstraints();
 		gbc_tFTotal.fill = GridBagConstraints.HORIZONTAL;
 		gbc_tFTotal.insets = new Insets(0, 0, 0, 5);
 		gbc_tFTotal.gridx = 3;
 		gbc_tFTotal.gridy = 5;
-		add(tFTotal, gbc_tFTotal);
-		tFTotal.setColumns(10);
+		add(total, gbc_tFTotal);
 		
 		Select accion= new Select();
 		producto.addListSelectionListener(accion);
 		autor.addListSelectionListener(accion);
 		titulo.addListSelectionListener(accion);
 	}  
-   
+   public JButton getAgregar(){return btnAadir;}
 	public boolean checkCantidad(){
 		boolean error = false;
-		for(int i = 0; i < tFCantidad.getText().length(); i++)
-			if(tFCantidad.getText().charAt(i) < '0' || tFCantidad.getText().charAt(i) > '9'){
-				error = true;
-				lblErrorCantidad.setText("Solo Numeros");
-				break;
+		if(tFCantidad.getText().equals("")){
+			error=true;
+			lblErrorCantidad.setText("Ponga un numero");
+		}
+		else{
+			for(int i = 0; i < tFCantidad.getText().length(); i++)
+				if(tFCantidad.getText().charAt(i) < '0' || tFCantidad.getText().charAt(i) > '9'){
+					error = true;
+					lblErrorCantidad.setText("Solo Numeros");
+					break;
 			}
+			if(!error){
+				cantidad=Integer.parseInt(tFCantidad.getText());
+				if(cantidad==0){
+					error = true;
+					lblErrorCantidad.setText("Mayor a 0");	
+				}
+				else if(producto.getSelectedValue()=="Libros"&&libro!=null){
+					if(cantidad>libro.getExistencias()){
+						error = true;
+						lblErrorCantidad.setText("No hay tantos productos");	
+					}
+				}
+				else if(producto.getSelectedValue()=="Discos"&&disco!=null){
+					if(cantidad>disco.getExistencias()){
+						error = true;
+						lblErrorCantidad.setText("No hay tantos productos");	
+					}
+				}  
+				else if(producto.getSelectedValue()=="Peliculas"&&pelicula!=null){
+					if(cantidad>pelicula.getExistencias()){
+						error = true;
+						lblErrorCantidad.setText("No hay tantos productos");	
+					}
+				}
+				else if(producto.getSelectedValue()=="Juguetes"&&juguete!=null){
+					if(cantidad>juguete.getExistencias()){
+						error = true;
+						lblErrorCantidad.setText("No hay tantos productos");	
+					}
+				}
+			}
+		}
 		if(!error)
 			lblErrorCantidad.setText("");
+		
 		return error;
 	}
 
