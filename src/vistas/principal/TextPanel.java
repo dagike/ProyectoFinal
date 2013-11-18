@@ -29,6 +29,41 @@ public class TextPanel extends JPanel {
 	
 	public void setUsuario(Usuario u){this.u=u;}
 	public void inicio(){producto.setSelectedIndex(0);}
+	private class Select implements ListSelectionListener{
+     public void valueChanged(ListSelectionEvent e){
+       if(e.getSource()==producto){
+         if(producto.getSelectedValue()=="Libros"){
+           lblAutor.setText("Autor");
+           lblTitulo.setText("Titulo");
+           lblFicha.setText("Ficha");
+           autor.setListData(u.getAutores());
+           autor.setSelectedIndex(0);
+         }
+         else if(producto.getSelectedValue()=="Discos"){
+           lblAutor.setText("Artista");
+           lblTitulo.setText("Titulo");
+           lblFicha.setText("Ficha");
+           autor.setListData(u.getArtistasDisco());
+           autor.setSelectedIndex(0);
+         }
+       }
+       else if(e.getSource()==autor){
+         if(producto.getSelectedValue()=="Libros"){
+           titulo.setListData(u.getLibroNombres( autor.getSelectedValue() ));
+           titulo.setSelectedIndex(0);
+         }
+         else if(producto.getSelectedValue()=="Discos"){
+           titulo.setListData(u.getDiscoNombres( autor.getSelectedValue() ));
+           titulo.setSelectedIndex(0);
+         }  
+       }
+       else if(e.getSource()==titulo){
+         if(producto.getSelectedValue()=="Libros"){
+           
+         }
+       }
+     }
+   }
 	public TextPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 100, 0, 100, 0, 200, 0, 200, 0};
@@ -139,41 +174,7 @@ public class TextPanel extends JPanel {
 		autor.addListSelectionListener(accion);
 		titulo.addListSelectionListener(accion);
 	}  
-   private class Select implements ListSelectionListener{
-     public void valueChanged(ListSelectionEvent e){
-       if(e.getSource()==producto){
-         if(producto.getSelectedValue()=="Libros"){
-           lblAutor.setText("Autor");
-           lblTitulo.setText("Titulo");
-           lblFicha.setText("Ficha");
-           autor.setListData(u.getAutores());
-           autor.setSelectedIndex(0);
-         }
-         else if(producto.getSelectedValue()=="Discos"){
-           lblAutor.setText("Artista");
-           lblTitulo.setText("Titulo");
-           lblFicha.setText("Ficha");
-           autor.setListData(u.getArtistasDisco());
-           autor.setSelectedIndex(0);
-         }
-       }
-       else if(e.getSource()==autor){
-         if(producto.getSelectedValue()=="Libros"){
-           titulo.setListData(u.getLibroNombres( autor.getSelectedValue() ));
-           titulo.setSelectedIndex(0);
-         }
-         else if(producto.getSelectedValue()=="Discos"){
-           titulo.setListData(u.getDiscoNombres( autor.getSelectedValue() ));
-           titulo.setSelectedIndex(0);
-         }  
-       }
-       else if(e.getSource()==titulo){
-         if(producto.getSelectedValue()=="Libros"){
-           
-         }
-       }
-     }
-    }
+   
 
 
 }
