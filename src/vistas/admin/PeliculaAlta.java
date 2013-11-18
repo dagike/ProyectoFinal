@@ -267,7 +267,7 @@ public class PeliculaAlta extends JPanel {
 		}else{
 			Pelicula pelicula = new Pelicula();
 			if(!pelicula.setFecha(tFFechaEstreno.getText())){
-				lblErrorFechaEstreno.setText("Fecha invalida");
+				lblErrorFechaEstreno.setText("Fecha aaaa-mm-dd");
 				error=true;
 			}
 			else

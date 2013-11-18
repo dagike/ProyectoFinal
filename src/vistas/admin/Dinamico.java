@@ -324,16 +324,10 @@ public class Dinamico extends JPanel {
 				}
 			}else if(e.getSource() == discoBaja.getAceptar()){
 				if(!discoBaja.getNombreDisco().equals("")){
-					discoBaja.cancelar(estado);
 					disco=u.obtenerInfoDisco(discoBaja.getNombreDisco());
 					if(disco==null){
 						discoBaja.setError(2);
 						discoBaja.cancelar(estado);
-					}
-					else if(disco.getNombre()==null){
-						discoBaja.setError(3);
-						discoBaja.cancelar(estado);
-						disco=null;
 					}
 					else{
 						discoBaja.cargarDatos(disco);
@@ -399,7 +393,6 @@ public class Dinamico extends JPanel {
 				}
 			}else if(e.getSource() == jugueteBaja.getAceptar()){
 				if(!jugueteBaja.getNombreJuguete().equals("")){
-					jugueteBaja.cancelar(estado);
 					juguete=u.obtenerInfoJuguete(jugueteBaja.getNombreJuguete());
 					if(juguete==null){
 						jugueteBaja.setError(2);
@@ -474,7 +467,6 @@ public class Dinamico extends JPanel {
 				}
 			}else if(e.getSource() == libroBaja.getAceptar()){
 				if(!libroBaja.getNombreLibro().equals("")){
-					libroBaja.cancelar(estado);
 					libro=u.obtenerInfoLibro(libroBaja.getNombreLibro());
 					if(libro==null){
 						libroBaja.setError(2);
@@ -549,7 +541,6 @@ public class Dinamico extends JPanel {
 				}
 			}else if(e.getSource() == peliculaBaja.getAceptar()){
 				if(!peliculaBaja.getNombrePelicula().equals("")){
-					peliculaBaja.cancelar(estado);
 					pelicula=u.obtenerInfoPelicula(peliculaBaja.getNombrePelicula());
 					if(pelicula==null){
 						peliculaBaja.setError(2);

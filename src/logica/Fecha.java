@@ -6,10 +6,10 @@ public class Fecha{
 		int dia=0,mes=0,anio=0,numeroDeDiagonales,i,k=0;
 		char temp;
 		//Validadacion de que solo haya numeros y tenga 2 diagonales
-		for(i=0,numeroDeDiagonales=0;i<fecha.length();i++){
+		for(i=0,numeroDeDiagonales=0,k=0;i<fecha.length();i++){
 			temp=fecha.charAt(i);
-			if(temp<=47&&temp>57){
-				if(temp==45){numeroDeDiagonales++;}
+			if(temp<=47||temp>57){
+				if(temp=='-'){numeroDeDiagonales++;}
 				else
 					k=1;
 			}
@@ -24,12 +24,12 @@ public class Fecha{
 				if(fecha.charAt(i)=='-'){
 					numeroDeDiagonales++;
 					if(numeroDeDiagonales==1){
-						dia=Integer.parseInt(fecha.substring(0,i));
+						anio=Integer.parseInt(fecha.substring(0,i));
 						k=i;
 					}
 					else if(numeroDeDiagonales==2){
 						mes=Integer.parseInt(fecha.substring(k+1,i));
-						anio=Integer.parseInt(fecha.substring(i+1));
+						dia=Integer.parseInt(fecha.substring(i+1));
 					}
 				}
 			}
@@ -60,7 +60,7 @@ public class Fecha{
 		if(validarFecha(dia,mes,anio))this.anio=anio;
 		else System.out.println("ERROR: LA FECHA NO ES CORRECTA");
 	}
-	public String toString(){return dia+"-"+mes+"-"+anio;}
+	public String toString(){return anio+"-"+mes+"-"+dia;}
 	private boolean validarFecha(int dia,int mes,int anio){
 		if(dia<1 || dia>31)
 			return false;

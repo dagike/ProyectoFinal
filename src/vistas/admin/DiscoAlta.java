@@ -240,7 +240,7 @@ public class DiscoAlta extends JPanel {
 		}else{
 			Disco disco= new Disco();
 			if(!disco.setFecha(tFFechaLanzamiento.getText())){
-				lblErrorFechaLanzamiento.setText("Fecha invalida");
+				lblErrorFechaLanzamiento.setText("Fecha aaaa-mm-dd");
 				error=true;
 			}
 			else
@@ -295,7 +295,7 @@ public class DiscoAlta extends JPanel {
 	public String getNombreDisco(){return tFNombre.getText().toLowerCase();}
 
 	public Disco getDisco(){
-		Disco disco = new Disco(tFNombre.getText(),tFArtista.getText(),tFGenero.getText(),tFPrecio.getText(),tFExistencias.getText());
+		Disco disco = new Disco(tFNombre.getText().toLowerCase(),tFArtista.getText(),tFGenero.getText(),tFPrecio.getText(),tFExistencias.getText());
 		disco.setFecha(tFFechaLanzamiento.getText());
 		return disco;
 	}

@@ -360,7 +360,7 @@ public class LibroAlta extends JPanel {
 		}else{
 			Libro libro = new Libro();
 			if(!libro.setFecha( tFFechaImpresion.getText() )){
-				lblErrorFechaImpresion.setText("Fecha invalida");
+				lblErrorFechaImpresion.setText("Fecha aaaa-mm-dd");
 				error=true;
 			}
 			else

@@ -259,7 +259,7 @@ public class DiscoBaja extends JPanel {
 		}else{
 			Disco disco= new Disco();
 			if(!disco.setFecha(tFFechaLanzamiento.getText())){
-				lblErrorFechaLanzamiento.setText("Fecha invalida");
+				lblErrorFechaLanzamiento.setText("Fecha aaaa-mm-dd");
 				error=true;
 			}
 			else

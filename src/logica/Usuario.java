@@ -45,16 +45,16 @@ public class Usuario{
 			}
 			else{
 				if(p.getTipo()==ADMINISTRADOR){
-					instruccion.execute("CREATE USER "+p.getNombreUsuario()+" WITH PASSWORD '"+p.getPassword()+"' CREATEROLE;");
+					instruccion.execute("CREATE USER "+p.getNombreUsuario()+" WITH PASSWORD '"+p.getPassword()+"' CREATEROLE");
 					instruccion.execute(" INSERT INTO nombre values('0','"+p.getNombre().getApellidoPaterno()+"','"+p.getNombre().getApellidoMaterno() +"','"+p.getNombre().getNombrePila()+"')" );
 					instruccion.execute("INSERT INTO administrador (cve_administrador,cve_nombre,email,usuario) SELECT 0,max(cve_nombre),'"+p.getEmail()+"','"+p.getNombreUsuario()+"' from nombre");
-					instruccion.execute("  GRANT ALL PRIVILEGES ON tienda to "+p.getNombreUsuario());
+					instruccion.execute("  GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to "+p.getNombreUsuario());
 				}
 				else{
 					instruccion.execute("CREATE USER "+p.getNombreUsuario()+" WITH PASSWORD '"+p.getPassword()+"'");
 					instruccion.execute(" INSERT INTO nombre values('0','"+p.getNombre().getApellidoPaterno()+"','"+p.getNombre().getApellidoMaterno() +"','"+p.getNombre().getNombrePila()+"')" );
 					instruccion.execute("INSERT INTO empleado (cve_empleado,cve_tienda,cve_nombre,email,usuario) SELECT 0,1,max(cve_nombre),'"+p.getEmail()+"','"+p.getNombreUsuario()+"' from nombre");
-					instruccion.execute("  GRANT ALL PRIVILEGES ON tienda to "+p.getNombreUsuario());
+					instruccion.execute("  GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to "+p.getNombreUsuario());
 				}
 			}
 		}catch(SQLException e){
@@ -104,6 +104,7 @@ public class Usuario{
 			else
 				instruccion.execute("DELETE FROM empleado WHERE usuario='"+p.getNombreUsuario()+"'");
 			instruccion.execute("DELETE FROM nombre WHERE nombrepila='"+p.getNombre().getNombrePila()+"'");
+			instruccion.execute("  REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM "+p.getNombreUsuario());
 			instruccion.execute("DROP ROLE "+p.getNombreUsuario());
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
@@ -288,8 +289,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			conjuntoResultados = instruccion.executeQuery("SELECT * FROM disco WHERE nombre='"+d.getNombre()+"'");
-			System.out.println("Nop");
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre FROM disco WHERE nombre='"+d.getNombre()+"'");
 			if(conjuntoResultados.next()){
 				return EREPETIDO;
 			}
@@ -307,6 +307,7 @@ public class Usuario{
 		int i;
 		Disco d=null;
 		try{
+			nombre.toLowerCase();
 			instruccion =coneccion.createStatement();
 			conjuntoResultados = instruccion.executeQuery("SELECT nombre,artista,genero,precio,existencias,fecha_lanzamiento FROM disco WHERE nombre='"+nombre+"'");
 			if(conjuntoResultados.next()){
