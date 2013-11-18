@@ -284,7 +284,13 @@ public class PeliculaBaja extends JPanel {
 			lblErrorFechaEstreno.setText("Campo necesario");
 			error = true;
 		}else{
-			lblErrorFechaEstreno.setText("");
+			Pelicula pelicula = new Pelicula();
+			if(!pelicula.setFecha(tFFechaEstreno.getText())){
+				lblErrorFechaEstreno.setText("Fecha invalida");
+				error=true;
+			}
+			else
+				lblErrorFechaEstreno.setText("");
 		}
 		
 		if(tFGenero.getText().equals("")){
@@ -360,8 +366,8 @@ public class PeliculaBaja extends JPanel {
 	
 	public void exito(int estado){
 		if(estado==Dinamico.BAJASPELICULA)
-			lMensaje.setText("Pelicula Eliminado");
+			lMensaje.setText("Pelicula Eliminada");
 		else
-			lMensaje.setText("Pelicula Cambiado");
+			lMensaje.setText("Pelicula Cambiada");
 	}
 }

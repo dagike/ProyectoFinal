@@ -237,7 +237,7 @@ public class JugueteAlta extends JPanel {
 	public String getNombreJuguete(){return tFNombre.getText().toLowerCase();}
 
 	public Juguete getJuguete(){
-		Juguete juguete = new Juguete(tFNombre.getText(),tFFabricante.getText(),tFEdadApropiada.getText(),tFPrecio.getText(),tFExistencias.getText());
+		Juguete juguete = new Juguete(tFNombre.getText().toLowerCase(),tFFabricante.getText(),tFEdadApropiada.getText(),tFPrecio.getText(),tFExistencias.getText());
 		return juguete;
 	}
 	

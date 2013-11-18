@@ -159,24 +159,251 @@ public class Usuario{
 		return true; 
 	}
 
-	public int agregarJuguete(Juguete j){return 0;}
-	public Juguete obtenerInfoJuguete(String nombre){return null;}
-	public boolean eliminarJuguete(Juguete j){return true;}
-	public boolean cambiarJuguete(Juguete j){return true;}
+	public int agregarJuguete(Juguete j){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM juguete WHERE nombre='"+j.getNombre()+"'");
+			if(conjuntoResultados.next()){
+				return EREPETIDO;
+			}
+			else{
+				instruccion.execute(" INSERT INTO juguete values(0,'"+j.getNombre()+"','"+j.getFabricante() +"',"+j.getEdad()+","+j.getPrecio()+","+j.getExistencias()+")" );
+			}
+		}catch(SQLException e){
+			return ECONEXION;
+		}
+		return 0; 
+	}
+	public Juguete obtenerInfoJuguete(String nombre){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		int i;
+		Juguete j=null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre,fabricante,edad_apropiada,precio,existencias FROM juguete WHERE nombre='"+nombre+"'");
+			if(conjuntoResultados.next()){
+				j= new Juguete(conjuntoResultados.getString(1),conjuntoResultados.getString(2),conjuntoResultados.getString(3),conjuntoResultados.getString(4),conjuntoResultados.getString(5));
+			}
+			else{
+				return null;
+			}
+		}catch(SQLException e){
+			return null;
+		}
+		return j;
+	}
+	public boolean eliminarJuguete(Juguete j){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			instruccion.execute("DELETE FROM juguete WHERE nombre='"+j.getNombre()+"'");
+		}catch(SQLException e){
+			System.out.println("Error en la conexion");
+			return false;
+		}
+		return true; 
+	}
+	public boolean cambiarJuguete(Juguete j){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			instruccion.executeUpdate("UPDATE juguete set fabricante='"+j.getFabricante()+"',edad_apropiada="+j.getEdad()+",precio="+j.getPrecio()+",existencias="+j.getExistencias()+" where nombre='"+j.getNombre()+"'");
+		}catch(SQLException e){
+			System.out.println("Error en la conexion");
+			return false;
+		}
+		return true; 
+		
+	}
 	
-	public int agregarPelicula(Pelicula p){return 0;}
-	public Pelicula obtenerInfoPelicula(String nombre){return null;}
-	public boolean eliminarPelicula(Pelicula p){return true;}
-	public boolean cambiarPelicula(Pelicula p){return true;}
+	public int agregarPelicula(Pelicula p){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM pelicula WHERE nombre='"+p.getNombre()+"'");
+			if(conjuntoResultados.next()){
+				return EREPETIDO;
+			}
+			else{
+				instruccion.execute(" INSERT INTO pelicula values(0,'"+p.getNombre()+"',"+p.getFecha() +",'"+p.getGenero()+"',"+p.getPrecio()+",'"+p.getIdioma()+"',1,1,'"+p.getDirector()+"',"+p.getExistencias()+")" );
+			}
+		}catch(SQLException e){
+			return ECONEXION;
+		}
+		return 0; 
+	}
+	public Pelicula obtenerInfoPelicula(String nombre){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		int i;
+		Pelicula p=null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre,director,genero,idioma,precio,existencias,fecha_estreno FROM pelicula WHERE nombre='"+nombre+"'");
+			if(conjuntoResultados.next()){
+				p= new Pelicula(conjuntoResultados.getString(1),conjuntoResultados.getString(2),conjuntoResultados.getString(3),conjuntoResultados.getString(4),conjuntoResultados.getString(5),conjuntoResultados.getString(6));
+				p.setFecha(conjuntoResultados.getString(7));
+			}
+			else{
+				return null;
+			}
+		}catch(SQLException e){
+			return null;
+		}
+		return p;
+	}
+	public boolean eliminarPelicula(Pelicula p){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			instruccion.execute("DELETE FROM pelicula WHERE nombre='"+p.getNombre()+"'");
+		}catch(SQLException e){
+			System.out.println("Error en la conexion");
+			return false;
+		}
+		return true; 
+	}
+	public boolean cambiarPelicula(Pelicula p){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			instruccion.executeUpdate("UPDATE pelicula set fecha_estreno='"+p.getFecha()+"',genero='"+p.getGenero()+"',idioma='"+p.getIdioma()+"',director='"+p.getDirector()+"',precio="+p.getPrecio()+",existencias="+p.getExistencias()+" where nombre='"+p.getNombre()+"'");
+		}catch(SQLException e){
+			System.out.println("Error en la conexion");
+			return false;
+		}
+		return true; 
+	}
 	
-	public int agregarLibro(Libro l){return 0;}
-	public Libro obtenerInfoLibro(String nombre){return null;}
-	public boolean eliminarLibro(Libro l){return true;}
-	public boolean cambiarLibro(Libro l){return true;}
+	public int agregarDisco(Disco d){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM disco WHERE nombre='"+d.getNombre()+"'");
+			if(conjuntoResultados.next()){
+				return EREPETIDO;
+			}
+			else{
+				instruccion.execute(" INSERT INTO disco values(0,1,1,'"+d.getNombre()+"',"+d.getFecha()+",'"+d.getGenero()+"',"+d.getPrecio()+",'"+d.getArtista()+"',"+d.getExistencias()+")" );
+			}
+		}catch(SQLException e){
+			return ECONEXION;
+		}
+		return 0; 
+	}
+	public Disco obtenerInfoDisco(String nombre){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		int i;
+		Disco d=null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre,artista,genero,precio,existencias,fecha_lanzamiento FROM disco WHERE nombre='"+nombre+"'");
+			if(conjuntoResultados.next()){
+				d= new Disco(conjuntoResultados.getString(1),conjuntoResultados.getString(2),conjuntoResultados.getString(3),conjuntoResultados.getString(4),conjuntoResultados.getString(5));
+				d.setFecha(conjuntoResultados.getString(6));
+			}
+			else{
+				return null;
+			}
+		}catch(SQLException e){
+			return null;
+		}
+		return d;
+	}
+	public boolean eliminarDisco(Disco d){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			instruccion.execute("DELETE FROM disco WHERE nombre='"+d.getNombre()+"'");
+		}catch(SQLException e){
+			System.out.println("Error en la conexion");
+			return false;
+		}
+		return true; 
+	}
+	public boolean cambiarDisco(Disco d){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			instruccion.executeUpdate("UPDATE disco set fecha_lanzamiento='"+d.getFecha()+"',genero='"+d.getGenero()+"',artista='"+d.getArtista()+"',precio="+d.getPrecio()+",existencias="+d.getExistencias()+" where nombre='"+d.getNombre()+"'");
+		}catch(SQLException e){
+			System.out.println("Error en la conexion");
+			return false;
+		}
+		return true; 
+	}
 	
-	public int agregarDisco(Disco d){return 0;}
-	public Disco obtenerInfoDisco(String nombre){return null;}
-	public boolean eliminarDisco(Disco d){return true;}
-	public boolean cambiarDisco(Disco d){return true;}
-	
+	public int agregarLibro(Libro l){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM libro WHERE nombre='"+l.getNombre()+"'");
+			if(conjuntoResultados.next()){
+				return EREPETIDO;
+			}
+			else{
+				instruccion.execute(" INSERT INTO libro values(0,1,"+l.getFecha()+","+l.getFecha()+",'"+l.getGenero()+","+l.getPrecio()+",'"+l.getIdioma()+"','"+l.getNombre()+"','"+l.getIsbn()+"','"+l.getEditorial()+"','"+l.getAutor()+"','"+l.getEdicion()+"',"+l.getExistencias()+")");
+			}
+		}catch(SQLException e){
+			return ECONEXION;
+		}
+		return 0; 
+	}
+	public Libro obtenerInfoLibro(String nombre){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		int i;
+		Libro l=null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre,autor,editorial,idioma,isbn,genero,edicion,precio,existencias,fecha_impresion FROM libro WHERE nombre='"+nombre+"'");
+			if(conjuntoResultados.next()){
+				l= new Libro(conjuntoResultados.getString(1),conjuntoResultados.getString(2),conjuntoResultados.getString(3),conjuntoResultados.getString(4),conjuntoResultados.getString(5),conjuntoResultados.getString(6),conjuntoResultados.getString(7),conjuntoResultados.getString(8),conjuntoResultados.getString(9));
+				l.setFecha(conjuntoResultados.getString(10));
+			}
+			else{
+				return null;
+			}
+		}catch(SQLException e){
+			return null;
+		}
+		return l;
+	}
+	public boolean eliminarLibro(Libro l){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			instruccion.execute("DELETE FROM libro WHERE nombre='"+l.getNombre()+"'");
+		}catch(SQLException e){
+			System.out.println("Error en la conexion");
+			return false;
+		}
+		return true; 
+	}
+	public boolean cambiarLibro(Libro l){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			instruccion.executeUpdate("UPDATE libro set fecha_impresion='"+l.getFecha()+"',genero='"+l.getGenero()+"',idioma='"+l.getIdioma()+"',isbn='"+l.getIsbn()+"',editorial='"+l.getEditorial()+"',autor='"+l.getAutor()+"',edicion='"+l.getEdicion()+"',precio="+l.getPrecio()+",existencias="+l.getExistencias()+" where nombre='"+l.getNombre()+"'");
+		}catch(SQLException e){
+			System.out.println("Error en la conexion");
+			return false;
+		}
+		return true; 
+	}
 }

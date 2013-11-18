@@ -20,4 +20,6 @@ public class Disco extends Articulo{
 			return this.fecha.setFecha(fecha);
 	}
 	
+	public Disco(){}
+	
 }

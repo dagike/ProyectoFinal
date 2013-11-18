@@ -265,7 +265,13 @@ public class PeliculaAlta extends JPanel {
 			lblErrorFechaEstreno.setText("Campo necesario");
 			error = true;
 		}else{
-			lblErrorFechaEstreno.setText("");
+			Pelicula pelicula = new Pelicula();
+			if(!pelicula.setFecha(tFFechaEstreno.getText())){
+				lblErrorFechaEstreno.setText("Fecha invalida");
+				error=true;
+			}
+			else
+				lblErrorFechaEstreno.setText("");
 		}
 		
 		if(tFGenero.getText().equals("")){

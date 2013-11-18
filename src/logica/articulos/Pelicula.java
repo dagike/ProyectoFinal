@@ -21,4 +21,5 @@ public class Pelicula extends Articulo{
 	public boolean setFecha(String fecha){
 			return this.fecha.setFecha(fecha);
 	}
+	public Pelicula(){}
 }

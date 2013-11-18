@@ -12,4 +12,5 @@ public class Juguete extends Articulo{
 	public String getNombre(){return nombre;}
 	public String getFabricante(){return fabricante;}
 	public int getEdad(){return edadApropiada;}
+	public Juguete(){}
 }

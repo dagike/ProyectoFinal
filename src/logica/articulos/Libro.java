@@ -28,5 +28,5 @@ public class Libro extends Articulo{
 	public boolean setFecha(String fecha){
 			return this.fecha.setFecha(fecha);
 	}
-
+	public Libro(){}
 }

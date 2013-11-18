@@ -358,7 +358,13 @@ public class LibroAlta extends JPanel {
 			lblErrorFechaImpresion.setText("Campo necesario");
 			error = true;
 		}else{
-			lblErrorFechaImpresion.setText("");
+			Libro libro = new Libro();
+			if(!libro.setFecha( tFFechaImpresion.getText() )){
+				lblErrorFechaImpresion.setText("Fecha invalida");
+				error=true;
+			}
+			else
+				lblErrorFechaImpresion.setText("");
 		}
 		
 		if(tFEdicion.getText().equals("")){
