@@ -274,6 +274,11 @@ public class JugueteBaja extends JPanel {
 		tFEdadApropiada.setText("");
 		tFPrecio.setText("");
 		tFExistencias.setText("");
+		lblErrorNombre.setText("");
+		lblErrorFabricante.setText("");
+		lblErrorEdadApropiada.setText("");
+		lblErrorPrecio.setText("");
+		lblErrorExistencias.setText("");
 		if(estado == Dinamico.BAJASJUGUETE)
 			lMensaje.setText("Bajas Juguetes");
 		else

@@ -440,7 +440,17 @@ public class LibroAlta extends JPanel {
 		tFPrecio.setText("");
 		tFExistencias.setText("");
 		lMensaje.setText("Altas Libros");
-
+		lblErrorNombre.setText("");
+		lblErrorAutor.setText("");
+		lblErrorEditorial.setText("");
+		lblErrorPrecio.setText("");
+		lblErrorFechaImpresion.setText("");
+		lblErrorEdicion.setText("");
+		lblErrorGenero.setText("");
+		lblErrorIdioma.setText("");
+		lblErrorISBN.setText("");
+		lblErrorPrecio.setText("");
+		lblErrorExistencias.setText("");
 	}
 
 	public String getNombreLibro(){return tFNombre.getText().toLowerCase();}

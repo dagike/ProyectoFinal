@@ -325,6 +325,13 @@ public class PeliculaAlta extends JPanel {
 		tFPrecio.setText("");
 		tFExistencias.setText("");
 		lMensaje.setText("Altas Peliculas");
+		lblErrorNombre.setText("");
+		lblErrorDirector.setText("");
+		lblErrorFechaEstreno.setText("");
+		lblErrorGenero.setText("");
+		lblErrorIdioma.setText("");
+		lblErrorPrecio.setText("");
+		lblErrorExistencias.setText("");
 	}
 
 	public String getNombrePelicula(){return tFNombre.getText().toLowerCase();}

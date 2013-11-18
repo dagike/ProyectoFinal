@@ -252,6 +252,11 @@ public class JugueteAlta extends JPanel {
 		tFPrecio.setText("");
 		tFExistencias.setText("");
 		lMensaje.setText("Altas Juguetes");
+		lblErrorNombre.setText("");
+		lblErrorFabricante.setText("");
+		lblErrorEdadApropiada.setText("");
+		lblErrorPrecio.setText("");
+		lblErrorExistencias.setText("");
 	}
 
 	public String getNombreJuguete(){return tFNombre.getText().toLowerCase();}
