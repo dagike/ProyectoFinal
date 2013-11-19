@@ -12,6 +12,11 @@ import java.awt.Color;
 public class ClientePanel extends JPanel {
 	private JTextField tFEmail;
 	private JLabel lblErrorEmail;
+	JButton btnAceptar,btnCancelar,btnNuevoCliente;
+	
+	public JButton getAceptar(){return btnAceptar;}
+	public JButton getCancelar(){return btnCancelar;}
+	public JButton getNuevo(){return btnNuevoCliente;}
 
 	public ClientePanel() {
 		setBackground(Color.WHITE);
@@ -48,21 +53,21 @@ public class ClientePanel extends JPanel {
 		gbc_lblErrorEmail.gridy = 1;
 		add(lblErrorEmail, gbc_lblErrorEmail);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
 		gbc_btnAceptar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnAceptar.gridx = 1;
 		gbc_btnAceptar.gridy = 3;
 		add(btnAceptar, gbc_btnAceptar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancelar.gridx = 2;
 		gbc_btnCancelar.gridy = 3;
 		add(btnCancelar, gbc_btnCancelar);
 		
-		JButton btnNuevoCliente = new JButton("Nuevo Cliente");
+		btnNuevoCliente = new JButton("Nuevo Cliente");
 		GridBagConstraints gbc_btnNuevoCliente = new GridBagConstraints();
 		gbc_btnNuevoCliente.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNuevoCliente.gridx = 3;

@@ -1,7 +1,7 @@
 package logica.articulos;
 import logica.*;
 public class Disco extends Articulo{	
-	private String nombre,artista,genero;
+	private String artista,genero;
 	private Fecha fecha;
 	public Disco(String nombre,String artista,String genero,String precio,String existencias){
 		this.nombre=nombre;
@@ -12,7 +12,6 @@ public class Disco extends Articulo{
 		fecha= new Fecha();
 	}
 	public String getFecha(){return fecha.toString();}
-	public String getNombre(){return nombre;}
 	public String getArtista(){return artista;}
 	public String getGenero(){return genero;}
 	
@@ -25,6 +24,8 @@ public class Disco extends Articulo{
 	public String getFicha(){
 		return "<html>Artista: "+artista+"<br>Nombre: "+nombre+"<br>Fecha: "+getFecha()+"<br>Genero: "+genero+"<br>Precio: $"+precio+"<br>Existencias: "+existencias+"<br> </html>";
 	}
-	
+	public String getCarrito(){
+		return "Nombre:"+nombre+"       $"+precio*cantidad+"       "+cantidad+"       $"+precio;
+	}
 	
 }

@@ -31,8 +31,15 @@ public class TextPanel extends JPanel {
 	private JLabel lblErrorAadir, lblErrorCantidad;
 	private JLabel lblTotal,total;
 	
+	public void setTotal(int total){intTotal=total;this.total.setText("$"+intTotal);}
 	public void setUsuario(Usuario u){this.u=u;}
-	public void inicio(){producto.setSelectedIndex(0);intTotal=0;total.setText("$"+intTotal);}
+	public void inicio(){
+		producto.setSelectedIndex(0);
+		intTotal=0;
+		total.setText("$"+intTotal);
+		lblErrorCantidad.setText("");
+		tFCantidad.setText("");
+	}
 	private class Select implements ListSelectionListener{
      public void valueChanged(ListSelectionEvent e){
        if(e.getSource()==producto){
@@ -85,18 +92,22 @@ public class TextPanel extends JPanel {
        }
        else if(e.getSource()==titulo){
          if(producto.getSelectedValue()=="Libros"&&titulo.getSelectedValue()!=null){
+				libro=null;
 				libro=u.obtenerInfoLibro( titulo.getSelectedValue() );
 				ficha.setText(libro.getFicha());
          }
          else if(producto.getSelectedValue()=="Discos"&&titulo.getSelectedValue()!=null){
+				disco=null;
 				disco=u.obtenerInfoDisco( titulo.getSelectedValue() );
 				ficha.setText(disco.getFicha());
          }  
          else if(producto.getSelectedValue()=="Peliculas"&&titulo.getSelectedValue()!=null){
+				pelicula=null;
 				pelicula=u.obtenerInfoPelicula( titulo.getSelectedValue() );
 				ficha.setText(pelicula.getFicha());
          }
          else if(producto.getSelectedValue()=="Juguetes"&&titulo.getSelectedValue()!=null){
+				juguete=null;
 				juguete=u.obtenerInfoJuguete( titulo.getSelectedValue() );
 				ficha.setText(juguete.getFicha());
          }
@@ -251,7 +262,7 @@ public class TextPanel extends JPanel {
 		titulo.addListSelectionListener(accion);
 	}  
    public JButton getAgregar(){return btnAadir;}
-	public boolean checkCantidad(){
+	public boolean checkCantidad(int a){
 		boolean error = false;
 		if(tFCantidad.getText().equals("")){
 			error=true;
@@ -298,8 +309,29 @@ public class TextPanel extends JPanel {
 		}
 		if(!error)
 			lblErrorCantidad.setText("");
-		
+		if(a==0)
+			lblErrorCantidad.setText("No articulos repetidos");
+		if(a==-1)
+			lblErrorCantidad.setText("El carrito esta vacio");
 		return error;
 	}
-
+	public Articulo getArticulo(){
+		if(producto.getSelectedValue()=="Libros"&&libro!=null){
+			libro.setCantidad(cantidad);
+			return libro;
+		}
+		else if(producto.getSelectedValue()=="Discos"&&disco!=null){
+			disco.setCantidad(cantidad);
+			return disco;
+		}  
+		else if(producto.getSelectedValue()=="Peliculas"&&pelicula!=null){
+			pelicula.setCantidad(cantidad);
+			return pelicula;
+		}
+		else if(producto.getSelectedValue()=="Juguetes"&&juguete!=null){
+			juguete.setCantidad(cantidad);
+			return juguete;
+		}
+		return null;
+	}
 }

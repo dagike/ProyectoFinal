@@ -5,6 +5,8 @@ import vistas.*;
 import vistas.admin.*;
 import vistas.principal.*;
 import logica.*;
+import logica.articulos.*;
+import java.util.*;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -14,11 +16,12 @@ public class MainFrame extends JFrame {
 	private Dinamico din;
 	private AgregarClientePanel nvoCliente;
 	private ClientePanel cliente;
+	private Vector<Articulo> articulos;
 	
 	//logica
 	private Usuario usuario;
 	public final static int INGRESO=0,PRINCIPAL=1,INICIAL=2,ADMINISTRADOR=3,CLIENTE=4,NVOCLIENTE=5;
-	private int estado=CLIENTE;
+	private int estado=INICIAL;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -54,6 +57,9 @@ public class MainFrame extends JFrame {
 		nvoCliente=new AgregarClientePanel();
 		
 		cliente=new ClientePanel();
+		cliente.getAceptar().addActionListener(new Acciones());;
+		cliente.getCancelar().addActionListener(new Acciones());;
+		cliente.getNuevo().addActionListener(new Acciones());;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
@@ -115,7 +121,32 @@ public class MainFrame extends JFrame {
 				estado=INICIAL;
 				estados();
 			}
-			//Agregar Nuevo Usuario
+			//Pricipal
+			else if(e.getSource()==escoger.getCancelar()){
+				escoger.inicio();
+			}
+			else if(e.getSource()==escoger.getPedido()){
+				articulos=escoger.getArticulos();
+				if(articulos==null||articulos.size()==0)
+					escoger.vectorVacio();
+				else{
+					estado=CLIENTE;
+					estados();
+				}
+			}
+			//Cliente
+			else if(e.getSource()==cliente.getCancelar()){
+				estado=PRINCIPAL;
+				estados();
+			}
+			else if(e.getSource()==cliente.getAceptar()){
+				
+			}
+			else if(e.getSource()==cliente.getNuevo()){
+				estado=NVOCLIENTE;
+				estados();
+			}
+			
 			
 		}
 	}
