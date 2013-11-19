@@ -36,6 +36,14 @@ public class AgregarClientePanel extends JPanel {
 		add(tFNombreCompleto, gbc_tFNombreCompleto);
 		tFNombreCompleto.setColumns(10);
 		
+		JLabel lblErrorNombreCompleto = new JLabel("");
+		lblErrorNombreCompleto.setForeground(Color.RED);
+		GridBagConstraints gbc_lblErrorNombreCompleto = new GridBagConstraints();
+		gbc_lblErrorNombreCompleto.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorNombreCompleto.gridx = 2;
+		gbc_lblErrorNombreCompleto.gridy = 1;
+		add(lblErrorNombreCompleto, gbc_lblErrorNombreCompleto);
+		
 		JTextArea tADireccion = new JTextArea();
 		tADireccion.setLineWrap(true);
 		tADireccion.setWrapStyleWord(true);
@@ -55,6 +63,14 @@ public class AgregarClientePanel extends JPanel {
 		gbc_lblDireccion.gridy = 3;
 		add(lblDireccion, gbc_lblDireccion);
 		
+		JLabel lblErrorDireccion = new JLabel("");
+		lblErrorDireccion.setForeground(Color.RED);
+		GridBagConstraints gbc_lblErrorDireccion = new GridBagConstraints();
+		gbc_lblErrorDireccion.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorDireccion.gridx = 2;
+		gbc_lblErrorDireccion.gridy = 3;
+		add(lblErrorDireccion, gbc_lblErrorDireccion);
+		
 		JLabel lblEmail = new JLabel("e-mail");
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
@@ -72,7 +88,16 @@ public class AgregarClientePanel extends JPanel {
 		add(tFEmail, gbc_tFEmail);
 		tFEmail.setColumns(10);
 		
+		JLabel lblErrorEmail = new JLabel("");
+		lblErrorEmail.setForeground(Color.RED);
+		GridBagConstraints gbc_lblErrorEmail = new GridBagConstraints();
+		gbc_lblErrorEmail.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorEmail.gridx = 2;
+		gbc_lblErrorEmail.gridy = 5;
+		add(lblErrorEmail, gbc_lblErrorEmail);
+		
 		JRadioButton rdbtnVisa = new JRadioButton("Visa");
+		rdbtnVisa.setSelected(true);
 		btnGroupTarjetas.add(rdbtnVisa);
 		GridBagConstraints gbc_rdbtnVisa = new GridBagConstraints();
 		gbc_rdbtnVisa.anchor = GridBagConstraints.EAST;
@@ -114,6 +139,14 @@ public class AgregarClientePanel extends JPanel {
 		gbc_tFNumeroTarjeta.gridy = 9;
 		add(tFNumeroTarjeta, gbc_tFNumeroTarjeta);
 		tFNumeroTarjeta.setColumns(10);
+		
+		JLabel lblErrorNumeroTarjeta = new JLabel("");
+		lblErrorNumeroTarjeta.setForeground(Color.RED);
+		GridBagConstraints gbc_lblErrorNumeroTarjeta = new GridBagConstraints();
+		gbc_lblErrorNumeroTarjeta.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorNumeroTarjeta.gridx = 2;
+		gbc_lblErrorNumeroTarjeta.gridy = 9;
+		add(lblErrorNumeroTarjeta, gbc_lblErrorNumeroTarjeta);
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
