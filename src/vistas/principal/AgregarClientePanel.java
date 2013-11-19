@@ -4,11 +4,23 @@ import javax.swing.*;
 import java.awt.*;
 
 
+@SuppressWarnings("serial")
 public class AgregarClientePanel extends JPanel {
+	private JLabel lblNombreCompleto, lblErrorNombreCompleto;
 	private JTextField tFNombreCompleto;
+	private JLabel lblDireccion, lblErrorDireccion;
+	private JTextArea tADireccion;
+	private JLabel lblEmail, lblErrorEmail;
 	private JTextField tFEmail;
+	private JRadioButton rdbtnVisa, rdbtnMastercard, rdbtnAmericanExpress;
 	private ButtonGroup btnGroupTarjetas = new ButtonGroup();
+	private JLabel lblNumeroTarjeta, lblErrorNumeroTarjeta;
 	private JTextField tFNumeroTarjeta;
+	private JButton btnAceptar, btnCancelar, btnSalir;
+	
+	public JButton getAceptar(){return btnAceptar;}
+	public JButton getCancelar(){return btnCancelar;}
+	public JButton getSalir(){return btnSalir;}
 
 	public AgregarClientePanel() {
 		setBackground(Color.WHITE);
@@ -19,7 +31,7 @@ public class AgregarClientePanel extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JLabel lblNombreCompleto = new JLabel("Nombre Completo");
+		lblNombreCompleto = new JLabel("Nombre Completo");
 		GridBagConstraints gbc_lblNombreCompleto = new GridBagConstraints();
 		gbc_lblNombreCompleto.anchor = GridBagConstraints.EAST;
 		gbc_lblNombreCompleto.insets = new Insets(0, 0, 5, 5);
@@ -36,7 +48,7 @@ public class AgregarClientePanel extends JPanel {
 		add(tFNombreCompleto, gbc_tFNombreCompleto);
 		tFNombreCompleto.setColumns(10);
 		
-		JLabel lblErrorNombreCompleto = new JLabel("");
+		lblErrorNombreCompleto = new JLabel("");
 		lblErrorNombreCompleto.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorNombreCompleto = new GridBagConstraints();
 		gbc_lblErrorNombreCompleto.insets = new Insets(0, 0, 5, 5);
@@ -44,7 +56,7 @@ public class AgregarClientePanel extends JPanel {
 		gbc_lblErrorNombreCompleto.gridy = 1;
 		add(lblErrorNombreCompleto, gbc_lblErrorNombreCompleto);
 		
-		JTextArea tADireccion = new JTextArea();
+		tADireccion = new JTextArea();
 		tADireccion.setLineWrap(true);
 		tADireccion.setWrapStyleWord(true);
 		GridBagConstraints gbc_tADireccion = new GridBagConstraints();
@@ -55,7 +67,7 @@ public class AgregarClientePanel extends JPanel {
 		gbc_tADireccion.gridy = 2;
 		add(new JScrollPane(tADireccion), gbc_tADireccion);
 		
-		JLabel lblDireccion = new JLabel("Direccion");
+		lblDireccion = new JLabel("Direccion");
 		GridBagConstraints gbc_lblDireccion = new GridBagConstraints();
 		gbc_lblDireccion.anchor = GridBagConstraints.EAST;
 		gbc_lblDireccion.insets = new Insets(0, 0, 5, 5);
@@ -63,7 +75,7 @@ public class AgregarClientePanel extends JPanel {
 		gbc_lblDireccion.gridy = 3;
 		add(lblDireccion, gbc_lblDireccion);
 		
-		JLabel lblErrorDireccion = new JLabel("");
+		lblErrorDireccion = new JLabel("");
 		lblErrorDireccion.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorDireccion = new GridBagConstraints();
 		gbc_lblErrorDireccion.insets = new Insets(0, 0, 5, 5);
@@ -71,7 +83,7 @@ public class AgregarClientePanel extends JPanel {
 		gbc_lblErrorDireccion.gridy = 3;
 		add(lblErrorDireccion, gbc_lblErrorDireccion);
 		
-		JLabel lblEmail = new JLabel("e-mail");
+		lblEmail = new JLabel("e-mail");
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
@@ -88,7 +100,7 @@ public class AgregarClientePanel extends JPanel {
 		add(tFEmail, gbc_tFEmail);
 		tFEmail.setColumns(10);
 		
-		JLabel lblErrorEmail = new JLabel("");
+		lblErrorEmail = new JLabel("");
 		lblErrorEmail.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorEmail = new GridBagConstraints();
 		gbc_lblErrorEmail.insets = new Insets(0, 0, 5, 5);
@@ -96,7 +108,7 @@ public class AgregarClientePanel extends JPanel {
 		gbc_lblErrorEmail.gridy = 5;
 		add(lblErrorEmail, gbc_lblErrorEmail);
 		
-		JRadioButton rdbtnVisa = new JRadioButton("Visa");
+		rdbtnVisa = new JRadioButton("Visa");
 		rdbtnVisa.setSelected(true);
 		btnGroupTarjetas.add(rdbtnVisa);
 		GridBagConstraints gbc_rdbtnVisa = new GridBagConstraints();
@@ -106,7 +118,7 @@ public class AgregarClientePanel extends JPanel {
 		gbc_rdbtnVisa.gridy = 7;
 		add(rdbtnVisa, gbc_rdbtnVisa);
 		
-		JRadioButton rdbtnMastercard = new JRadioButton("MasterCard");
+		rdbtnMastercard = new JRadioButton("MasterCard");
 		btnGroupTarjetas.add(rdbtnMastercard);
 		GridBagConstraints gbc_rdbtnMastercard = new GridBagConstraints();
 		gbc_rdbtnMastercard.insets = new Insets(0, 0, 5, 5);
@@ -114,7 +126,7 @@ public class AgregarClientePanel extends JPanel {
 		gbc_rdbtnMastercard.gridy = 7;
 		add(rdbtnMastercard, gbc_rdbtnMastercard);
 		
-		JRadioButton rdbtnAmericanExpress = new JRadioButton("American Express");
+		rdbtnAmericanExpress = new JRadioButton("American Express");
 		btnGroupTarjetas.add(rdbtnAmericanExpress);
 		GridBagConstraints gbc_rdbtnAmericanExpress = new GridBagConstraints();
 		gbc_rdbtnAmericanExpress.anchor = GridBagConstraints.WEST;
@@ -123,13 +135,13 @@ public class AgregarClientePanel extends JPanel {
 		gbc_rdbtnAmericanExpress.gridy = 7;
 		add(rdbtnAmericanExpress, gbc_rdbtnAmericanExpress);
 		
-		JLabel lblNumeroDeTarjeta = new JLabel("Numero de Tarjeta");
-		GridBagConstraints gbc_lblNumeroDeTarjeta = new GridBagConstraints();
-		gbc_lblNumeroDeTarjeta.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNumeroDeTarjeta.anchor = GridBagConstraints.EAST;
-		gbc_lblNumeroDeTarjeta.gridx = 0;
-		gbc_lblNumeroDeTarjeta.gridy = 9;
-		add(lblNumeroDeTarjeta, gbc_lblNumeroDeTarjeta);
+		lblNumeroTarjeta = new JLabel("Numero de Tarjeta");
+		GridBagConstraints gbc_lblNumeroTarjeta = new GridBagConstraints();
+		gbc_lblNumeroTarjeta.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNumeroTarjeta.anchor = GridBagConstraints.EAST;
+		gbc_lblNumeroTarjeta.gridx = 0;
+		gbc_lblNumeroTarjeta.gridy = 9;
+		add(lblNumeroTarjeta, gbc_lblNumeroTarjeta);
 		
 		tFNumeroTarjeta = new JTextField();
 		GridBagConstraints gbc_tFNumeroTarjeta = new GridBagConstraints();
@@ -140,7 +152,7 @@ public class AgregarClientePanel extends JPanel {
 		add(tFNumeroTarjeta, gbc_tFNumeroTarjeta);
 		tFNumeroTarjeta.setColumns(10);
 		
-		JLabel lblErrorNumeroTarjeta = new JLabel("");
+		lblErrorNumeroTarjeta = new JLabel("");
 		lblErrorNumeroTarjeta.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorNumeroTarjeta = new GridBagConstraints();
 		gbc_lblErrorNumeroTarjeta.insets = new Insets(0, 0, 5, 5);
@@ -148,7 +160,7 @@ public class AgregarClientePanel extends JPanel {
 		gbc_lblErrorNumeroTarjeta.gridy = 9;
 		add(lblErrorNumeroTarjeta, gbc_lblErrorNumeroTarjeta);
 		
-		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton("Aceptar");
 		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
 		gbc_btnAceptar.anchor = GridBagConstraints.EAST;
 		gbc_btnAceptar.insets = new Insets(0, 0, 0, 5);
@@ -156,14 +168,14 @@ public class AgregarClientePanel extends JPanel {
 		gbc_btnAceptar.gridy = 11;
 		add(btnAceptar, gbc_btnAceptar);
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		GridBagConstraints gbc_btnCancelar = new GridBagConstraints();
 		gbc_btnCancelar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnCancelar.gridx = 1;
 		gbc_btnCancelar.gridy = 11;
 		add(btnCancelar, gbc_btnCancelar);
 		
-		JButton btnSalir = new JButton("Salir");
+		btnSalir = new JButton("Salir");
 		GridBagConstraints gbc_btnSalir = new GridBagConstraints();
 		gbc_btnSalir.anchor = GridBagConstraints.WEST;
 		gbc_btnSalir.insets = new Insets(0, 0, 0, 5);
@@ -171,6 +183,52 @@ public class AgregarClientePanel extends JPanel {
 		gbc_btnSalir.gridy = 11;
 		add(btnSalir, gbc_btnSalir);
 
+	}
+	
+	public boolean checkTextFields(){
+		boolean error = false;
+		
+		if(tFNombreCompleto.getText().equals("")){
+			lblErrorNombreCompleto.setText("Campo Necesario");
+			error = true;
+		}else{
+			lblErrorNombreCompleto.setText("");
+		}
+		
+		if(tADireccion.getText().equals("")){
+			lblErrorDireccion.setText("Campo Necesario");
+			error = true;
+		}else{
+			lblErrorDireccion.setText("");
+		}
+		
+		if(tFEmail.getText().equals("")){
+			lblErrorEmail.setText("Campo Necesario");
+			error = true;
+		}else{
+			lblErrorEmail.setText("");
+		}
+		
+		if(tFNumeroTarjeta.getText().equals("")){
+			lblErrorNumeroTarjeta.setText("Campo Necesario");
+			error = true;
+		}else{
+			lblErrorNumeroTarjeta.setText("");
+		}
+			
+		return error;
+	}
+	
+	public void cancelar(){
+		tFNombreCompleto.setText("");
+		tADireccion.setText("");
+		tFEmail.setText("");
+		tFNumeroTarjeta.setText("");
+		lblErrorNombreCompleto.setText("");
+		lblErrorDireccion.setText("");
+		lblErrorEmail.setText("");
+		lblErrorNumeroTarjeta.setText("");
+		rdbtnVisa.setSelected(true);
 	}
 
 }
