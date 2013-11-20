@@ -170,14 +170,11 @@ public class MainFrame extends JFrame {
 						}
 					}	
 				}
-				
 			}
 			else if(e.getSource()==cliente.getNuevo()){
 				estado=NVOCLIENTE;
 				estados();
 			}
-			
-			
 		}
 	}
 	Action salir = new AbstractAction("Salir") {
