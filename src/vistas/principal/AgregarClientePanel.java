@@ -2,6 +2,7 @@ package vistas.principal;
 
 import javax.swing.*;
 import java.awt.*;
+import logica.Persona;
 
 
 @SuppressWarnings("serial")
@@ -217,6 +218,18 @@ public class AgregarClientePanel extends JPanel {
 		}
 			
 		return error;
+	}
+	public Persona getPersona(){
+		String tarjeta;
+		if(rdbtnVisa.isSelected()){
+			tarjeta = "VISA";
+		}else if(rdbtnMastercard.isSelected()){
+			tarjeta = "MasterCard";
+		}else{
+			tarjeta = "American Express";
+		}
+		Persona persona = new Persona(tFNombreCompleto.getText(),tFEmail.getText(),tADireccion.getText(),tarjeta,tFNumeroTarjeta.getText());
+		return persona;
 	}
 	
 	public void cancelar(){

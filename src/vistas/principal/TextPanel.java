@@ -27,8 +27,8 @@ public class TextPanel extends JPanel {
 	private JList<String> autor;
 	private JScrollPane scrollPane_3;
 	private JList<String> titulo;
-	JButton btnAadir;
-	private JLabel lblErrorAadir, lblErrorCantidad;
+	JButton btnAniadir;
+	private JLabel lblErrorAniadir, lblErrorCantidad;
 	private JLabel lblTotal,total;
 	
 	public void setTotal(int total){intTotal=total;this.total.setText("$"+intTotal);}
@@ -223,20 +223,20 @@ public class TextPanel extends JPanel {
 		ficha.setOpaque(true);
 		scrollPane.setViewportView(ficha);
 		
-		btnAadir = new JButton("A\u00f1adir");
+		btnAniadir = new JButton("A\u00f1adir");
 		GridBagConstraints gbc_btnAadir = new GridBagConstraints();
 		gbc_btnAadir.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAadir.gridx = 7;
 		gbc_btnAadir.gridy = 4;
-		add(btnAadir, gbc_btnAadir);
+		add(btnAniadir, gbc_btnAadir);
 		
-		lblErrorAadir = new JLabel("");
-		lblErrorAadir.setForeground(Color.RED);
+		lblErrorAniadir = new JLabel("");
+		lblErrorAniadir.setForeground(Color.RED);
 		GridBagConstraints gbc_lblErrorAadir = new GridBagConstraints();
 		gbc_lblErrorAadir.insets = new Insets(0, 0, 5, 0);
 		gbc_lblErrorAadir.gridx = 8;
 		gbc_lblErrorAadir.gridy = 4;
-		add(lblErrorAadir, gbc_lblErrorAadir);
+		add(lblErrorAniadir, gbc_lblErrorAadir);
 		
 		lblTotal = new JLabel("Total");
 		GridBagConstraints gbc_lblTotal = new GridBagConstraints();
@@ -261,7 +261,7 @@ public class TextPanel extends JPanel {
 		autor.addListSelectionListener(accion);
 		titulo.addListSelectionListener(accion);
 	}  
-   public JButton getAgregar(){return btnAadir;}
+   public JButton getAgregar(){return btnAniadir;}
 	public boolean checkCantidad(int a){
 		boolean error = false;
 		if(tFCantidad.getText().equals("")){
