@@ -58,6 +58,9 @@ public class MainFrame extends JFrame {
 		escoger.getPedido().addActionListener(new Acciones());
 		
 		nvoCliente=new AgregarClientePanel();
+		nvoCliente.getSalir().addActionListener(new Acciones());
+		nvoCliente.getCancelar().addActionListener(new Acciones());
+		nvoCliente.getAceptar().addActionListener(new Acciones());
 		
 		cliente=new ClientePanel();
 		cliente.getAceptar().addActionListener(new Acciones());;
@@ -90,10 +93,11 @@ public class MainFrame extends JFrame {
 		}
 		else if(estado == CLIENTE){
 			setSize(600,250);
+			cliente.limpiar();
 			setContentPane(cliente);
 		}
 		else if(estado == NVOCLIENTE){
-			setSize(660,460);
+			setSize(660,300);
 			setContentPane(nvoCliente);
 		}
 	}
@@ -174,6 +178,26 @@ public class MainFrame extends JFrame {
 			else if(e.getSource()==cliente.getNuevo()){
 				estado=NVOCLIENTE;
 				estados();
+			}
+			//nvoCliente
+			else if(e.getSource()==nvoCliente.getSalir()){
+				estado=CLIENTE;
+				estados();
+			}
+			else if(e.getSource()==nvoCliente.getCancelar()){
+				nvoCliente.cancelar();
+			}
+			else if(e.getSource()==nvoCliente.getAceptar()){
+				if(!nvoCliente.checkTextFields(1)){
+					int a=usuario.agregarCliente( nvoCliente.getPersona() );
+					if(a==Usuario.EREPETIDO){
+						nvoCliente.checkTextFields(0);
+					}
+					else if(a==0){
+						estado=CLIENTE;
+						estados();
+					}
+				}
 			}
 		}
 	}

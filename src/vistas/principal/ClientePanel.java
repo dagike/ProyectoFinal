@@ -19,6 +19,10 @@ public class ClientePanel extends JPanel {
 	public JButton getNuevo(){return btnNuevoCliente;}
 	
 	public String getEmail(){return tFEmail.getText();}
+	public void limpiar(){
+		tFEmail.setText("");
+		lblErrorEmail.setText("");
+	}
 
 	public ClientePanel() {
 		setBackground(Color.WHITE);

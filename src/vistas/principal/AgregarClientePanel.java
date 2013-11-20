@@ -119,7 +119,7 @@ public class AgregarClientePanel extends JPanel {
 		gbc_rdbtnVisa.gridy = 7;
 		add(rdbtnVisa, gbc_rdbtnVisa);
 		
-		rdbtnMastercard = new JRadioButton("MasterCard");
+		rdbtnMastercard = new JRadioButton("Carnet");
 		btnGroupTarjetas.add(rdbtnMastercard);
 		GridBagConstraints gbc_rdbtnMastercard = new GridBagConstraints();
 		gbc_rdbtnMastercard.insets = new Insets(0, 0, 5, 5);
@@ -186,7 +186,7 @@ public class AgregarClientePanel extends JPanel {
 
 	}
 	
-	public boolean checkTextFields(){
+	public boolean checkTextFields(int a){
 		boolean error = false;
 		
 		if(tFNombreCompleto.getText().equals("")){
@@ -206,7 +206,12 @@ public class AgregarClientePanel extends JPanel {
 		if(tFEmail.getText().equals("")){
 			lblErrorEmail.setText("Campo Necesario");
 			error = true;
-		}else{
+		}
+		else if(a==0){
+			lblErrorEmail.setText("Ya existe");
+			error = true;
+		}
+		else{
 			lblErrorEmail.setText("");
 		}
 		
@@ -222,9 +227,9 @@ public class AgregarClientePanel extends JPanel {
 	public Persona getPersona(){
 		String tarjeta;
 		if(rdbtnVisa.isSelected()){
-			tarjeta = "VISA";
+			tarjeta = "Visa";
 		}else if(rdbtnMastercard.isSelected()){
-			tarjeta = "MasterCard";
+			tarjeta = "Carnet";
 		}else{
 			tarjeta = "American Express";
 		}
