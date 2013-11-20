@@ -2,8 +2,9 @@ package logica;
 import java.sql.*;
 import logica.articulos.*;
 import java.util.*;
+import java.io.*;
 
-public class Usuario{
+public class Usuario implements Serializable{
 	public static int ADMINISTRADOR=0,EMPLEADO=1,CLIENTE=2;
 	public static int ECONEXION=1,EREPETIDO=2;
 	
@@ -16,6 +17,11 @@ public class Usuario{
 		this.coneccion=coneccion;
 		setTipo();
 	}
+	public Usuario(int error){
+		e=error;
+	}
+	int e;
+	public int getError(){return e;}
 	
 	public int getTipo(){return tipo;}
 	private void setTipo(){

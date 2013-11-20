@@ -14,7 +14,7 @@ public class Inicial extends JPanel{
 		GridBagConstraints posicion = new GridBagConstraints();
 		setLayout(new GridBagLayout());
 		
-		JPanel imagen=new JPanel();
+		Animacion imagen=new Animacion();
 		imagen.setMinimumSize(new Dimension(250,150));
 		imagen.setMaximumSize(new Dimension(250,150));
 		imagen.setPreferredSize(new Dimension(250,150));

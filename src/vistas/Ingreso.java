@@ -4,15 +4,16 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import java.sql.*;
-import logica.Usuario;
+import logica.*;
 
 @SuppressWarnings("serial")
-public class Ingreso extends JPanel{
+public class Ingreso extends JPanel implements Runnable{
 	private JTextField usuario;
 	private JPasswordField password;
 	private JLabel lusuario,lpassword,lerror;
 	private JButton login,regresar;
-	
+	private ferchoClient f;
+	private Thread me;
 	public JButton getLogin(){return login;}
 	public JButton getRegresar(){return regresar;}
 	public JPasswordField getPasswordField(){return password;}
@@ -21,19 +22,38 @@ public class Ingreso extends JPanel{
 		password.setText("");
 		lerror.setText("");
 	}
-	
-	public Usuario intentoConectar(){
+	Usuario u;
+	int ya;
+	public void run(){
+		while(true){
+			try{
+				Thread.sleep(100);
+			}catch (InterruptedException e){}
+			if(f.getIntento()==1){
+				u=null;
+				if(f.getSi()==1){
+					this.u=intentoConectar(usuario.getText(),String.copyValueOf(password.getPassword()) );
+					if(this.u==null)
+						lerror.setText("Error en usuario o password");
+				}
+				else{
+					lerror.setText("No hay Servidor");
+				}
+				f.setIntento(0);
+				ya=1;
+			}
+		}
+	}
+	public Usuario intentoConectar(String n,String p){
 		Connection coneccion;
 		Usuario u;
 		try {
 			Class.forName("org.postgresql.Driver"); 
-			coneccion = DriverManager.getConnection("jdbc:postgresql://127.0.0.1/tienda",usuario.getText(),String.copyValueOf(password.getPassword()));
-			u=new Usuario(usuario.getText(),coneccion);
-			lerror.setText("Conexion Exitosa");
+			coneccion = DriverManager.getConnection("jdbc:postgresql://127.0.0.1/tienda",n,p);
+			u=new Usuario(n,coneccion);
 			return u;
 		}
 		catch (SQLException excepcionSql) {
-			lerror.setText("El usuario o password son incorrectos");
 		}
 		catch( ClassNotFoundException e){
 			System.out.println("Where is your PostgreSQL JDBC Driver? "+ "Include in your library path!");
@@ -41,6 +61,17 @@ public class Ingreso extends JPanel{
 		return null; 
 	}
 	
+	public Usuario cliente(){
+		ya=0;
+		f.setState(ferchoClient.RUN);
+		while(ya==0){
+			try{
+				Thread.sleep(100);
+			}catch (InterruptedException e){}
+		}
+		
+		return u;
+	}
 	
 	public void showPanel(){
 		setBorder(new EmptyBorder(30, 0, 0, 0));
@@ -53,11 +84,11 @@ public class Ingreso extends JPanel{
 		JPanel ppassword=new JPanel();
 		ppassword.add(lpassword);
 		ppassword.add(password);
-		JPanel imagen=new JPanel();
+		Animacion imagen=new Animacion();
 		
-		imagen.setMinimumSize(new Dimension(200,100));
-		imagen.setMaximumSize(new Dimension(200,100));
-		imagen.setPreferredSize(new Dimension(200,100));
+		imagen.setMinimumSize(new Dimension(250,150));
+		imagen.setMaximumSize(new Dimension(250,150));
+		imagen.setPreferredSize(new Dimension(250,150));
 		imagen.setBackground(new Color(120,213,220));
 		
 		posicion.gridx = 0;
@@ -114,5 +145,9 @@ public class Ingreso extends JPanel{
 		lerror = new JLabel("");
 		lerror.setForeground(new Color(255,0,0));
 		showPanel();
+		f=new ferchoClient();
+		f.start();
+		me =new Thread(this);
+		me.start();
 	}
 }

@@ -78,7 +78,7 @@ public class MainFrame extends JFrame {
 			setContentPane(ini);
 		}
 		else if(estado==INGRESO){
-			setSize(400, 350);
+			setSize(400, 400);
 			log.limpiar();
 			setContentPane(log);
 		}
@@ -111,7 +111,7 @@ public class MainFrame extends JFrame {
 			//Panel de ingresar al sistema
 			else if(e.getSource()==log.getLogin()||e.getSource()==log.getPasswordField()){
 				usuario=null;
-				usuario=log.intentoConectar();
+				usuario=log.cliente();
 				if(usuario!=null){
 					if(usuario.getTipo()==usuario.ADMINISTRADOR){
 						din.setUser(usuario);

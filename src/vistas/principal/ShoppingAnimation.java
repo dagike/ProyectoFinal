@@ -1,14 +1,12 @@
 package vistas.principal;
+import vistas.*;
 import javax.swing.*;
 import java.awt.*;
 
 
 @SuppressWarnings("serial")
-public class ShoppingAnimation extends JPanel {
-
-	/**
-	 * Create the panel.
-	 */
+public class ShoppingAnimation extends JPanel{
+	
 	public ShoppingAnimation() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{250, 0};
@@ -17,14 +15,14 @@ public class ShoppingAnimation extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		JPanel panel = new JPanel();
+		Animacion panel = new Animacion();
 		panel.setBackground(Color.BLACK);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 0;
 		add(panel, gbc_panel);
-
+		
 	}
 
 }
