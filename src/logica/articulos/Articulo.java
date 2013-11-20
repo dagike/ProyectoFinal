@@ -6,6 +6,7 @@ public abstract class Articulo{
 	public void setExistencias(int existencias){this.existencias=existencias;}
 	public void setCantidad(int cantidad){this.cantidad=cantidad;}
 	
+	public int getCantidad(){return cantidad;}
 	public int getTotal(){return precio*cantidad;}
 	public String getNombre(){return nombre;}
 	public int getPrecio(){return precio;}

@@ -36,4 +36,7 @@ public class Libro extends Articulo{
 	public String getCarrito(){
 		return "Nombre:"+nombre+"       $"+precio*cantidad+"       "+cantidad+"       $"+precio;
 	}
+	public String toString(){
+		return nombre+", "+autor+"\nPrecio Unitario: $"+precio+" Cantidad de Libros: "+cantidad+" Total: $"+precio*cantidad;
+	}
 }

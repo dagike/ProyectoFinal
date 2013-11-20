@@ -17,6 +17,8 @@ public class ClientePanel extends JPanel {
 	public JButton getAceptar(){return btnAceptar;}
 	public JButton getCancelar(){return btnCancelar;}
 	public JButton getNuevo(){return btnNuevoCliente;}
+	
+	public String getEmail(){return tFEmail.getText();}
 
 	public ClientePanel() {
 		setBackground(Color.WHITE);
@@ -83,5 +85,19 @@ public class ClientePanel extends JPanel {
 		add(btnNuevoCliente, gbc_btnNuevoCliente);
 
 	}
-
+	
+	public boolean checkEmail(boolean esta){
+		boolean error = false;
+		if(tFEmail.getText().equals("")){
+			lblErrorEmail.setText("Campo Necesario");
+			error = true;
+		}
+		else if(!esta){
+			lblErrorEmail.setText("No se encontro");
+			error = true;
+		}
+		else
+			lblErrorEmail.setText("");
+		return error;
+	}
 }

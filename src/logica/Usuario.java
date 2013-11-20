@@ -16,6 +16,7 @@ public class Usuario{
 		this.coneccion=coneccion;
 		setTipo();
 	}
+	
 	public int getTipo(){return tipo;}
 	private void setTipo(){
 		Statement instruccion = null; 
@@ -35,6 +36,61 @@ public class Usuario{
 		} 
 	}
 
+	public Persona getCliente(String email){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		Persona p=null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre,e_mail,direccion,tipotarjeta,tarjeta FROM cliente WHERE e_mail='"+email+"'");
+			if(conjuntoResultados.next()){
+				p=new Persona(conjuntoResultados.getString(1),conjuntoResultados.getString(2),conjuntoResultados.getString(3),conjuntoResultados.getString(4),conjuntoResultados.getString(5));
+				
+			}
+		}catch(SQLException e){
+			System.out.println("Error en obtener cliente");
+		}
+		return p;
+	}
+	public int agregarCliente(Persona cliente){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM cliente WHERE e_mail='"+cliente.getEmail()+"'");
+			if(conjuntoResultados.next()){
+				return EREPETIDO;
+			}
+			else{
+				instruccion.execute("INSERT INTO cliente values(0,'"+cliente.getNumTarjeta()+"','"+cliente.getEmail()+"',1,1,1,'"+cliente.getTarjeta()+"','"+cliente.getNombreCompleto()+"','"+cliente.getDireccion()+"')" );
+			}
+		}catch(SQLException e){
+			System.out.println("Error en agregar cliente");
+			return ECONEXION;
+		}
+		return 0;
+	}
+	
+	public boolean cambiarArticulo(Articulo a){
+		Statement instruccion = null; 
+		ResultSet conjuntoResultados = null;
+		try{
+			instruccion =coneccion.createStatement();
+			if(a instanceof Juguete)
+				instruccion.executeUpdate("UPDATE juguete set existencias="+(a.getExistencias()-a.getCantidad())+" where nombre='"+a.getNombre()+"'");
+			else if(a instanceof Libro)
+				instruccion.executeUpdate("UPDATE libro set existencias="+(a.getExistencias()-a.getCantidad())+" where nombre='"+a.getNombre()+"'");
+			else if(a instanceof Pelicula)
+				instruccion.executeUpdate("UPDATE pelicula set existencias="+(a.getExistencias()-a.getCantidad())+" where nombre='"+a.getNombre()+"'");
+			else if(a instanceof Disco)
+				instruccion.executeUpdate("UPDATE disco set existencias="+(a.getExistencias()-a.getCantidad())+" where nombre='"+a.getNombre()+"'");	
+		}catch(SQLException e){
+			System.out.println("Error en la conexion");
+			return false;
+		}
+		return true;
+	}
+	
 	public Vector<String> getAutores(){
 		Vector <String>autores= new Vector<String>();
 		Statement instruccion = null; 
@@ -307,12 +363,12 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			conjuntoResultados = instruccion.executeQuery("SELECT * FROM juguete WHERE nombre='"+j.getNombre().toLowerCase()+"'");
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM juguete WHERE nombre='"+j.getNombre()+"'");
 			if(conjuntoResultados.next()){
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO juguete values(0,'"+j.getNombre().toLowerCase()+"','"+j.getFabricante() +"',"+j.getEdad()+","+j.getPrecio()+","+j.getExistencias()+")" );
+				instruccion.execute(" INSERT INTO juguete values(0,'"+j.getNombre()+"','"+j.getFabricante() +"',"+j.getEdad()+","+j.getPrecio()+","+j.getExistencias()+")" );
 			}
 		}catch(SQLException e){
 			return ECONEXION;
@@ -343,7 +399,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.execute("DELETE FROM juguete WHERE nombre='"+j.getNombre().toLowerCase()+"'");
+			instruccion.execute("DELETE FROM juguete WHERE nombre='"+j.getNombre()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -355,7 +411,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.executeUpdate("UPDATE juguete set fabricante='"+j.getFabricante()+"',edad_apropiada="+j.getEdad()+",precio="+j.getPrecio()+",existencias="+j.getExistencias()+" where nombre='"+j.getNombre().toLowerCase()+"'");
+			instruccion.executeUpdate("UPDATE juguete set fabricante='"+j.getFabricante()+"',edad_apropiada="+j.getEdad()+",precio="+j.getPrecio()+",existencias="+j.getExistencias()+" where nombre='"+j.getNombre()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -369,12 +425,12 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			conjuntoResultados = instruccion.executeQuery("SELECT * FROM pelicula WHERE nombre='"+p.getNombre().toLowerCase()+"'");
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM pelicula WHERE nombre='"+p.getNombre()+"'");
 			if(conjuntoResultados.next()){
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO pelicula values(0,'"+p.getNombre().toLowerCase()+"','"+p.getFecha() +"','"+p.getGenero()+"',"+p.getPrecio()+",'"+p.getIdioma()+"',1,1,'"+p.getDirector()+"',"+p.getExistencias()+")" );
+				instruccion.execute(" INSERT INTO pelicula values(0,'"+p.getNombre()+"','"+p.getFecha() +"','"+p.getGenero()+"',"+p.getPrecio()+",'"+p.getIdioma()+"',1,1,'"+p.getDirector()+"',"+p.getExistencias()+")" );
 			}
 		}catch(SQLException e){
 			return ECONEXION;
@@ -406,7 +462,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.execute("DELETE FROM pelicula WHERE nombre='"+p.getNombre().toLowerCase()+"'");
+			instruccion.execute("DELETE FROM pelicula WHERE nombre='"+p.getNombre()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -418,7 +474,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.executeUpdate("UPDATE pelicula set fecha_estreno='"+p.getFecha()+"',genero='"+p.getGenero()+"',idioma='"+p.getIdioma()+"',director='"+p.getDirector()+"',precio="+p.getPrecio()+",existencias="+p.getExistencias()+" where nombre='"+p.getNombre().toLowerCase()+"'");
+			instruccion.executeUpdate("UPDATE pelicula set fecha_estreno='"+p.getFecha()+"',genero='"+p.getGenero()+"',idioma='"+p.getIdioma()+"',director='"+p.getDirector()+"',precio="+p.getPrecio()+",existencias="+p.getExistencias()+" where nombre='"+p.getNombre()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -431,12 +487,12 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			conjuntoResultados = instruccion.executeQuery("SELECT nombre FROM disco WHERE nombre='"+d.getNombre().toLowerCase()+"'");
+			conjuntoResultados = instruccion.executeQuery("SELECT nombre FROM disco WHERE nombre='"+d.getNombre()+"'");
 			if(conjuntoResultados.next()){
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO disco values(0,1,1,'"+d.getNombre().toLowerCase()+"','"+d.getFecha()+"','"+d.getGenero()+"',"+d.getPrecio()+",'"+d.getArtista()+"',"+d.getExistencias()+")" );
+				instruccion.execute(" INSERT INTO disco values(0,1,1,'"+d.getNombre()+"','"+d.getFecha()+"','"+d.getGenero()+"',"+d.getPrecio()+",'"+d.getArtista()+"',"+d.getExistencias()+")" );
 			}
 		}catch(SQLException e){
 			return ECONEXION;
@@ -468,7 +524,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.execute("DELETE FROM disco WHERE nombre='"+d.getNombre().toLowerCase()+"'");
+			instruccion.execute("DELETE FROM disco WHERE nombre='"+d.getNombre()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -480,7 +536,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.executeUpdate("UPDATE disco set fecha_lanzamiento='"+d.getFecha()+"',genero='"+d.getGenero()+"',artista='"+d.getArtista()+"',precio="+d.getPrecio()+",existencias="+d.getExistencias()+" where nombre='"+d.getNombre().toLowerCase()+"'");
+			instruccion.executeUpdate("UPDATE disco set fecha_lanzamiento='"+d.getFecha()+"',genero='"+d.getGenero()+"',artista='"+d.getArtista()+"',precio="+d.getPrecio()+",existencias="+d.getExistencias()+" where nombre='"+d.getNombre()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -493,12 +549,12 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			conjuntoResultados = instruccion.executeQuery("SELECT * FROM libro WHERE nombre='"+l.getNombre().toLowerCase()+"'");
+			conjuntoResultados = instruccion.executeQuery("SELECT * FROM libro WHERE nombre='"+l.getNombre()+"'");
 			if(conjuntoResultados.next()){
 				return EREPETIDO;
 			}
 			else{
-				instruccion.execute(" INSERT INTO libro values(0,1,'"+l.getFecha()+"','"+l.getFecha()+"','"+l.getGenero()+"',"+l.getPrecio()+",'"+l.getIdioma()+"','"+l.getNombre().toLowerCase()+"','"+l.getIsbn()+"','"+l.getEditorial()+"','"+l.getAutor()+"','"+l.getEdicion()+"',"+l.getExistencias()+")");
+				instruccion.execute(" INSERT INTO libro values(0,1,'"+l.getFecha()+"','"+l.getFecha()+"','"+l.getGenero()+"',"+l.getPrecio()+",'"+l.getIdioma()+"','"+l.getNombre()+"','"+l.getIsbn()+"','"+l.getEditorial()+"','"+l.getAutor()+"','"+l.getEdicion()+"',"+l.getExistencias()+")");
 			}
 		}catch(SQLException e){
 			return ECONEXION;
@@ -530,7 +586,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.execute("DELETE FROM libro WHERE nombre='"+l.getNombre().toLowerCase()+"'");
+			instruccion.execute("DELETE FROM libro WHERE nombre='"+l.getNombre()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;
@@ -542,7 +598,7 @@ public class Usuario{
 		ResultSet conjuntoResultados = null;
 		try{
 			instruccion =coneccion.createStatement();
-			instruccion.executeUpdate("UPDATE libro set fecha_impresion='"+l.getFecha()+"',genero='"+l.getGenero()+"',idioma='"+l.getIdioma()+"',isbn='"+l.getIsbn()+"',editorial='"+l.getEditorial()+"',autor='"+l.getAutor()+"',edicion='"+l.getEdicion()+"',precio="+l.getPrecio()+",existencias="+l.getExistencias()+" where nombre='"+l.getNombre().toLowerCase()+"'");
+			instruccion.executeUpdate("UPDATE libro set fecha_impresion='"+l.getFecha()+"',genero='"+l.getGenero()+"',idioma='"+l.getIdioma()+"',isbn='"+l.getIsbn()+"',editorial='"+l.getEditorial()+"',autor='"+l.getAutor()+"',edicion='"+l.getEdicion()+"',precio="+l.getPrecio()+",existencias="+l.getExistencias()+" where nombre='"+l.getNombre()+"'");
 		}catch(SQLException e){
 			System.out.println("Error en la conexion");
 			return false;

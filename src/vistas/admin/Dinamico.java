@@ -72,7 +72,7 @@ public class Dinamico extends JPanel {
 		menuDisco.add(altasDisco);
 		menuDisco.add(bajasDisco);
 		menuDisco.add(cambiosDisco);
-		menuJuguete = new JMenu("Jueguete");
+		menuJuguete = new JMenu("Juguete");
 		menuJuguete.add(altasJuguete);
 		menuJuguete.add(bajasJuguete);
 		menuJuguete.add(cambiosJuguete);

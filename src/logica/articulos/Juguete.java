@@ -19,4 +19,7 @@ public class Juguete extends Articulo{
 	public String getCarrito(){
 		return "Nombre:"+nombre+"       $"+precio*cantidad+"       "+cantidad+"       $"+precio;
 	}
+	public String toString(){
+		return nombre+", "+fabricante+"\nPrecio Unitario: $"+precio+" Cantidad de Juguetes: "+cantidad+" Total: $"+precio*cantidad;
+	}
 }

@@ -7,6 +7,7 @@ import vistas.principal.*;
 import logica.*;
 import logica.articulos.*;
 import java.util.*;
+import java.io.*;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -17,6 +18,8 @@ public class MainFrame extends JFrame {
 	private AgregarClientePanel nvoCliente;
 	private ClientePanel cliente;
 	private Vector<Articulo> articulos;
+	private Persona c;
+	private JFileChooser fileChooser;
 	
 	//logica
 	private Usuario usuario;
@@ -36,7 +39,7 @@ public class MainFrame extends JFrame {
 		});
 	}
 	public MainFrame() {
-		//setResizable(false);
+		setResizable(false);
 		setLocationRelativeTo(null);
 		ini=new Inicial();
 		ini.getIngresar().addActionListener(new Acciones());
@@ -64,6 +67,7 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		estados();
+		fileChooser = new JFileChooser();
 	}
 	public void estados(){
 		if(estado==INICIAL){
@@ -85,7 +89,7 @@ public class MainFrame extends JFrame {
 			setJMenuBar(din.getAdminMenu());
 		}
 		else if(estado == CLIENTE){
-			setSize(400,250);
+			setSize(600,250);
 			setContentPane(cliente);
 		}
 		else if(estado == NVOCLIENTE){
@@ -140,6 +144,32 @@ public class MainFrame extends JFrame {
 				estados();
 			}
 			else if(e.getSource()==cliente.getAceptar()){
+				if(!cliente.checkEmail(true)){
+					c=usuario.getCliente( cliente.getEmail() );
+					if(c==null)
+						cliente.checkEmail(false);
+					else{
+					//REPORTE
+						if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+							String file = fileChooser.getSelectedFile().getAbsolutePath();						
+							try {							
+								PrintWriter fileW = new PrintWriter(file);
+								int total=0;
+								fileW.println( c.toString() );
+								for(int i=0;i<articulos.size();i++){
+									fileW.println( articulos.get(i).toString() );
+									total+=articulos.get(i).getTotal();
+									usuario.cambiarArticulo( articulos.get(i) );
+								}
+								fileW.println("Importe del pedido: $"+total);
+								fileW.close();
+							}catch(IOException e1) {}
+							estado=PRINCIPAL;
+							escoger.inicio();
+							estados();
+						}
+					}	
+				}
 				
 			}
 			else if(e.getSource()==cliente.getNuevo()){

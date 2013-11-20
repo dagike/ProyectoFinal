@@ -82,7 +82,6 @@ public class MainDatabasePanel extends JPanel {
 					}	
 				}
 			}
-			
 		}
 	}
 	

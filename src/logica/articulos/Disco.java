@@ -27,5 +27,7 @@ public class Disco extends Articulo{
 	public String getCarrito(){
 		return "Nombre:"+nombre+"       $"+precio*cantidad+"       "+cantidad+"       $"+precio;
 	}
-	
+	public String toString(){
+		return nombre+", "+artista+"\nPrecio Unitario: $"+precio+" Cantidad de Discos: "+cantidad+" Total: $"+precio*cantidad;
+	}
 }

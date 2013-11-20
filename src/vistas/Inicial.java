@@ -8,6 +8,7 @@ import javax.swing.border.*;
 public class Inicial extends JPanel{
 	private JButton ingresar;
 	public JButton getIngresar(){return ingresar;}
+
 	public void showPanel(){
 		setBorder(new EmptyBorder(30, 0, 0, 0));
 		GridBagConstraints posicion = new GridBagConstraints();

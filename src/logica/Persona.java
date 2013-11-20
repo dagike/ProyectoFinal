@@ -1,10 +1,15 @@
 package logica;
 public class Persona{
 	private Nombre nombre;
-	private String email;
+	private String email,direccion,nombreCompleto,tarjeta,numTarjeta;
 	private String nombreUsuario;
 	private String password;
 	private int tipo;
+	
+	public String getNombreCompleto(){return nombreCompleto;}
+	public String getDireccion(){return direccion;}
+	public String getTarjeta(){return tarjeta;}
+	public String getNumTarjeta(){return numTarjeta;}
 	
 	public Nombre getNombre(){return nombre;}
 	public String getEmail(){return email;}
@@ -31,6 +36,16 @@ public class Persona{
 		this.email=email;
 		this.nombreUsuario=nombreUsuario;
 		this.tipo=tipo;
+	}
+	public Persona(String nombreCompleto,String email,String direccion,String tarjeta,String numTarjeta){
+		this.nombreCompleto=nombreCompleto;
+		this.email=email;
+		this.direccion=direccion;
+		this.tarjeta=tarjeta;
+		this.numTarjeta=numTarjeta;
+	}
+	public String toString(){
+		return "Cliente: "+nombreCompleto+"\nDireccion: "+direccion+"\nEmail: "+email+"\nTarjeta: "+tarjeta+"\tNumero: "+numTarjeta+"\nPedido:";
 	}
 	public Persona(){}
 }

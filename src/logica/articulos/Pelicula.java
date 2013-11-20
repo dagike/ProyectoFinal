@@ -29,4 +29,7 @@ public class Pelicula extends Articulo{
 	public String getCarrito(){
 		return "Nombre:"+nombre+"       $"+precio*cantidad+"       "+cantidad+"       $"+precio;
 	}
+	public String toString(){
+		return nombre+", "+director+"\nPrecio Unitario: $"+precio+" Cantidad de Peliculas: "+cantidad+" Total: $"+precio*cantidad;
+	}
 }

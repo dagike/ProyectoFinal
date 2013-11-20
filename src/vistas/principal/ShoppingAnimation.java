@@ -10,7 +10,6 @@ public class ShoppingAnimation extends JPanel {
 	 * Create the panel.
 	 */
 	public ShoppingAnimation() {
-		setSize(250,150);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{250, 0};
 		gridBagLayout.rowHeights = new int[]{150, 0};

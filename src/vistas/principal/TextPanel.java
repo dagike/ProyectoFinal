@@ -38,7 +38,7 @@ public class TextPanel extends JPanel {
 		intTotal=0;
 		total.setText("$"+intTotal);
 		lblErrorCantidad.setText("");
-		tFCantidad.setText("");
+		tFCantidad.setText("1");
 	}
 	private class Select implements ListSelectionListener{
      public void valueChanged(ListSelectionEvent e){
